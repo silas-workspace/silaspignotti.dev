@@ -28,6 +28,10 @@ export const NAV_LINKS: SocialLink[] = [
     href: '/blog',
     label: 'blog',
   },
+  {
+    href: '/contact',
+    label: 'contact',
+  },
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [

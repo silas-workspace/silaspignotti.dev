@@ -1,0 +1,51 @@
+---
+import Link from '@/components/Link.astro'
+import PageHead from '@/components/PageHead.astro'
+import Layout from '@/layouts/Layout.astro'
+
+const currentUrl = Astro.url
+---
+
+<Layout canonicalUrl={currentUrl}>
+  <PageHead
+    slot="head"
+    title="Contact"
+    description="Get in touch for projects, collaborations, and conversations about geospatial data and AI."
+  />
+
+  <section class="flex flex-col gap-y-8 px-4 py-8 sm:px-8 lg:px-16">
+    <header class="flex flex-col gap-y-3">
+      <h1 class="font-custom text-foreground text-4xl font-bold sm:text-5xl">Get in Touch</h1>
+      <p class="text-muted-foreground max-w-3xl text-base leading-relaxed sm:text-lg">
+        I'm always open to interesting projects, collaborations, or just a good conversation about geospatial data and AI.
+      </p>
+    </header>
+
+    <section aria-labelledby="contact-links-title" class="bg-card border-border max-w-3xl rounded-xl border p-6">
+      <h2 id="contact-links-title" class="font-custom text-foreground text-2xl font-bold">Contact Links</h2>
+
+      <ul class="mt-4 flex flex-col gap-3" role="list">
+        <li>
+          <span class="text-foreground font-medium">Email:</span>
+          <Link href="mailto:pignottisilas@gmail.com" class="text-primary ml-2" underline>
+            pignottisilas@gmail.com
+          </Link>
+        </li>
+        <li>
+          <span class="text-foreground font-medium">GitHub:</span>
+          <Link href="https://github.com/spignotti" external class="text-primary ml-2" underline>
+            github.com/spignotti
+          </Link>
+        </li>
+        <li>
+          <span class="text-foreground font-medium">LinkedIn:</span>
+          <span class="text-muted-foreground ml-2">TODO (link to be added later)</span>
+        </li>
+      </ul>
+    </section>
+
+    <p class="text-muted-foreground max-w-4xl text-sm leading-relaxed">
+      Based in Berlin. Currently finishing my M.Sc. in Geoinformation at BHT Berlin. Open for freelance work, full-time positions, and open-source collaboration.
+    </p>
+  </section>
+</Layout>

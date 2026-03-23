@@ -1,12 +1,10 @@
 ---
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import BlogCard from '@/components/react/blog-card'
 import PageHead from '@/components/PageHead.astro'
-import Search from '@/components/react/search'
-import PaginationComponent from '@/components/ui/pagination'
 import Layout from '@/layouts/Layout.astro'
 import { getAllPosts } from '@/lib/data-utils'
 import type { PaginateFunction } from 'astro'
-import { Icon } from 'astro-icon/components'
 
 export async function getStaticPaths({
   paginate,
@@ -18,45 +16,89 @@ export async function getStaticPaths({
 }
 
 const { page } = Astro.props
-const searchList = await getAllPosts()
-const currentUrl = Astro.url;
+
+const categories = [
+  {
+    title: 'Project Writeups',
+    description:
+      "End-to-end breakdowns of portfolio projects. What the problem was, how I solved it, what I'd do differently.",
+  },
+  {
+    title: 'System Design & Meta',
+    description:
+      'How I structure my work: AI coding workflows, knowledge management, prompt engineering, Python tooling.',
+  },
+  {
+    title: 'Tools & Reviews',
+    description:
+      "Honest reviews of tools I use daily. What works, what doesn't, and why.",
+  },
+]
+
+const currentUrl = Astro.url
 ---
 
 <Layout canonicalUrl={currentUrl}>
-  <PageHead slot="head" title="Blog" />
-  
+  <PageHead
+    slot="head"
+    title="Blog"
+    description="Technical writing on geospatial data science, AI-powered automation, and the tools I build along the way."
+  />
+
   <Breadcrumbs
     items={[
       { label: 'Blog', href: '/blog', icon: 'lucide:archive' },
-      { label: `Page ${page.currentPage}`, icon: 'lucide:folder-open' },
     ]}
   />
+
   <section class="max-screen mt-12 px-4 md:px-6">
-    <div class="flex w-fit items-center gap-2 text-primary">
-        <Icon class="h-4 w-4 text-secondary-foreground animate-pulse" name="lucide:brain" />
-        <p class="shimmer word-spacing font-mono text-sm uppercase leading-none text-secondary-foreground">
-          Quick Thoughts
-        </p>
-    </div>
-    <h2
-    id="skills-title"
-    class="font-custom text-foreground text-4xl font-bold mt-2"
-    >
-      Blog
-    </h2>
-    <p class="text-muted-foreground text-md max-w-2xl mt-3">
-      Welcome to my blog! Here, I share AI generated content, tutorials, and insights on various topics. I hope you find the information helpful and engaging. If you have any questions or suggestions, feel free to reach out!
-    </p>
+    <header class="mb-10">
+      <h1 class="font-custom text-foreground text-4xl font-bold">Blog</h1>
+      <p class="text-muted-foreground text-md mt-3 max-w-4xl">
+        Technical writing on geospatial data science, AI-powered automation, and the tools I build along the way. I write about things I actually work on: project deep dives, architecture decisions, tooling setups, and lessons learned. No thought leadership, no hot takes for the sake of engagement.
+      </p>
+    </header>
 
-    <div class="flex min-h-[calc(100vh-18rem)] flex-col gap-y-8 my-12">
-      <Search client:load searchList={searchList} initialPosts={page.data} />
-    </div>
+    <section class="mb-12" aria-labelledby="blog-categories-heading">
+      <h2 id="blog-categories-heading" class="font-custom text-foreground mb-4 text-2xl font-bold">
+        Categories
+      </h2>
+      <ul class="flex flex-wrap gap-3" role="list">
+        {
+          categories.map((category) => (
+            <li class="bg-card border-border max-w-full rounded-full border px-4 py-2 text-sm">
+              <p class="text-foreground font-medium">{category.title}</p>
+              <p class="text-muted-foreground mt-1 text-xs leading-relaxed">{category.description}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
 
-    <PaginationComponent
-      currentPage={page.currentPage}
-      totalPages={page.lastPage}
-      baseUrl="/blog/"
-      client:load
-    />
+    <section aria-labelledby="blog-posts-heading" class="mb-8">
+      <h2 id="blog-posts-heading" class="font-custom text-foreground mb-4 text-2xl font-bold">
+        Posts
+      </h2>
+
+      {
+        page.data.length > 0 ? (
+          <ul class="flex flex-col gap-4" role="list">
+            {page.data.map((post) => (
+              <li>
+                <BlogCard entry={post} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div class="bg-muted/40 border-border rounded-xl border border-dashed p-6">
+            <p class="text-muted-foreground text-sm">First articles are in the pipeline.</p>
+          </div>
+        )
+      }
+
+      <p class="text-muted-foreground mt-4 text-sm">
+        Blog posts will be added as Markdown/MDX files in the content collection with title, date, category, tags, description, and slug.
+      </p>
+    </section>
   </section>
 </Layout>
