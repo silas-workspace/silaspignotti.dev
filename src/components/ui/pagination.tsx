@@ -6,6 +6,7 @@ import {
 } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
+import { withBasePath } from '@/lib/paths'
 import { Button, buttonVariants } from '@/components/ui/button'
 
 function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
@@ -48,10 +49,14 @@ function PaginationLink({
   isActive,
   isDisabled,
   size = 'icon',
+  href,
   ...props
 }: PaginationLinkProps) {
+  const resolvedHref = typeof href === 'string' ? withBasePath(href) : href
+
   return (
     <a
+      href={resolvedHref}
       aria-current={isActive ? 'page' : undefined}
       data-slot="pagination-link"
       data-active={isActive}

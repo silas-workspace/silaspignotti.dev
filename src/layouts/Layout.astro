@@ -5,12 +5,14 @@ import '@/styles/typography.css'
 import Footer from '@/components/Footer.astro'
 import Head from '@/components/Head.astro'
 import Navbar from '@/components/react/navbar'
+import { withBasePath } from '@/lib/paths'
 import { SITE } from '@/consts'
 import { cn } from '@/lib/utils'
 
 const {
   isWide = false
 } = Astro.props
+
 ---
 
 <!doctype html>
@@ -20,8 +22,8 @@ const {
     <script is:inline src="https://analytics.ahrefs.com/analytics.js" data-key="+FHMgRP7/Duxaq5D0gZtJw" async></script>
     
     <!-- Preload critical resources -->
-    <link rel="preload" href="/fonts/ClashDisplay/ClashDisplay-Semibold.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/Lexend/Lexend-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={withBasePath('/fonts/ClashDisplay/ClashDisplay-Semibold.woff2')} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={withBasePath('/fonts/Lexend/Lexend-Regular.woff2')} as="font" type="font/woff2" crossorigin />
 
     <!-- DNS prefetch for external resources -->
     <link rel="dns-prefetch" href="//analytics.ahrefs.com" />
@@ -48,7 +50,7 @@ const {
         }
       })();
     </script>
-    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href={withBasePath('/rss.xml')} />
   </Head>
   <body>
     <div class="flex h-fit min-h-screen w-full flex-col gap-y-4 sm:gap-y-6 font-sans">

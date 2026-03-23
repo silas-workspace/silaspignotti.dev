@@ -75,13 +75,13 @@ const canonicalUrl = new URL(`/blog/${post.id}/`, Astro.site).toString();
           {
             post.data.tags && post.data.tags.length > 0 ? (
               post.data.tags.map((tag) => (
-                <a
+                <Link
                   href={`/tags/${tag}`}
                   class={badgeVariants({ variant: 'secondary' })}
                 >
                   <Icon name="lucide:hash" class="size-3" />
                   {tag}
-                </a>
+                </Link>
               ))
             ) : (
               <span class="text-muted-foreground text-sm">

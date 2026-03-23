@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { withBasePath } from '@/lib/paths';
 import React from 'react';
 
 interface Props {
@@ -10,9 +11,11 @@ interface Props {
 }
 
 const Link: React.FC<Props> = ({ href, external, className, underline, children, ...rest }) => {
+  const resolvedHref = external ? href : withBasePath(href)
+
   return (
     <a
-      href={href}
+      href={resolvedHref}
       target={external ? '_blank' : '_self'}
       className={cn(
         'inline-block transition-colors duration-300 ease-in-out',

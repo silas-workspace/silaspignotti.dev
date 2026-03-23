@@ -8,6 +8,7 @@ import { Icon } from 'astro-icon/components'
 import { Image } from 'astro:assets'
 import { render } from 'astro:content'
 import PageHead from '@/components/PageHead.astro'
+import Link from '@/components/Link.astro'
 
 export async function getStaticPaths() {
   const projects = await getAllProjects()
@@ -67,13 +68,13 @@ const currentUrl = Astro.url;
           {
             project.data.tags && project.data.tags.length > 0 ? (
               project.data.tags.map((tag) => (
-                <a
+                <Link
                   href={`/tags/${tag}`}
                   class={badgeVariants({ variant: 'secondary' })}
                 >
                   <Icon name="lucide:hash" class="size-3" />
                   {tag}
-                </a>
+                </Link>
               ))
             ) : (
               <span class="text-muted-foreground text-sm">
