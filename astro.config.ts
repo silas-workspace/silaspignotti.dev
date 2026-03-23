@@ -46,6 +46,7 @@ function rehypeDemoteH1AndStripTitle() {
 
 export default defineConfig({
   output: 'static',
+  base: '/silaspignotti.dev',
   site: 'https://silaspignotti.dev',
 
   integrations: [expressiveCode({
