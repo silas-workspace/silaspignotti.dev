@@ -3,6 +3,8 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import Layout from '@/layouts/Layout.astro'
 import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
+import { badgeVariants } from '@/components/ui/badge'
+import { withBasePath } from '@/lib/paths'
 import { PROJECT_CASES } from '@/lib/project-cases'
 
 export async function getStaticPaths() {
@@ -20,31 +22,136 @@ const currentUrl = Astro.url
   <PageHead
     slot="head"
     title={`${project.name} | Project`}
-    description="Project detail page coming soon."
+    description={project.description}
   />
-  <section class="flex flex-col gap-y-8 px-4 md:px-6">
-    <Breadcrumbs
-      items={[
-        { href: '/projects', label: 'Projects', icon: 'lucide:folder' },
-        { label: project.name, icon: 'lucide:folder-open' },
-      ]}
-    />
 
-    <article class="bg-card border-border max-w-3xl rounded-xl border p-6">
-      <h1 class="font-custom text-foreground text-3xl font-bold sm:text-4xl">{project.name}</h1>
-      <p class="text-muted-foreground mt-3 text-sm leading-relaxed">
-        Detailed project case is in progress.
-      </p>
-      <!-- TODO: Add full project case details (challenge, approach, architecture, outcomes). -->
+  <section class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-lg)-2rem),100%)_minmax(0px,1fr)] gap-y-6 max-w-[calc(100vw-2rem)]">
+    <div class="col-start-2">
+      <Breadcrumbs
+        items={[
+          { href: '/projects', label: 'Projects', icon: 'lucide:folder' },
+          { label: project.name, icon: 'lucide:folder-open' },
+        ]}
+      />
+    </div>
 
-      <div class="mt-6 flex flex-wrap items-center gap-3">
+    <section class="col-start-2 flex flex-col gap-y-6 text-start">
+      <header>
+        <div class="aspect-[16/8] w-full overflow-hidden rounded-2xl border border-border/60 bg-muted/40">
+          <img
+            src={withBasePath(project.coverImage)}
+            alt={`${project.name} cover placeholder`}
+            class="h-full w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+
+        <h1 class="mt-6 mb-2 text-3xl leading-tight font-medium text-pretty sm:text-5xl">
+          {project.name}
+        </h1>
+        <p class="text-foreground/90 text-base sm:text-lg">{project.tagline}</p>
+
+        <div class="mt-4 flex flex-wrap items-center gap-2">
+          <span class="text-muted-foreground text-sm">Category:</span>
+          <span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+            {project.category}
+          </span>
+        </div>
+
+        <ul class="mt-4 flex flex-wrap gap-2" role="list" aria-label={`${project.name} stack`}>
+          {
+            project.stack.map((tag) => (
+              <li class={badgeVariants({ variant: 'secondary' })}>{tag}</li>
+            ))
+          }
+        </ul>
+      </header>
+
+      <article class="prose max-w-none" aria-label="Project details">
+        <section aria-labelledby="problem-title" class="not-prose mt-8 rounded-xl border border-border bg-card p-5">
+          <h2 id="problem-title" class="font-custom text-foreground text-2xl font-bold">Problem</h2>
+          <p class="text-muted-foreground mt-2 text-sm leading-relaxed">{project.problem}</p>
+        </section>
+
+        <section aria-labelledby="solution-title" class="not-prose mt-4 rounded-xl border border-border bg-card p-5">
+          <h2 id="solution-title" class="font-custom text-foreground text-2xl font-bold">Solution</h2>
+          <p class="text-muted-foreground mt-2 text-sm leading-relaxed">{project.solution}</p>
+        </section>
+
+        <section aria-labelledby="result-title" class="not-prose mt-4 rounded-xl border border-border bg-card p-5">
+          <h2 id="result-title" class="font-custom text-foreground text-2xl font-bold">Result</h2>
+          <p class="text-muted-foreground mt-2 text-sm leading-relaxed">{project.result}</p>
+        </section>
+
+        {
+          project.downloads && project.downloads.length > 0 && (
+            <section aria-labelledby="downloads-title" class="not-prose mt-4 rounded-xl border border-border bg-card p-5">
+              <h2 id="downloads-title" class="font-custom text-foreground text-2xl font-bold">Downloads</h2>
+              <ul class="mt-3 list-disc space-y-2 pl-5">
+                {project.downloads.map((item) => (
+                  <li class="text-muted-foreground text-sm">
+                    {item.href ? (
+                      <Link
+                        href={item.href}
+                        external={item.href.startsWith('http://') || item.href.startsWith('https://')}
+                        underline
+                        class="text-primary"
+                      >
+                        {item.label}
+                      </Link>
+                    ) : (
+                      <span class="text-foreground">{item.label}</span>
+                    )}
+                    {item.note ? <span class="text-muted-foreground"> — {item.note}</span> : null}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
+
+        {
+          project.screenshots && project.screenshots.length > 0 && (
+            <section aria-labelledby="screenshots-title" class="not-prose mt-4 rounded-xl border border-border bg-card p-5">
+              <h2 id="screenshots-title" class="font-custom text-foreground text-2xl font-bold">Screenshots</h2>
+              <ul class="mt-4 grid gap-4 sm:grid-cols-2" role="list">
+                {project.screenshots.map((screenshot) => (
+                  <li class="overflow-hidden rounded-xl border border-border/60 bg-muted/30">
+                    <img
+                      src={withBasePath(screenshot.src)}
+                      alt={screenshot.alt}
+                      class="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
+      </article>
+    </section>
+
+    <aside class="group col-start-2 rounded-xl border p-4 xl:sticky xl:top-26 xl:col-start-3 xl:mr-auto xl:ml-8 xl:h-fit xl:max-w-fit xl:rounded-none xl:border-none xl:p-0">
+      <div class="flex flex-col gap-4 rounded-xl border bg-card p-4 shadow-md transition-all duration-300 group-hover:shadow-lg xl:group-hover:shadow-none">
+        <h2 class="text-lg font-semibold">Project Links</h2>
+        <ul class="flex flex-col gap-2 text-sm text-muted-foreground">
+          <li>
+            <Link href={project.githubUrl} external underline class="text-primary">GitHub Repository</Link>
+          </li>
+          {project.pypiUrl && (
+            <li>
+              <Link href={project.pypiUrl} external underline class="text-primary">PyPI Package</Link>
+            </li>
+          )}
+        </ul>
+
+        <hr class="my-2 border-t" />
+
         <Link href="/projects" underline class="text-sm font-medium text-primary">
           Back to all projects
         </Link>
-        <Link href={project.githubUrl} external underline class="text-sm font-medium text-muted-foreground">
-          View on GitHub
-        </Link>
       </div>
-    </article>
+    </aside>
   </section>
 </Layout>
