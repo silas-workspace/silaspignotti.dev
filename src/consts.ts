@@ -1,14 +1,14 @@
 import type { IconMap, SocialLink, Site } from '@/types'
 
 export const SITE: Site = {
-  title: 'Cojocaru David',
+  title: 'Silas Pignotti',
   description:
-    "Junior Full Stack Developer specializing in modern web technologies. Expert in React, Node.js, TypeScript, and cloud development. Read my latest tech tutorials, project insights, and programming tips on web development, DevOps, and software engineering best practices.",
-  href: 'https://www.cojocarudavid.me',
-  author: 'Cojocaru David',
+    'Geo Data Scientist and AI Engineer building geospatial data pipelines, ML systems, and automation tooling for real-world urban and infrastructure use cases.',
+  href: 'https://silaspignotti.dev',
+  author: 'Silas Pignotti',
   locale: 'en-US',
-  location: 'Romania',
-  email: 'contact@cojocarudavid.me'
+  location: 'Berlin, Germany',
+  email: 'pignottisilas@gmail.com'
 }
 
 export const NAV_LINKS: SocialLink[] = [
@@ -36,34 +36,24 @@ export const NAV_LINKS: SocialLink[] = [
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    href: 'https://github.com/cojocaru-david?ref=personal-website',
+    href: 'https://github.com/spignotti',
     label: 'GitHub',
   },
   {
-    href: 'mailto:contact@cojocarudavid.me',
+    href: 'https://www.linkedin.com/in/silas-pignotti/',
+    label: 'LinkedIn',
+  },
+  {
+    href: 'mailto:pignottisilas@gmail.com',
     label: 'Email',
-  },
-  {
-    href: 'tel:+40764132266',
-    label: 'Phone',
-  },
-  {
-    href: 'https://www.instagram.com/david._.cojo?ref=personal-website',
-    label: 'Instagram',
-  },
-  {
-    href: '/rss.xml',
-    label: 'RSS',
   },
 ]
 
 export const ICON_MAP: IconMap = {
   Website: 'lucide:globe',
   GitHub: 'lucide:github',
-  Instagram: 'lucide:instagram',
-  Phone: 'lucide:phone',
+  LinkedIn: 'lucide:linkedin',
   Email: 'lucide:mail',
-  RSS: 'lucide:rss',
 }
 
 export interface Category {

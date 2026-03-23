@@ -4,8 +4,8 @@
 
 @font-face {
   font-family: 'ClashDisplay';
-  src: url('../fonts/ClashDisplay/ClashDisplay-Semibold.woff2') format('woff2'),
-      url('../fonts/ClashDisplay/ClashDisplay-Semibold.woff') format('woff');
+  src: url('/fonts/ClashDisplay/ClashDisplay-Semibold.woff2') format('woff2'),
+      url('/fonts/ClashDisplay/ClashDisplay-Semibold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -13,8 +13,8 @@
 
 @font-face {
   font-family: 'Lexend';
-  src: url('../fonts/Lexend/Lexend-Regular.woff2') format('woff2'),
-      url('../fonts/Lexend/Lexend-Regular.woff') format('woff');
+  src: url('/fonts/Lexend/Lexend-Regular.woff2') format('woff2'),
+      url('/fonts/Lexend/Lexend-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
