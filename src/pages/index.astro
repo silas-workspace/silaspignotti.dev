@@ -1,121 +1,120 @@
 ---
 import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
-import BlogCard from '@/components/react/blog-card'
-import Skills from '@/components/react/skills'
 import { buttonVariants } from '@/components/ui/button'
-import Logo from '@/components/ui/logo'
 import Layout from '@/layouts/Layout.astro'
-import { getRecentPosts } from '@/lib/data-utils'
-import { SITE } from '@/consts'
 
-const blog = await getRecentPosts(3)
-const currentUrl = Astro.url;
+const currentUrl = Astro.url
+
+const whatIDo = [
+  {
+    title: 'Geospatial Data Science',
+    description:
+      'Spatial data processing, ML on satellite and geodata, reproducible analysis pipelines.',
+  },
+  {
+    title: 'AI & Automation',
+    description:
+      'Context Engineering, agentic workflows, and process automation. AI as a core part of how I work, not a bolt-on.',
+  },
+  {
+    title: 'Open Source Tools',
+    description:
+      'CLI tools and web applications, published on PyPI and available on GitHub.',
+  },
+]
+
+const techStack = [
+  'Python',
+  'SQL',
+  'PostGIS',
+  'GeoPandas',
+  'scikit-learn',
+  'PyTorch',
+  'Google Earth Engine',
+  'FastAPI',
+  'Docker',
+  'Git',
+  'LangChain',
+]
 ---
 
 <Layout canonicalUrl={currentUrl}>
-  <PageHead slot="head" title="Junior Full Stack Developer" />
-  <section class="flex flex-col gap-y-12 px-4 py-8 sm:px-8 lg:px-16">
-    <div
-      class="flex flex-col items-center text-center sm:flex-row sm:items-start sm:gap-8 sm:text-left"
-    >
-      <div class="relative overflow-hidden rounded-lg sm:shrink-0 sm:overflow-hidden sm:rounded-lg">
-        <Logo
-          className="h-auto w-40 object-cover sm:w-48 md:w-56 lg:w-64 "
-        />
-      </div>
-      <div class="mt-8 sm:mt-0 sm:max-w-xl">
-        <h1
-          class="font-custom text-foreground text-start text-4xl font-extrabold sm:text-5xl"
-        >
-          {SITE.title}
-        </h1>
-        <div class="mt-4 flex items-center gap-2" aria-label="location">
-          <span
-            class="bg-primary text-primary-foreground ring-primary/30 rounded-full px-3 py-1 text-sm font-medium ring-1"
-          >
-            I'm from
-          </span>
-          <span class="flex items-center gap-1">
-            <span class="text-foreground text-sm font-medium"> {SITE.location}</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 51.18 38.4"
-              class="h-6 w-6 transition-transform duration-500 hover:rotate-12"
-              aria-hidden="true"
-              role="img"
-              focusable="false"
-              aria-labelledby="title"
-            >
-              <path
-                d="M17.75 0v38.4H3.03C1.37 38.4 0 37.04 0 35.37V3.03C0 1.36 1.37 0 3.03 0h14.72z"
-                fill="#002b7f"></path>
-              <path fill="#fcd116" d="M37.45 0v38.4h-19.7V0h19.7z"></path>
-              <path
-                d="M37.45 38.4V0h14.72c1.67 0 3.03 1.36 3.03 3.03v32.33c0 1.67-1.37 3.03-3.03 3.03H37.45v.01z"
-                fill="#ce1126"></path>
-            </svg>
-          </span>
-        </div>
-        <p class="text-md text-foreground mt-4 text-start font-sans" title="description" aria-label="description">
-          {SITE.description}
-        </p>
-      </div>
-    </div>
+  <PageHead
+    slot="head"
+    title="Geo Data Scientist | AI Engineer"
+    description="I build data pipelines and ML systems for geospatial problems, from satellite imagery analysis to urban analytics. Python, SQL, and a habit of automating what shouldn't be done by hand."
+  />
 
-    <section class="relative" aria-labelledby="skills-title">
-      <h2
-        id="skills-title"
-        class="font-custom text-foreground text-2xl font-bold"
-        title="skills"
-        aria-label="skills"
-        role="heading"
-      >
-        Skills & Technologies
-      </h2>
-      <p class="text-muted-foreground text-sm" aria-label="skills description">
-        Here are some of the technologies I've been working with:
+  <section class="flex flex-col gap-y-12 px-4 py-8 sm:px-8 lg:px-16">
+    <section aria-labelledby="hero-title" class="flex flex-col gap-y-4">
+      <h1 id="hero-title" class="font-custom text-foreground text-4xl font-extrabold sm:text-5xl">
+        Geo Data Scientist | AI Engineer
+      </h1>
+      <p class="text-foreground max-w-3xl text-base leading-relaxed sm:text-lg">
+        I build data pipelines and ML systems for geospatial problems, from satellite imagery analysis to urban analytics. Python, SQL, and a habit of automating what shouldn't be done by hand.
       </p>
-      <div>
-        <Skills client:load />
-      </div>
     </section>
 
-    <section class="flex flex-col gap-y-4" aria-labelledby="latest-posts-title" role="region">
-      <div class="relative" aria-labelledby="latest-posts-title">
-        <h2
-          id="latest-posts-title"
-          class="font-custom text-foreground text-2xl font-bold"
-          title="latest blog posts"
-          aria-label="latest blog posts"
-        >
-          Latest Blog Posts
-        </h2>
-        <p class="text-muted-foreground text-sm" aria-label="blog description">
-          Here are some of my latest blog posts. You can find more on my blog
-          page.
-        </p>
-      </div>
-      <ul class="flex flex-col gap-y-4">
+    <section aria-labelledby="what-i-do-title" class="flex flex-col gap-y-5">
+      <h2 id="what-i-do-title" class="font-custom text-foreground text-2xl font-bold">
+        What I Do
+      </h2>
+      <ul class="grid gap-4 md:grid-cols-3" role="list">
         {
-          blog.map((post) => (
+          whatIDo.map((item) => (
             <li>
-              <BlogCard entry={post} />
+              <article class="bg-card border-border h-full rounded-xl border p-5 shadow-sm">
+                <h3 class="text-foreground text-lg font-semibold">{item.title}</h3>
+                <p class="text-muted-foreground mt-2 text-sm leading-relaxed">{item.description}</p>
+              </article>
             </li>
           ))
         }
       </ul>
-      <div class="flex justify-center" aria-label="see all posts">
-        <Link
-          href="/blog"
-          class={buttonVariants({ variant: 'ghost' }) + ' group'}
-        >
-          See all posts <span
-            class="ml-1.5 transition-transform group-hover:translate-x-1"
-            >&rarr;</span
-          >
-        </Link>
+    </section>
+
+    <section aria-labelledby="featured-projects-title" class="flex flex-col gap-y-3">
+      <h2 id="featured-projects-title" class="font-custom text-foreground text-2xl font-bold">
+        Featured Projects
+      </h2>
+      <!-- TODO: Add featured project cards after curation. -->
+      <div class="bg-muted/50 border-border rounded-xl border border-dashed p-6">
+        <p class="text-muted-foreground text-sm">Featured project cards are coming soon.</p>
       </div>
+    </section>
+
+    <section aria-labelledby="tech-stack-title" class="flex flex-col gap-y-4">
+      <h2 id="tech-stack-title" class="font-custom text-foreground text-2xl font-bold">
+        Tech Stack
+      </h2>
+      <ul class="flex flex-wrap gap-2" role="list">
+        {
+          techStack.map((technology) => (
+            <li class="bg-secondary text-secondary-foreground rounded-full px-3 py-1 text-sm font-medium">
+              {technology}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section aria-labelledby="cta-title" class="bg-card border-border flex flex-col gap-y-5 rounded-xl border p-6">
+      <h2 id="cta-title" class="sr-only">Call to Action</h2>
+      <p class="text-foreground text-base leading-relaxed">
+        Currently finishing my M.Sc. in Geoinformation at BHT Berlin. Open for freelance projects and collaboration.
+      </p>
+      <nav aria-label="Primary actions" class="flex flex-wrap items-center gap-3">
+        <Link href="/projects" class={buttonVariants({ variant: 'default' })}>
+          View Projects
+        </Link>
+        <Link href="/blog" class={buttonVariants({ variant: 'outline' })}>
+          Read Blog
+        </Link>
+        <Link href="/contact" class={buttonVariants({ variant: 'ghost' })}>
+          Get in Touch
+        </Link>
+      </nav>
     </section>
   </section>
 </Layout>
