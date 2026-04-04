@@ -11,7 +11,8 @@ stack:
   - pymupdf
 github: https://github.com/spignotti/renamr
 pypi: https://pypi.org/project/renamr/
-cover: /ogImage.png
+cover: /covers/renamr.png
+coverIcon: file-code-2
 tagline: Let AI name your files. So you don't have to.
 featuredOrder: 5
 ---

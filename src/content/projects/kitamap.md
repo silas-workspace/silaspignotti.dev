@@ -10,7 +10,8 @@ stack:
   - GeoPandas
   - OpenRouteService
 github: https://github.com/spignotti/kitamap
-cover: /projects/kitamap/cover.png
+cover: /covers/kitamap.png
+coverIcon: map-pinned
 tagline: Where are daycare spots missing in Berlin? A data-driven answer instead of guesswork.
 featuredOrder: 3
 downloads:

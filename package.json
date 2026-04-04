@@ -24,6 +24,8 @@
   "scripts": {
     "prebuild": "node scripts/ensure-node-version.mjs",
     "precheck": "node scripts/ensure-node-version.mjs",
+    "generate:cover": "tsx scripts/generate-cover.ts",
+    "generate:cover:force": "tsx scripts/generate-cover.ts --force",
     "dev": "astro dev --port 3010",
     "start": "astro preview",
     "build": "astro build",
@@ -54,14 +56,17 @@
     "@types/react-dom": "19.1.7",
     "@vercel/routing-utils": "^5.1.1",
     "@vercel/speed-insights": "^1.2.0",
+    "@resvg/resvg-js": "^2.6.2",
     "astro": "^5.12.9",
     "astro-expressive-code": "^0.41.3",
     "astro-icon": "^1.1.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.12",
+    "gray-matter": "^4.0.3",
     "fuse.js": "^7.1.0",
     "lodash.debounce": "^4.0.8",
+    "lucide-static": "^0.542.0",
     "lucide-react": "^0.539.0",
     "react": "19.1.1",
     "react-dom": "19.1.1",
@@ -72,12 +77,14 @@
     "remark-emoji": "^5.0.1",
     "remark-math": "^6.0.0",
     "remark-sectionize": "^2.1.0",
+    "satori": "^0.12.1",
     "tailwind-merge": "^3.3.1",
     "typescript": "^5.9.2"
   },
   "devDependencies": {
     "@types/lodash.debounce": "^4.0.9",
-    "prettier": "^3.6.2"
+    "prettier": "^3.6.2",
+    "tsx": "^4.20.3"
   },
   "prettier": {
     "semi": false,

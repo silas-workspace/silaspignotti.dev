@@ -24,3 +24,5 @@ teaser.pptx
 .opencode/skills/*
 !.opencode/skills/technical-seo/
 !.opencode/skills/technical-seo/SKILL.md
+!.opencode/skills/project-cover/
+!.opencode/skills/project-cover/SKILL.md

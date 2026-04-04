@@ -12,7 +12,8 @@ stack:
   - GeoPandas
   - Rasterio
 github: https://github.com/spignotti/building-detector
-cover: /projects/building-detector/cover.png
+cover: /covers/building-detector.png
+coverIcon: house
 tagline: Detecting buildings in satellite imagery. With a click, not by hand.
 featuredOrder: 1
 screenshots:

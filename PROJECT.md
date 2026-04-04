@@ -164,6 +164,25 @@ npm run dev
 # 7. Add Content Collections + Markdown files
 ```
 
+### Cover generation workflow
+
+- Project covers are generated to `public/covers/[slug].png`
+- Project frontmatter must include `coverIcon` (Lucide icon name) and `cover` (recommended: `/covers/<slug>.png`)
+- Deploy commands for projects run technical SEO and then project-cover generation
+
+Manual usage:
+
+```bash
+# generate missing covers
+npx tsx scripts/generate-cover.ts
+
+# regenerate one project cover
+npx tsx scripts/generate-cover.ts --slug heatsense --force
+
+# regenerate all covers
+npx tsx scripts/generate-cover.ts --force
+```
+
 ## Context
 
 - **Product Spec:** Notion subpage under Website project (Artefakte)

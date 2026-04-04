@@ -11,7 +11,8 @@ stack:
   - SQLite
   - HTMX
 github: https://github.com/spignotti/urbanIQ
-cover: /projects/urbaniq/cover.png
+cover: /covers/urbaniq.png
+coverIcon: map
 tagline: Analyzing Berlin's districts. One question instead of ten datasets.
 featuredOrder: 2
 screenshots:

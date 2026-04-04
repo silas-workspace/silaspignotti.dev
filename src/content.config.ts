@@ -23,6 +23,7 @@ const projects = defineCollection({
       github: z.string().url(),
       pypi: z.string().url().optional(),
       cover: z.string(),
+      coverIcon: z.string().default('code-2'),
       tagline: z.string().optional(),
       featuredOrder: z.number().optional(),
       downloads: z

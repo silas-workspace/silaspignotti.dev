@@ -1,0 +1,22 @@
+{
+  "building-detector": {
+    "icon": "house",
+    "generatedAt": "2026-04-04T18:53:21.007Z"
+  },
+  "heatsense": {
+    "icon": "thermometer",
+    "generatedAt": "2026-04-04T18:54:27.214Z"
+  },
+  "kitamap": {
+    "icon": "map-pinned",
+    "generatedAt": "2026-04-04T18:53:23.947Z"
+  },
+  "renamr": {
+    "icon": "file-code-2",
+    "generatedAt": "2026-04-04T18:53:24.314Z"
+  },
+  "urbaniq": {
+    "icon": "map",
+    "generatedAt": "2026-04-04T18:53:24.656Z"
+  }
+}

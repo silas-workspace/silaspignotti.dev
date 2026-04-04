@@ -12,7 +12,8 @@ stack:
   - Rasterio
   - Leaflet
 github: https://github.com/spignotti/heatsense
-cover: /projects/heatsense/cover.png
+cover: /covers/heatsense.png
+coverIcon: thermometer
 tagline: Making urban heat islands visible. Satellites, weather data, and land use.
 featuredOrder: 4
 screenshots:
