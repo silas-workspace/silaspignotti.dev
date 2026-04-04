@@ -49,13 +49,6 @@ import Favicons from './Favicons.astro'
 
   <!-- Feed link -->
   <link rel="manifest" href={withBasePath('/site.webmanifest')} />
-  <link
-    rel="alternate"
-    type="application/rss+xml"
-    title={`${SITE.title} RSS Feed`}
-    href={new URL('rss.xml', Astro.site)}
-  />
-
   <Favicons />
 
   <slot />

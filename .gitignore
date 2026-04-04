@@ -14,4 +14,13 @@ teaser.pptx
 .vercel
 
 # OpenCode
-.opencode/
+.opencode/*
+!.opencode/commands/
+.opencode/commands/*
+!.opencode/commands/deploy-page.md
+!.opencode/commands/deploy-project.md
+!.opencode/commands/deploy-all.md
+!.opencode/skills/
+.opencode/skills/*
+!.opencode/skills/technical-seo/
+!.opencode/skills/technical-seo/SKILL.md

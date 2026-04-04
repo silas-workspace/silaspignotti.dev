@@ -1,120 +1,26 @@
 ---
-import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
-import { buttonVariants } from '@/components/ui/button'
 import Layout from '@/layouts/Layout.astro'
+import { getCollection, render } from 'astro:content'
 
 const currentUrl = Astro.url
+const page = (await getCollection('pages')).find((entry) => entry.data.slug === '/')
 
-const whatIDo = [
-  {
-    title: 'Geospatial Data Science',
-    description:
-      'Spatial data processing, ML on satellite and geodata, reproducible analysis pipelines.',
-  },
-  {
-    title: 'AI & Automation',
-    description:
-      'Context Engineering, agentic workflows, and process automation. AI as a core part of how I work, not a bolt-on.',
-  },
-  {
-    title: 'Open Source Tools',
-    description:
-      'CLI tools and web applications, published on PyPI and available on GitHub.',
-  },
-]
+if (!page) {
+  throw new Error('Missing pages/landing.md content entry')
+}
 
-const techStack = [
-  'Python',
-  'SQL',
-  'PostGIS',
-  'GeoPandas',
-  'scikit-learn',
-  'PyTorch',
-  'Google Earth Engine',
-  'FastAPI',
-  'Docker',
-  'Git',
-  'LangChain',
-]
+const { Content } = await render(page)
 ---
 
 <Layout canonicalUrl={currentUrl}>
   <PageHead
     slot="head"
-    title="Geo Data Scientist | AI Engineer"
-    description="I build data pipelines and ML systems for geospatial problems, from satellite imagery analysis to urban analytics. Python, SQL, and a habit of automating what shouldn't be done by hand."
+    title={page.data.title}
+    description={page.data.description}
+    imagePath={page.data.ogImage}
   />
-
-  <section class="flex flex-col gap-y-12 px-4 py-8 sm:px-8 lg:px-16">
-    <section aria-labelledby="hero-title" class="flex flex-col gap-y-4">
-      <h1 id="hero-title" class="font-custom text-foreground text-4xl font-extrabold sm:text-5xl">
-        Geo Data Scientist | AI Engineer
-      </h1>
-      <p class="text-foreground max-w-3xl text-base leading-relaxed sm:text-lg">
-        I build data pipelines and ML systems for geospatial problems, from satellite imagery analysis to urban analytics. Python, SQL, and a habit of automating what shouldn't be done by hand.
-      </p>
-    </section>
-
-    <section aria-labelledby="what-i-do-title" class="flex flex-col gap-y-5">
-      <h2 id="what-i-do-title" class="font-custom text-foreground text-2xl font-bold">
-        What I Do
-      </h2>
-      <ul class="grid gap-4 md:grid-cols-3" role="list">
-        {
-          whatIDo.map((item) => (
-            <li>
-              <article class="bg-card border-border h-full rounded-xl border p-5 shadow-sm">
-                <h3 class="text-foreground text-lg font-semibold">{item.title}</h3>
-                <p class="text-muted-foreground mt-2 text-sm leading-relaxed">{item.description}</p>
-              </article>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-
-    <section aria-labelledby="featured-projects-title" class="flex flex-col gap-y-3">
-      <h2 id="featured-projects-title" class="font-custom text-foreground text-2xl font-bold">
-        Featured Projects
-      </h2>
-      <!-- TODO: Add featured project cards after curation. -->
-      <div class="bg-muted/50 border-border rounded-xl border border-dashed p-6">
-        <p class="text-muted-foreground text-sm">Featured project cards are coming soon.</p>
-      </div>
-    </section>
-
-    <section aria-labelledby="tech-stack-title" class="flex flex-col gap-y-4">
-      <h2 id="tech-stack-title" class="font-custom text-foreground text-2xl font-bold">
-        Tech Stack
-      </h2>
-      <ul class="flex flex-wrap gap-2" role="list">
-        {
-          techStack.map((technology) => (
-            <li class="bg-secondary text-secondary-foreground rounded-full px-3 py-1 text-sm font-medium">
-              {technology}
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-
-    <section aria-labelledby="cta-title" class="bg-card border-border flex flex-col gap-y-5 rounded-xl border p-6">
-      <h2 id="cta-title" class="sr-only">Call to Action</h2>
-      <p class="text-foreground text-base leading-relaxed">
-        Currently finishing my M.Sc. in Geoinformation at BHT Berlin. Open for freelance projects and collaboration.
-      </p>
-      <nav aria-label="Primary actions" class="flex flex-wrap items-center gap-3">
-        <Link href="/projects" class={buttonVariants({ variant: 'default' })}>
-          View Projects
-        </Link>
-        <Link href="/blog" class={buttonVariants({ variant: 'outline' })}>
-          Read Blog
-        </Link>
-        <Link href="/contact" class={buttonVariants({ variant: 'ghost' })}>
-          Get in Touch
-        </Link>
-      </nav>
-    </section>
-  </section>
+  <article class="prose prose-neutral dark:prose-invert max-w-none px-4 py-8 sm:px-8 lg:px-16">
+    <Content />
+  </article>
 </Layout>

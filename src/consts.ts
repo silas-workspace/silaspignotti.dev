@@ -4,7 +4,7 @@ export const SITE: Site = {
   title: 'Silas Pignotti',
   description:
     'Geo Data Scientist and AI Engineer building geospatial data pipelines, ML systems, and automation tooling for real-world urban and infrastructure use cases.',
-  href: 'https://silaspignotti.dev',
+  href: 'https://silas-workspace.github.io/silaspignotti.dev',
   author: 'Silas Pignotti',
   locale: 'en-US',
   location: 'Berlin, Germany',
@@ -23,10 +23,6 @@ export const NAV_LINKS: SocialLink[] = [
   {
     href: '/projects',
     label: 'projects',
-  },
-  {
-    href: '/blog',
-    label: 'blog',
   },
   {
     href: '/contact',

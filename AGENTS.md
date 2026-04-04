@@ -21,6 +21,12 @@ Personal portfolio and blog website. Central professional presence for recruiter
 - React (islands for interactivity)
 - MDX and Content Collections (type-safe markdown content)
 
+## Theme Reference
+
+- Base template: https://github.com/cojocaru-david/portfolio
+- For visual updates or feature additions, check the base template first for existing components, patterns, and options before introducing custom implementations.
+- Treat this repository as the source of truth for current behavior; use the base template as a capabilities reference.
+
 ## Project Type
 
 `static-site` — generates static HTML for GitHub Pages deployment

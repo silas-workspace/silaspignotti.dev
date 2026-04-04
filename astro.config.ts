@@ -47,7 +47,7 @@ function rehypeDemoteH1AndStripTitle() {
 export default defineConfig({
   output: 'static',
   base: '/silaspignotti.dev',
-  site: 'https://silaspignotti.dev',
+  site: 'https://silas-workspace.github.io/silaspignotti.dev',
 
   integrations: [expressiveCode({
     themes: ['catppuccin-latte', 'ayu-dark'],
@@ -68,7 +68,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss() as any],
     optimizeDeps: {
-      exclude: ["satori", "satori-html"],
       include: [
         "react",
         "react-dom",

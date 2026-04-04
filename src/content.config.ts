@@ -1,32 +1,48 @@
 import { glob } from 'astro/loaders'
 import { defineCollection, z } from 'astro:content'
 
-const blog = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      date: z.coerce.date(),
-      image: image().optional(),
-      tags: z.array(z.string()).optional(),
-      authors: z.array(z.string()).optional(),
-      draft: z.boolean().optional(),
-    }),
+const pages = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/pages' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    slug: z.string(),
+    ogImage: z.string().optional(),
+  }),
 })
 
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
-  schema: ({ image }) =>
+  schema: () =>
     z.object({
-      name: z.string(),
+      title: z.string(),
       description: z.string(),
-      tags: z.array(z.string()),
-      image: image(),
-      link: z.string().url(),
-      startDate: z.coerce.date().optional(),
-      endDate: z.coerce.date().optional(),
+      slug: z.string(),
+      category: z.enum(['Geo Data Science', 'AI/Automation']),
+      stack: z.array(z.string()),
+      github: z.string().url(),
+      pypi: z.string().url().optional(),
+      cover: z.string(),
+      tagline: z.string().optional(),
+      featuredOrder: z.number().optional(),
+      downloads: z
+        .array(
+          z.object({
+            label: z.string(),
+            href: z.string().optional(),
+            note: z.string().optional(),
+          })
+        )
+        .optional(),
+      screenshots: z
+        .array(
+          z.object({
+            src: z.string(),
+            alt: z.string(),
+          })
+        )
+        .optional(),
     }),
 })
 
-export const collections = { blog, projects }
+export const collections = { pages, projects }

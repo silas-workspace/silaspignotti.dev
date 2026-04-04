@@ -1,6 +1,5 @@
 import { SITE } from '@/consts';
 import { getCollection } from 'astro:content';
-import { getAllTags } from '@/lib/data-utils';
 import type { APIRoute } from 'astro';
 
 const MAX_URLS_PER_SITEMAP = 50000;
@@ -14,24 +13,10 @@ export const GET: APIRoute = async (context) => {
   const pathname = requestUrl.pathname;
   const baseUrl = SITE.href.replace(/\/$/, '');
 
-  const [blogPosts, projects, tagsMap] = await Promise.all([
-    getCollection('blog'),
-    getCollection('projects'),
-    getAllTags()
-  ]);
+  const projects = await getCollection('projects');
 
   const now = new Date();
-  const latestBlogDate = blogPosts.reduce((max, post) => {
-    if (!post.data.draft && post.data.date > max) return post.data.date;
-    return max;
-  }, new Date(0)) || now;
-
-  const latestProjectDate = projects.reduce((max, project) => {
-    const projectDate = project.data.endDate || project.data.startDate || now;
-    return projectDate > max ? projectDate : max;
-  }, new Date(0)) || now;
-
-  const latestTagsDate = latestBlogDate;
+  const latestProjectDate = now;
 
   const urls: { loc: string; lastmod: string; changefreq?: string; priority?: number }[] = [];
 
@@ -43,13 +28,6 @@ export const GET: APIRoute = async (context) => {
   });
 
   urls.push({
-    loc: `${baseUrl}/blog/`,
-    lastmod: formatDate(latestBlogDate),
-    changefreq: 'weekly',
-    priority: 0.9
-  });
-
-  urls.push({
     loc: `${baseUrl}/projects/`,
     lastmod: formatDate(latestProjectDate),
     changefreq: 'weekly',
@@ -57,38 +35,25 @@ export const GET: APIRoute = async (context) => {
   });
 
   urls.push({
-    loc: `${baseUrl}/tags/`,
-    lastmod: formatDate(latestTagsDate),
-    changefreq: 'weekly',
-    priority: 0.9
+    loc: `${baseUrl}/about/`,
+    lastmod: formatDate(now),
+    changefreq: 'monthly',
+    priority: 0.8
   });
 
-  for (const post of blogPosts) {
-    if (post.data.draft) continue;
-    urls.push({
-      loc: `${baseUrl}/blog/${encodeURIComponent(post.id)}/`,
-      lastmod: formatDate(post.data.date),
-      changefreq: 'monthly',
-      priority: 0.8
-    });
-  }
+  urls.push({
+    loc: `${baseUrl}/contact/`,
+    lastmod: formatDate(now),
+    changefreq: 'monthly',
+    priority: 0.8
+  });
 
   for (const project of projects) {
-    const projectDate = project.data.endDate || project.data.startDate || now;
     urls.push({
-      loc: `${baseUrl}/projects/${encodeURIComponent(project.id)}/`,
-      lastmod: formatDate(projectDate),
+      loc: `${baseUrl}/projects/${encodeURIComponent(project.data.slug)}/`,
+      lastmod: formatDate(now),
       changefreq: 'yearly',
       priority: 0.6
-    });
-  }
-
-  for (const tag of tagsMap.keys()) {
-    urls.push({
-      loc: `${baseUrl}/tags/${encodeURIComponent(tag)}/`,
-      lastmod: formatDate(now),
-      changefreq: 'monthly',
-      priority: 0.7
     });
   }
 

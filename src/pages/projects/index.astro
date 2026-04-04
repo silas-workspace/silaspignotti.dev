@@ -1,0 +1,108 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import Link from '@/components/Link.astro'
+import PageHead from '@/components/PageHead.astro'
+import Layout from '@/layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+import { withBasePath } from '@/lib/paths'
+
+const page = (await getCollection('pages')).find((entry) => entry.data.slug === '/projects')
+
+if (!page) {
+  throw new Error('Missing pages/projects.md content entry')
+}
+
+const projects = (await getCollection('projects')).sort((a, b) => {
+  const aOrder = a.data.featuredOrder ?? Number.POSITIVE_INFINITY
+  const bOrder = b.data.featuredOrder ?? Number.POSITIVE_INFINITY
+  if (aOrder !== bOrder) return aOrder - bOrder
+  return a.data.title.localeCompare(b.data.title)
+})
+
+const currentUrl = Astro.url
+---
+
+<Layout canonicalUrl={currentUrl}>
+  <PageHead
+    slot="head"
+    title={page.data.title}
+    description={page.data.description}
+    imagePath={page.data.ogImage}
+  />
+
+  <Breadcrumbs
+    items={[
+      { label: 'Projects', href: '/projects', icon: 'lucide:folder' },
+    ]}
+  />
+
+  <section class="max-screen mt-12 px-4 md:px-6">
+    <header class="mb-10">
+      <h1 class="font-custom text-foreground text-4xl font-bold">{page.data.title}</h1>
+      <p class="text-muted-foreground text-md mt-3 max-w-3xl">{page.data.description}</p>
+    </header>
+
+    <ul class="grid grid-cols-1 gap-8 py-sm sm:grid-cols-2" role="list">
+      {
+        projects.map((project) => (
+          <li class="group h-full w-full transition-all duration-300 hover:translate-y-[-4px]">
+            <article class="flex h-full flex-col overflow-hidden rounded-2xl border border-card-foreground/10 bg-card transition-all duration-300 hover:shadow-lg">
+              <Link href={`/projects/${project.data.slug}`} aria-label={`Open ${project.data.title} details`}>
+                <div class="aspect-[16/10] w-full overflow-hidden">
+                  <img
+                    src={withBasePath(project.data.cover)}
+                    alt={`${project.data.title} project cover image`}
+                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+              </Link>
+
+              <div class="flex flex-grow flex-col justify-between p-5">
+                <div>
+                  <h2 class="mb-2 text-xl font-medium text-foreground">
+                    <Link href={`/projects/${project.data.slug}`} class="hover:text-primary transition-colors">
+                      {project.data.title}
+                    </Link>
+                  </h2>
+
+                  {project.data.tagline && (
+                    <p class="mb-2 text-sm font-medium text-foreground/90">{project.data.tagline}</p>
+                  )}
+
+                  <p class="mb-4 text-sm leading-relaxed text-muted-foreground">{project.data.description}</p>
+
+                  <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    {project.data.category}
+                  </p>
+
+                  <ul class="mb-5 flex flex-wrap gap-2" role="list" aria-label={`${project.data.title} tech stack`}>
+                    {project.data.stack.map((tag) => (
+                      <li class="rounded-full bg-secondary/80 px-2 py-1 text-xs font-medium text-secondary-foreground">
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="mt-auto flex items-center gap-3 border-t border-border/40 pt-3">
+                  <Link href={`/projects/${project.data.slug}`} class="text-sm font-medium text-primary" underline>
+                    View details
+                  </Link>
+                  <Link
+                    href={project.data.github}
+                    external
+                    class="text-sm font-medium text-muted-foreground hover:text-foreground"
+                    underline
+                  >
+                    GitHub
+                  </Link>
+                </div>
+              </div>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Layout>

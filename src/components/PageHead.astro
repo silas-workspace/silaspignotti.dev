@@ -1,14 +1,13 @@
 ---
 import { SITE } from '@/consts'
-import { getAllPosts } from '@/lib/data-utils'
 interface Props {
   title?: string
   description?: string
+  imagePath?: string
 }
 
-const { title = SITE.title, description = SITE.description } = Astro.props
-const image = new URL('/ogImage.png', Astro.site).toString()
-const posts = await getAllPosts()
+const { title = SITE.title, description = SITE.description, imagePath = '/ogImage.png' } = Astro.props
+const image = new URL(imagePath, Astro.site).toString()
 
 // Optimize description for SEO (50-155 chars)
 const descTrimmed = description.trim()
@@ -65,37 +64,6 @@ const pageTitle = rawTitle.length > 60 ? rawTitle.slice(0, 57) + '...' : rawTitl
       "@type": "Person",
       "name": SITE.author,
       "url": SITE.href
-    },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": `${SITE.href}/blog?q={search_term_string}`
-      },
-      "query-input": "required name=search_term_string"
-    },
-    "mainEntity": {
-      "@type": "Blog",
-      "@id": `${SITE.href}/blog#blog`,
-      "name": `${SITE.title} Blog`,
-      "description": "Technology blog covering web development, programming, and software engineering topics",
-      "url": `${SITE.href}/blog`,
-      "author": {
-        "@type": "Person",
-        "name": SITE.author
-      },
-      "blogPost": posts.slice(0, 10).map(post => ({
-        "@type": "BlogPosting",
-        "headline": post.data.title,
-        "description": post.data.description,
-        "url": `${SITE.href}/blog/${post.id}/`,
-        "datePublished": post.data.date.toISOString(),
-        "author": {
-          "@type": "Person",
-          "name": post.data.authors ? post.data.authors[0] : SITE.author
-        },
-        "keywords": post.data.tags ? post.data.tags.join(', ') : ''
-      }))
     }
   })}
 />

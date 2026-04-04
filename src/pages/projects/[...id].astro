@@ -5,32 +5,50 @@ import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import { withBasePath } from '@/lib/paths'
-import { PROJECT_CASES } from '@/lib/project-cases'
+import { getCollection, render } from 'astro:content'
+import type { CollectionEntry } from 'astro:content'
 
 export async function getStaticPaths() {
-  return PROJECT_CASES.map((project) => ({
-    params: { id: project.slug },
-    props: project,
+  const projects = await getCollection('projects')
+  return projects.map((project) => ({
+    params: { id: project.data.slug },
+    props: { project },
   }))
 }
 
-const project = Astro.props
+const { project } = Astro.props as { project: CollectionEntry<'projects'> }
 const currentUrl = Astro.url
+const { Content } = await render(project)
+const coverPath = withBasePath(project.data.cover) ?? '/ogImage.png'
+
+const projectSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareSourceCode',
+  name: project.data.title,
+  description: project.data.description,
+  codeRepository: project.data.github,
+  programmingLanguage: project.data.stack,
+  url: new URL(`/projects/${project.data.slug}`, Astro.site).toString(),
+  image: new URL(coverPath, Astro.site).toString(),
+}
 ---
 
 <Layout canonicalUrl={currentUrl}>
   <PageHead
     slot="head"
-    title={`${project.name} | Project`}
-    description={project.description}
+    title={`${project.data.title} | Project`}
+    description={project.data.description}
+    imagePath={coverPath}
   />
+
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(projectSchema)} />
 
   <section class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-lg)-2rem),100%)_minmax(0px,1fr)] gap-y-6 max-w-[calc(100vw-2rem)]">
     <div class="col-start-2">
       <Breadcrumbs
         items={[
           { href: '/projects', label: 'Projects', icon: 'lucide:folder' },
-          { label: project.name, icon: 'lucide:folder-open' },
+          { label: project.data.title, icon: 'lucide:folder-open' },
         ]}
       />
     </div>
@@ -39,28 +57,28 @@ const currentUrl = Astro.url
       <header>
         <div class="aspect-[16/8] w-full overflow-hidden rounded-2xl border border-border/60 bg-muted/40">
           <img
-            src={withBasePath(project.coverImage)}
-            alt={`${project.name} cover placeholder`}
+            src={coverPath}
+            alt={`${project.data.title} cover image`}
             class="h-full w-full object-cover"
             loading="lazy"
           />
         </div>
 
         <h1 class="mt-6 mb-2 text-3xl leading-tight font-medium text-pretty sm:text-5xl">
-          {project.name}
+          {project.data.title}
         </h1>
-        <p class="text-foreground/90 text-base sm:text-lg">{project.tagline}</p>
+        {project.data.tagline && <p class="text-foreground/90 text-base sm:text-lg">{project.data.tagline}</p>}
 
         <div class="mt-4 flex flex-wrap items-center gap-2">
           <span class="text-muted-foreground text-sm">Category:</span>
           <span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-            {project.category}
+            {project.data.category}
           </span>
         </div>
 
-        <ul class="mt-4 flex flex-wrap gap-2" role="list" aria-label={`${project.name} stack`}>
+        <ul class="mt-4 flex flex-wrap gap-2" role="list" aria-label={`${project.data.title} stack`}>
           {
-            project.stack.map((tag) => (
+            project.data.stack.map((tag) => (
               <li class={badgeVariants({ variant: 'secondary' })}>{tag}</li>
             ))
           }
@@ -68,27 +86,14 @@ const currentUrl = Astro.url
       </header>
 
       <article class="prose max-w-none" aria-label="Project details">
-        <section aria-labelledby="problem-title" class="not-prose mt-8 rounded-xl border border-border bg-card p-5">
-          <h2 id="problem-title" class="font-custom text-foreground text-2xl font-bold">Problem</h2>
-          <p class="text-muted-foreground mt-2 text-sm leading-relaxed">{project.problem}</p>
-        </section>
-
-        <section aria-labelledby="solution-title" class="not-prose mt-4 rounded-xl border border-border bg-card p-5">
-          <h2 id="solution-title" class="font-custom text-foreground text-2xl font-bold">Solution</h2>
-          <p class="text-muted-foreground mt-2 text-sm leading-relaxed">{project.solution}</p>
-        </section>
-
-        <section aria-labelledby="result-title" class="not-prose mt-4 rounded-xl border border-border bg-card p-5">
-          <h2 id="result-title" class="font-custom text-foreground text-2xl font-bold">Result</h2>
-          <p class="text-muted-foreground mt-2 text-sm leading-relaxed">{project.result}</p>
-        </section>
+        <Content />
 
         {
-          project.downloads && project.downloads.length > 0 && (
+          project.data.downloads && project.data.downloads.length > 0 && (
             <section aria-labelledby="downloads-title" class="not-prose mt-4 rounded-xl border border-border bg-card p-5">
               <h2 id="downloads-title" class="font-custom text-foreground text-2xl font-bold">Downloads</h2>
               <ul class="mt-3 list-disc space-y-2 pl-5">
-                {project.downloads.map((item) => (
+                {project.data.downloads.map((item) => (
                   <li class="text-muted-foreground text-sm">
                     {item.href ? (
                       <Link
@@ -111,11 +116,11 @@ const currentUrl = Astro.url
         }
 
         {
-          project.screenshots && project.screenshots.length > 0 && (
+          project.data.screenshots && project.data.screenshots.length > 0 && (
             <section aria-labelledby="screenshots-title" class="not-prose mt-4 rounded-xl border border-border bg-card p-5">
               <h2 id="screenshots-title" class="font-custom text-foreground text-2xl font-bold">Screenshots</h2>
               <ul class="mt-4 grid gap-4 sm:grid-cols-2" role="list">
-                {project.screenshots.map((screenshot) => (
+                {project.data.screenshots.map((screenshot) => (
                   <li class="overflow-hidden rounded-xl border border-border/60 bg-muted/30">
                     <img
                       src={withBasePath(screenshot.src)}
@@ -137,11 +142,11 @@ const currentUrl = Astro.url
         <h2 class="text-lg font-semibold">Project Links</h2>
         <ul class="flex flex-col gap-2 text-sm text-muted-foreground">
           <li>
-            <Link href={project.githubUrl} external underline class="text-primary">GitHub Repository</Link>
+            <Link href={project.data.github} external underline class="text-primary">GitHub Repository</Link>
           </li>
-          {project.pypiUrl && (
+          {project.data.pypi && (
             <li>
-              <Link href={project.pypiUrl} external underline class="text-primary">PyPI Package</Link>
+              <Link href={project.data.pypi} external underline class="text-primary">PyPI Package</Link>
             </li>
           )}
         </ul>
