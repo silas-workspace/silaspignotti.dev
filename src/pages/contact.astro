@@ -13,7 +13,7 @@ if (!page) {
 const { Content } = await render(page)
 ---
 
-<Layout canonicalUrl={currentUrl}>
+<Layout canonicalUrl={currentUrl} isWide>
   <PageHead
     slot="head"
     title={page.data.title}
@@ -21,8 +21,10 @@ const { Content } = await render(page)
     imagePath={page.data.ogImage}
   />
 
-  <article class="prose prose-neutral dark:prose-invert max-w-none px-4 py-8 sm:px-8 lg:px-16">
-    <h1 class="sr-only">{page.data.title}</h1>
-    <Content />
-  </article>
+  <section class="mx-auto w-full max-w-7xl px-4 py-8 sm:px-8 lg:px-12">
+    <article class="prose prose-neutral dark:prose-invert max-w-none">
+      <h1 class="sr-only">{page.data.title}</h1>
+      <Content />
+    </article>
+  </section>
 </Layout>

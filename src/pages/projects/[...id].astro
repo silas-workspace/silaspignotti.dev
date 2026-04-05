@@ -33,7 +33,7 @@ const projectSchema = {
 }
 ---
 
-<Layout canonicalUrl={currentUrl}>
+<Layout canonicalUrl={currentUrl} isWide>
   <PageHead
     slot="head"
     title={`${project.data.title} | Project`}
@@ -43,8 +43,8 @@ const projectSchema = {
 
   <script type="application/ld+json" is:inline set:html={JSON.stringify(projectSchema)} />
 
-  <section class="grid grid-cols-[minmax(0px,1fr)_min(calc(var(--breakpoint-lg)-2rem),100%)_minmax(0px,1fr)] gap-y-6 max-w-[calc(100vw-2rem)]">
-    <div class="col-start-2">
+  <section class="mx-auto grid w-full max-w-7xl gap-y-6 px-4 sm:px-8 lg:px-12 xl:grid-cols-[minmax(0px,1fr)_18rem] xl:items-start xl:gap-x-8">
+    <div class="xl:col-span-2">
       <Breadcrumbs
         items={[
           { href: '/projects', label: 'Projects', icon: 'lucide:folder' },
@@ -53,7 +53,7 @@ const projectSchema = {
       />
     </div>
 
-    <section class="col-start-2 flex flex-col gap-y-6 text-start">
+    <section class="flex flex-col gap-y-6 text-start xl:col-start-1">
       <header>
         <div class="aspect-[16/8] w-full overflow-hidden rounded-2xl border border-border/60 bg-muted/40">
           <img
@@ -137,7 +137,7 @@ const projectSchema = {
       </article>
     </section>
 
-    <aside class="group col-start-2 rounded-xl border p-4 xl:sticky xl:top-26 xl:col-start-3 xl:mr-auto xl:ml-8 xl:h-fit xl:max-w-fit xl:rounded-none xl:border-none xl:p-0">
+    <aside class="group rounded-xl border p-4 xl:sticky xl:top-26 xl:col-start-2 xl:h-fit xl:rounded-none xl:border-none xl:p-0">
       <div class="flex flex-col gap-4 rounded-xl border bg-card p-4 shadow-md transition-all duration-300 group-hover:shadow-lg xl:group-hover:shadow-none">
         <h2 class="text-lg font-semibold">Project Links</h2>
         <ul class="flex flex-col gap-2 text-sm text-muted-foreground">

@@ -74,10 +74,10 @@ const Navbar = () => {
 
   const sizeVariants: Record<number, { width: string }> = {
     0: { width: '100%' },
-    1: { width: '100%' },
-    2: { width: '100%' },
-    3: { width: '100%' },
-    4: { width: '100%' },
+    1: { width: 'calc(100% - 1rem)' },
+    2: { width: 'calc(100% - 2rem)' },
+    3: { width: 'calc(100% - 3rem)' },
+    4: { width: 'calc(100% - 4rem)' },
   }
 
   return (
