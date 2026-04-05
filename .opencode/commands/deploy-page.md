@@ -14,13 +14,24 @@ Use this mapping:
 
 Execution rules:
 1. Use the markdown content provided in this chat as the source of truth.
-2. Update the mapped file only. Do not edit layout/template code unless strictly required for schema compatibility.
-3. Ensure frontmatter includes at minimum: `title`, `description`, `slug`.
-4. Keep `ogImage` if present, otherwise set `/ogImage.png`.
-5. Validate image/link references in the page body.
-6. Load and run the `technical-seo` skill for this route.
-7. Run `npm run build` as deployment gate.
-8. If the gate passes, create a conventional commit and push to `main`.
+2. Update the mapped file only. Replace the page content cleanly; do not merge old/new sections into duplicated blocks.
+3. Do not edit layout/template code unless strictly required for schema compatibility.
+4. Ensure frontmatter includes at minimum: `title`, `description`, `slug`.
+5. Keep `ogImage` if present, otherwise set `/ogImage.png`.
+6. Normalize imperfect export formatting before writing:
+   - If input contains wrapper sections like `Landing Page Export`, `File target`, `Frontmatter / Page Meta`, `Body Content`, drop those wrappers.
+   - If frontmatter appears in a fenced code block, extract it into real YAML frontmatter at the top of the target file.
+   - If body appears in a fenced markdown block, extract only the body content.
+   - Remove duplicated sections/paragraphs caused by copy-paste merges.
+   - For route `landing`, remove any manual `## Featured Projects` section from the markdown body (featured cards are rendered dynamically from project data).
+7. Validate image/link references in the page body.
+8. Load and run the `technical-seo` skill for this route.
+9. Validation/runtime safety rules:
+   - Never run `npm install` in this flow.
+   - Never run `brew install` in this flow.
+   - Never modify system Node/npm/toolchain in this flow.
+   - Run build gate with explicit runtime: `npx -y -p node@22 -p npm@11 npm run build`.
+10. If the gate passes, create a conventional commit and push to `main`.
 
 Commit message format:
 - `content(page): update <route>`

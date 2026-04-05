@@ -1,35 +1,35 @@
 ---
 title: Geo Data Scientist | AI Engineer
-description: I build data pipelines and ML systems for geospatial problems, from satellite imagery analysis to urban analytics. Python, SQL, and a habit of automating what shouldn't be done by hand.
+description: I train ML and deep learning models on satellite imagery, build geospatial pipelines, and develop AI-powered developer tools.
 slug: /
 ogImage: /ogImage.png
 ---
 
 # Geo Data Scientist | AI Engineer
 
-I build data pipelines and ML systems for geospatial problems, from satellite imagery analysis to urban analytics. Python, SQL, and a habit of automating what shouldn't be done by hand.
+I train ML and deep learning models on satellite imagery, build geospatial analysis pipelines, and develop AI-powered developer tools. My work covers remote sensing, urban analytics, and workflow automation.
 
 ## What I Do
 
 ### Geospatial Data Science
 
-Spatial data processing, ML on satellite and geodata, reproducible analysis pipelines.
+Machine learning and deep learning on satellite imagery and geodata. End-to-end pipelines from raw data to trained models, with a focus on reproducibility and evaluation.
 
 ### AI & Automation
 
-Context Engineering, agentic workflows, and process automation. AI as a core part of how I work, not a bolt-on.
+Context Engineering, agentic workflows, and LLM-based tooling. I build structured prompt systems, automated pipelines, and integrate AI into development and analysis workflows.
 
-### Open Source Tools
+### Open Source
 
-CLI tools and web applications, published on PyPI and available on GitHub.
+Python CLI tools and web applications on PyPI and GitHub. Built to solve real problems in my own work, released for others to use.
 
 ## Tech Stack
 
-`Python` `SQL` `PostGIS` `GeoPandas` `scikit-learn` `PyTorch` `Google Earth Engine` `FastAPI` `Docker` `Git` `LangChain`
+`Python` `SQL` `PyTorch` `Google Earth Engine` `PostGIS` `GCP` `FastAPI` `Docker` `Git`
 
-## Call to Action
+## Get in Touch
 
-Currently finishing my M.Sc. in Geoinformation at BHT Berlin. Open for freelance projects and collaboration.
+M.Sc. Geoinformation student at BHT Berlin, looking for freelance projects, collaborations, and roles in Geo Data Science or AI Engineering.
 
 [View Projects](/projects)
 

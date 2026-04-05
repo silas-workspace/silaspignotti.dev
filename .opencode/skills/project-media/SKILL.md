@@ -13,6 +13,7 @@ Use this skill when a project deploy includes files (screenshots, PDFs, attachme
 - Never auto-scan `tmp/` globally.
 - Published assets must live under `public/projects/<slug>/`.
 - Project content must reference published paths (`/projects/<slug>/...`), never `tmp/...`.
+- Do not run `npm install`, `brew install`, or system Node/npm/toolchain manipulations in this workflow.
 
 ## Input mapping format
 

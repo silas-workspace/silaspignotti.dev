@@ -19,20 +19,28 @@ Execution rules:
 4. Optional frontmatter supported: `tagline`, `demo`, `paper`, `downloads`, `screenshots`, `featuredOrder`.
 5. Ensure `slug` matches `$ARGUMENTS`.
 6. Normalize cover path to `/covers/$ARGUMENTS.png` unless explicitly overridden.
-7. If the user provides a `Files:` block, load and run `project-media`.
+7. Normalize imperfect export formatting before writing:
+   - Drop wrapper headings like `Project Export`, `File target`, `Frontmatter`, `Body Content`, `Media`.
+   - If frontmatter/body are inside fenced code blocks, extract and write clean markdown with YAML frontmatter.
+   - If body contains `## Links` or `## Visuals`, map that data into structured frontmatter where possible (`demo`, `paper`, `downloads`, `screenshots`) and avoid duplicate body sections.
+8. If the user provides a `Files:` block, load and run `project-media`.
    - Process only explicitly declared mappings.
    - Mapping format: `tmp/source.ext -> final-name.ext`
    - No global `tmp/` scanning.
-8. Validate that referenced screenshots/downloads resolve to published paths under `/projects/$ARGUMENTS/`.
-9. Load and run the `technical-seo` skill for:
+9. Validate that referenced screenshots/downloads resolve to published paths under `/projects/$ARGUMENTS/`.
+10. Load and run the `technical-seo` skill for:
    - `/projects/$ARGUMENTS`
    - `/projects`
-10. Load and run the `project-cover` skill for `$ARGUMENTS`.
+11. Load and run the `project-cover` skill for `$ARGUMENTS`.
    - Skip regeneration by default when existing cover is still valid.
    - Regenerate only when missing, icon changed, or forced.
-11. Verify project is reachable from `/projects` (content collection listing).
-12. Run `npm run build` as deployment gate.
-13. If the gate passes, create a conventional commit and push to `main`.
+12. Verify project is reachable from `/projects` (content collection listing).
+13. Validation/runtime safety rules:
+   - Never run `npm install` in this flow.
+   - Never run `brew install` in this flow.
+   - Never modify system Node/npm/toolchain in this flow.
+   - Run build gate with explicit runtime: `npx -y -p node@22 -p npm@11 npm run build`.
+14. If the gate passes, create a conventional commit and push to `main`.
 
 Commit message format:
 - `content(project): upsert $ARGUMENTS`

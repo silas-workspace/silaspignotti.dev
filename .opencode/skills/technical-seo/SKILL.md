@@ -12,6 +12,8 @@ Use this skill after `/deploy-page`, `/deploy-project`, and `/deploy-all`.
 - Do **not** rewrite page copy for tone, style, or persuasion.
 - Only change technical SEO concerns and machine-readable metadata.
 - Keep fixes minimal and route-scoped.
+- Do **not** install dependencies or mutate the system toolchain in this skill (`npm install`, `brew install`, global Node/npm changes).
+- If validation cannot run in the current environment, fail with a clear instruction and use explicit Node 22 runtime wrappers.
 
 ## Scope
 

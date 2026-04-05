@@ -11,16 +11,25 @@ Execution rules:
    - `src/content/projects/*.md`
 3. For pages, enforce frontmatter: `title`, `description`, `slug` (plus optional `ogImage`).
 4. For projects, enforce frontmatter: `title`, `description`, `slug`, `tags`, `category`, `github`, `cover`, `coverIcon`.
-5. If the user provides file mappings per project, load and run `project-media` for each touched slug.
+5. Normalize imperfect export formatting before writing each block:
+   - Drop wrappers like `File target`, `Frontmatter / Meta`, `Body Content`, `Media`.
+   - Extract fenced frontmatter/body blocks into clean markdown files.
+   - Remove duplicated sections/paragraphs caused by copy merges.
+   - For `landing`, remove any manual `## Featured Projects` section from markdown body.
+6. If the user provides file mappings per project, load and run `project-media` for each touched slug.
    - Process only explicitly declared mappings.
    - Mapping format: `tmp/source.ext -> final-name.ext`
    - No global `tmp/` scanning.
-6. Validate image and internal links across all updated files.
-7. Load and run the `technical-seo` skill once at the end for all touched routes.
-8. Load and run the `project-cover` skill for touched/new project slugs only.
+7. Validate image and internal links across all updated files.
+8. Load and run the `technical-seo` skill once at the end for all touched routes.
+9. Load and run the `project-cover` skill for touched/new project slugs only.
    - Skip regeneration by default when existing covers are still valid.
-9. Run `npm run build` as deployment gate.
-10. If the gate passes, create a conventional commit and push to `main`.
+10. Validation/runtime safety rules:
+   - Never run `npm install` in this flow.
+   - Never run `brew install` in this flow.
+   - Never modify system Node/npm/toolchain in this flow.
+   - Run build gate with explicit runtime: `npx -y -p node@22 -p npm@11 npm run build`.
+11. If the gate passes, create a conventional commit and push to `main`.
 
 Commit message format:
 - `content: deploy batch update`

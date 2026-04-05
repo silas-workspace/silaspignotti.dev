@@ -19,6 +19,12 @@ Generate deterministic 1200x675 PNG covers for project cards and project detail 
 
 ## Execution
 
+Safety rules:
+
+- Do not run `npm install` in this workflow.
+- Do not run `brew install` in this workflow.
+- Do not modify system Node/npm/toolchain state.
+
 Run:
 
 ```bash
