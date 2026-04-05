@@ -74,10 +74,10 @@ const Navbar = () => {
 
   const sizeVariants: Record<number, { width: string }> = {
     0: { width: '100%' },
-    1: { width: '90%' },
-    2: { width: '80%' },
-    3: { width: '70%' },
-    4: { width: '50%' },
+    1: { width: '100%' },
+    2: { width: '100%' },
+    3: { width: '100%' },
+    4: { width: '100%' },
   }
 
   return (
@@ -98,7 +98,6 @@ const Navbar = () => {
           isScrolled && !isMobile && 'border-foreground/10',
           isScrolled && !isMobile && 'border',
           isScrolled && !isMobile && 'bg-background/80',
-          isScrolled && !isMobile && 'max-w-[calc(100vw-5rem)]',
           !isMobile && 'top-2 lg:top-4 xl:top-6',
           isMobile && 'top-0',
           isMobile && 'rounded-none',
