@@ -72,20 +72,12 @@ const Navbar = () => {
     }
   }, [mobileMenuOpen])
 
-  const shellVariants: Record<number, { maxWidth: string }> = {
-    0: { maxWidth: '100vw' },
-    1: { maxWidth: 'calc(100vw - 1rem)' },
-    2: { maxWidth: 'calc(100vw - 2rem)' },
-    3: { maxWidth: 'calc(100vw - 3rem)' },
-    4: { maxWidth: 'calc(100vw - 4rem)' },
-  }
-
-  const contentVariants: Record<number, { paddingTop: string; paddingBottom: string }> = {
-    0: { paddingTop: '1rem', paddingBottom: '1rem' },
-    1: { paddingTop: '0.9rem', paddingBottom: '0.9rem' },
-    2: { paddingTop: '0.82rem', paddingBottom: '0.82rem' },
-    3: { paddingTop: '0.74rem', paddingBottom: '0.74rem' },
-    4: { paddingTop: '0.66rem', paddingBottom: '0.66rem' },
+  const sizeVariants: Record<number, { width: string }> = {
+    0: { width: '100%' },
+    1: { width: '90%' },
+    2: { width: '80%' },
+    3: { width: '70%' },
+    4: { width: '50%' },
   }
 
   return (
@@ -94,8 +86,8 @@ const Navbar = () => {
         aria-label="Navigation"
         role="banner"
         layout={!isMobile}
-        initial={shellVariants[0]}
-        animate={isMobile ? shellVariants[0] : shellVariants[scrollLevel]}
+        initial={sizeVariants[0]}
+        animate={isMobile ? sizeVariants[0] : sizeVariants[scrollLevel]}
         className={cn(
           'fixed left-1/2 z-30 -translate-x-1/2 transform backdrop-blur-lg',
           'bg-background/80 border-0',
@@ -106,7 +98,7 @@ const Navbar = () => {
           isScrolled && !isMobile && 'border-foreground/10',
           isScrolled && !isMobile && 'border',
           isScrolled && !isMobile && 'bg-background/80',
-          isScrolled && !isMobile && 'shadow-md',
+          isScrolled && !isMobile && 'max-w-[calc(100vw-5rem)]',
           !isMobile && 'top-2 lg:top-4 xl:top-6',
           isMobile && 'top-0',
           isMobile && 'rounded-none',
@@ -115,11 +107,7 @@ const Navbar = () => {
           isMobile && 'border-0'
         )}
       >
-        <motion.div
-          initial={contentVariants[0]}
-          animate={isMobile ? contentVariants[0] : contentVariants[scrollLevel]}
-          className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4"
-        >
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 p-4">
           <Link
             href="/"
             className="font-custom flex shrink-0 items-center gap-2 text-xl font-bold"
@@ -146,7 +134,7 @@ const Navbar = () => {
                     <Link
                       href={item.href}
                       className={cn(
-                        "text-base font-medium capitalize transition-colors duration-200",
+                        "text-sm font-medium capitalize transition-colors duration-200",
                         "relative py-1 px-1",
                         "after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300",
                         "hover:after:w-full hover:text-foreground",
@@ -183,7 +171,7 @@ const Navbar = () => {
               </Button>
             )}
           </div>
-        </motion.div>
+        </div>
       </motion.header>
       
       <AnimatePresence>

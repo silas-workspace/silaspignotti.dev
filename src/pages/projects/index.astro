@@ -18,7 +18,7 @@ const featuredTags = await getProjectsFeaturedTags(8)
 const currentUrl = Astro.url
 ---
 
-<Layout canonicalUrl={currentUrl} isWide>
+<Layout canonicalUrl={currentUrl}>
   <PageHead
     slot="head"
     title={page.data.title}

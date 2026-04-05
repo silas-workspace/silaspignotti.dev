@@ -181,7 +181,6 @@
 
   html {
     @apply bg-background text-foreground scheme-light;
-    font-size: 106.25%;
 
     &.dark {
       @apply scheme-dark;

@@ -55,7 +55,7 @@ const ctaLinks = Array.from(ctaSection.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)).map
 const ctaText = ctaSection.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '').trim().replace(/\n+/g, ' ')
 ---
 
-<Layout canonicalUrl={currentUrl} isWide>
+<Layout canonicalUrl={currentUrl}>
   <PageHead
     slot="head"
     title={page.data.title}
