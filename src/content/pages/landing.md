@@ -23,8 +23,8 @@ Python CLI tools and web applications on PyPI and GitHub. Built to solve real pr
 
 ## Get in Touch
 
-M.Sc. Geoinformation student at BHT Berlin, looking for freelance projects, collaborations, and roles in Geo Data Science or AI Engineering.
+M.Sc. Geoinformation student at BHT Berlin. Open for freelance projects, collaborations, and roles in Geo Data Science or AI Engineering.
 
-[View Projects](/projects)
+[pignottisilas@gmail.com](mailto:pignottisilas@gmail.com) · [github.com/spignotti](http://github.com/spignotti) · [linkedin.com/in/silas-pignotti](http://linkedin.com/in/silas-pignotti)
 
-[Get in Touch](mailto:pignottisilas@gmail.com)
+Based in Berlin.
