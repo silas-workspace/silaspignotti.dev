@@ -1,11 +1,11 @@
 ---
-title: Geo Data Scientist | AI Engineer
-description: I train ML and deep learning models on satellite imagery, build geospatial pipelines, and develop AI-powered developer tools.
+title: Silas Pignotti
+description: Geo Data Scientist and AI Engineer in Berlin. M.Sc. Geoinformation at BHT Berlin.
 slug: /
 ogImage: /ogImage.png
 ---
 
-I train ML and deep learning models on satellite imagery, build geospatial analysis pipelines, and develop AI-powered developer tools. My work covers remote sensing, urban analytics, and workflow automation.
+M.Sc. Geoinformation student at BHT Berlin. Building geospatial ML systems and AI tooling.
 
 ## What I Do
 
