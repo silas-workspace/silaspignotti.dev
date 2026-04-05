@@ -122,20 +122,27 @@ Force regenerate:
 npx tsx scripts/generate-cover.ts --force
 ```
 
-## Deploy Commands
+## Deploy Workflow
 
-- `/deploy-page <landing|about|projects|contact>`
-- `/deploy-project <slug>`
-- `/deploy-all`
+Single command:
 
-Project deploy flow:
+- `/deploy`
 
-1. write/update markdown
-2. optional `project-media` (if `Files:` mappings provided)
-3. `technical-seo`
-4. `project-cover`
-5. `npm run build`
-6. commit + push to `main`
+`/deploy` auto-detects whether pasted content is:
+
+- page update
+- project update
+- batch update
+
+Then it handles the full pipeline internally:
+
+1. normalize messy Notion markdown wrappers
+2. route content to the correct `src/content/...` file
+3. run optional media processing for explicit file mappings
+4. generate/update project covers when needed
+5. run publish integrity checks (SEO/frontmatter/path hygiene)
+6. validate (`build`, and `check` for structural/batch changes)
+7. commit + push to `main`
 
 ## Validation
 

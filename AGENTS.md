@@ -51,6 +51,13 @@ public/          # static assets (fonts, images)
 - `npm run dev` — local development server (port 3010)
 - `npm run preview` — preview the production build locally
 
+## Deploy Workflow (Internal)
+
+- Use one command only: `/deploy`
+- `/deploy` auto-detects whether pasted content is a page update, project update, or batch update
+- `/deploy` normalizes messy Notion markdown wrappers and routes content to the correct `src/content/...` path
+- `/deploy` runs optional media + cover steps when needed, performs publish checks, validates, then commits and pushes
+
 ## Astro Conventions
 
 - keep the site static-first; add client islands only when interactivity clearly needs them

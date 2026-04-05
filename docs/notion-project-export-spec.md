@@ -2,6 +2,11 @@
 
 This document defines the canonical Notion-to-repo export format for project entries.
 
+Publishing note:
+
+- Paste exports into chat and use `/deploy`.
+- `/deploy` can normalize messy Notion wrappers, but this spec remains the preferred clean format for predictable results.
+
 ## Output contract
 
 For each project export, return exactly these sections in this order:
@@ -56,6 +61,8 @@ Rules:
 - Omit empty optional fields
 - Never reference `tmp/`, `public/`, Notion URLs, or local filesystem paths
 - Screenshot/download paths must be final published paths under `/projects/<slug>/...`
+
+If an export includes wrapper blocks like `File target`, `Frontmatter`, or `Body Content`, `/deploy` strips those wrappers before writing the canonical markdown file.
 
 Body sections (in order; omit if empty):
 
