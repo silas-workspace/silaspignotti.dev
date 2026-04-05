@@ -27,4 +27,4 @@ M.Sc. Geoinformation student at BHT Berlin, looking for freelance projects, coll
 
 [View Projects](/projects)
 
-[Get in Touch](/contact)
+[Get in Touch](mailto:pignottisilas@gmail.com)

@@ -42,13 +42,6 @@ export const GET: APIRoute = async (context) => {
     priority: 0.8
   });
 
-  urls.push({
-    loc: `${baseUrl}/contact/`,
-    lastmod: formatDate(now),
-    changefreq: 'monthly',
-    priority: 0.8
-  });
-
   for (const project of projects) {
     urls.push({
       loc: `${baseUrl}/projects/${encodeURIComponent(project.data.slug)}/`,
