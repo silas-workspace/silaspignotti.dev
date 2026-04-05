@@ -30,7 +30,7 @@ const intro = introMatch?.[1]?.trim().replace(/\n+/g, ' ') || page.data.descript
 
 const extractSection = (title: string) => {
   const escaped = title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  const regex = new RegExp(`##\\s+${escaped}\\s*([\\s\\S]*?)(?=\\n##\\s+|$)`, 'm')
+  const regex = new RegExp(`##\\s+${escaped}\\s*([\\s\\S]*?)(?=\\n##\\s+|$)`)
   return normalizedBody.match(regex)?.[1]?.trim() ?? ''
 }
 
