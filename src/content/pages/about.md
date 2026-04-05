@@ -60,7 +60,7 @@ GPA 1.6
 
 Machine learning and deep learning on satellite imagery and geodata. Remote sensing, spatial analysis, transfer learning, time series analysis. End-to-end pipelines from raw data to trained models.
 
-`Python` `PyTorch` `scikit-learn` `Google Earth Engine` `PostGIS` `QGIS`
+`Python` `SQL` `PyTorch` `scikit-learn` `Google Earth Engine` `PostGIS` `QGIS`
 
 ### AI & Automation
 

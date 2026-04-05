@@ -75,6 +75,9 @@ const iconMap: { [key: string]: IconType } = {
   'lucide:wand-sparkles': WandSparkles,
   'lucide:waypoints': Waypoints,
   'lucide:workflow': Workflow,
+  'lucide:file-code': FileCode,
+  'lucide:file-text': FileCode,
+  'lucide:code': FileCode,
   'mdi:visual-studio-code': FileCode,
 }
 
