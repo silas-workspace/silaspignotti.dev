@@ -181,6 +181,7 @@
 
   html {
     @apply bg-background text-foreground scheme-light;
+    font-size: 106.25%;
 
     &.dark {
       @apply scheme-dark;
@@ -196,7 +197,7 @@
   }
 
   body {
-    @apply font-sans text-base leading-relaxed sm:text-[1.0625rem];
+    @apply font-sans text-base leading-normal;
   }
 
   h1,

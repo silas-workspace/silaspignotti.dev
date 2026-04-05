@@ -2,7 +2,7 @@
 
 @layer components {
   .prose {
-    @apply text-foreground text-base leading-relaxed sm:text-[1.0625rem];
+    @apply text-foreground text-base leading-relaxed;
     @apply [&>*]:first:mt-0 [&>*]:last:mb-0 [&>section:first-child>*]:mt-0 [&>section:last-child>*]:mb-0;
 
     p {

@@ -72,12 +72,12 @@ const Navbar = () => {
     }
   }, [mobileMenuOpen])
 
-  const shellVariants: Record<number, { paddingInline: string }> = {
-    0: { paddingInline: '0rem' },
-    1: { paddingInline: '0.5rem' },
-    2: { paddingInline: '0.75rem' },
-    3: { paddingInline: '1rem' },
-    4: { paddingInline: '1.25rem' },
+  const shellVariants: Record<number, { maxWidth: string }> = {
+    0: { maxWidth: '100vw' },
+    1: { maxWidth: 'calc(100vw - 1rem)' },
+    2: { maxWidth: 'calc(100vw - 2rem)' },
+    3: { maxWidth: 'calc(100vw - 3rem)' },
+    4: { maxWidth: 'calc(100vw - 4rem)' },
   }
 
   const contentVariants: Record<number, { paddingTop: string; paddingBottom: string }> = {
@@ -106,6 +106,7 @@ const Navbar = () => {
           isScrolled && !isMobile && 'border-foreground/10',
           isScrolled && !isMobile && 'border',
           isScrolled && !isMobile && 'bg-background/80',
+          isScrolled && !isMobile && 'shadow-md',
           !isMobile && 'top-2 lg:top-4 xl:top-6',
           isMobile && 'top-0',
           isMobile && 'rounded-none',
