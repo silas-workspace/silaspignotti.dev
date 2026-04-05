@@ -1,6 +1,6 @@
 ---
 title: About
-description: Geo Data Scientist based in Berlin, currently finishing an M.Sc. in Geoinformation at BHT Berlin. Background in Urban Planning with experience in geospatial analysis, automation, and AI workflows.
+description: Geo Data Scientist in Berlin. M.Sc. Geoinformation at BHT Berlin. Geospatial analysis, ML on satellite imagery, AI workflows.
 slug: /about
 ogImage: /ogImage.png
 ---
@@ -9,7 +9,7 @@ ogImage: /ogImage.png
 
 I'm a Geo Data Scientist based in Berlin, currently finishing my M.Sc. in Geoinformation at BHT Berlin (GPA 1.15). I studied Urban Planning at TU Berlin before that. Working with cities and infrastructure is what drew me to geospatial data in the first place.
 
-Day to day, that means building ML pipelines on satellite imagery, automating analytical workflows with Python and SQL, and developing open-source tools. I also build AI-powered automation into my own work: structured prompts, agentic systems, reproducible documentation. Not as a separate discipline, but as a natural part of how I approach problems.
+Day to day, that means training ML and deep learning models on satellite imagery, building geospatial analysis pipelines, and developing open-source developer tools. I also work with Context Engineering and agentic systems to integrate AI into my development and analysis workflows.
 
 ## Experience
 
@@ -23,7 +23,7 @@ KPI automation on industrial plant data (Python, SQL). Migrated manual Excel wor
 
 2023-2025
 
-AI-powered database maintenance, GIS-based analyses for funding applications, project oversight for a sustainable housing development (51 units, EUR 11.5M).
+AI-powered database maintenance, GIS-based analyses for funding applications, project oversight for a sustainable housing development (51 units, €11.5M).
 
 ### Location Development · LOKATION:S
 
@@ -43,36 +43,44 @@ Real estate database management, GIS-based site analysis with direct impact on i
 
 2024-2026 (expected)
 
-- GPA 1.15
+GPA 1.15
+
 - Focus: Geoinformatics, Remote Sensing, Spatial Data Science
 - Thesis (planned): Urban Heat Islands. Remote Sensing, ML, Cloud Infrastructure
 
-### B.Sc. Urban and Regional Planning · TU Berlin
+### B.Sc. Urban & Regional Planning · TU Berlin
 
 2020-2024
 
-- GPA 1.6
+GPA 1.6
+
 - Thesis: "Hidden Champions in Large Cities: A Web-Data-Based Investigation Using Berlin as a Case Study" (Grade: 1.2)
 
 ## Skills
 
 ### Geospatial Data Science
 
-Spatial data analysis and processing (vector, raster, satellite data). Machine learning on geodata: feature engineering, training, evaluation. Earth observation and remote sensing. Data visualization and reporting.
+Machine learning and deep learning on satellite imagery and geodata. Remote sensing, spatial analysis, transfer learning, time series analysis. End-to-end pipelines from raw data to trained models.
 
-`PostGIS` `GeoPandas` `rasterio` `xarray` `Google Earth Engine` `Sentinel Hub` `QGIS` `scikit-learn` `XGBoost` `PyTorch` `Matplotlib` `Plotly`
+`Python` `PyTorch` `scikit-learn` `Google Earth Engine` `PostGIS` `QGIS`
 
-### AI and Automation
+### AI & Automation
 
-Prompt and Context Engineering. Agentic systems and workflow automation. RAG systems with domain-specific knowledge bases.
+Context Engineering, agentic systems, RAG pipelines, prompt engineering. LLM-based tooling for development, analysis, and workflow automation.
 
-`LangChain` `LangGraph` `LiteLLM` `Vector Databases`
+`LangChain` `LangGraph` `LiteLLM` `n8n` `Notion`
 
-### Cross-Cutting
+### AI-Assisted Development
 
-Data engineering: ETL/ELT pipelines, SQL-based analysis, cloud infrastructure. Backend and tooling: API development, containerization, version control.
+AI coding tools as core part of the development workflow. Structured handoff documents, prompt pipelines, reproducible project context.
 
-`Python` `SQL` `R` `FastAPI` `Docker` `Git/GitHub` `Linux` `PostgreSQL`
+`Claude Code` `OpenCode` `Codex`
+
+### Infrastructure & Tooling
+
+Cloud infrastructure, pipeline orchestration, API development, containerization.
+
+`GCP` `PostgreSQL` `FastAPI` `Docker` `Git/GitHub` `Linux` `Prefect` `MLflow`
 
 ### Languages
 
