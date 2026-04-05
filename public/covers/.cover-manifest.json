@@ -1,38 +1,38 @@
 {
   "building-detector": {
     "icon": "layers",
-    "generatedAt": "2026-04-05T15:37:45.408Z"
+    "generatedAt": "2026-04-05T15:51:19.842Z"
   },
   "heatsense": {
     "icon": "satellite",
-    "generatedAt": "2026-04-05T15:37:49.272Z"
+    "generatedAt": "2026-04-05T15:51:20.687Z"
   },
   "kitamap": {
     "icon": "map-pin",
-    "generatedAt": "2026-04-05T15:37:49.669Z"
+    "generatedAt": "2026-04-05T15:51:21.051Z"
   },
   "renamr": {
     "icon": "wand-2",
-    "generatedAt": "2026-04-05T15:37:50.833Z"
+    "generatedAt": "2026-04-05T15:51:22.423Z"
   },
   "urbaniq": {
     "icon": "building-2",
-    "generatedAt": "2026-04-05T15:37:51.582Z"
+    "generatedAt": "2026-04-05T15:51:23.362Z"
   },
   "context-engineering": {
     "icon": "terminal",
-    "generatedAt": "2026-04-05T15:37:48.835Z"
+    "generatedAt": "2026-04-05T15:51:20.320Z"
   },
   "litresearch": {
     "icon": "file-search",
-    "generatedAt": "2026-04-05T15:37:50.030Z"
+    "generatedAt": "2026-04-05T15:51:21.500Z"
   },
   "para-pm-system": {
     "icon": "layout-dashboard",
-    "generatedAt": "2026-04-05T15:37:50.441Z"
+    "generatedAt": "2026-04-05T15:51:21.987Z"
   },
   "urban-tree-transfer": {
     "icon": "trees",
-    "generatedAt": "2026-04-05T15:38:04.964Z"
+    "generatedAt": "2026-04-05T15:51:22.899Z"
   }
 }

@@ -25,6 +25,17 @@ type ResolvedIcon = {
   iconName: string
 }
 
+type SvgElement = {
+  tag: string
+  attrs: Record<string, string | number | undefined>
+  children?: SvgElement[]
+}
+
+type ParsedSvg = {
+  viewBox: string
+  elements: SvgElement[]
+}
+
 const ROOT = process.cwd()
 const PROJECTS_DIR = path.join(ROOT, 'src/content/projects')
 const COVERS_DIR = path.join(ROOT, 'public/covers')
@@ -83,6 +94,129 @@ function iconDataUri(svg: string) {
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`
 }
 
+function parseSvgElement(raw: string, tag: string): SvgElement | null {
+  const match = raw.match(new RegExp(`<${tag}([^>]*)>([^<]*)<\\/${tag}>`, 's'))
+  if (!match) return null
+
+  const attrsStr = match[1]
+  const attrs: Record<string, string | number | undefined> = {}
+
+  const attrMatches = attrsStr.matchAll(/(\w+(?:-\w+)?)="([^"]*)"/g)
+  for (const [, key, value] of attrMatches) {
+    if (key === 'width' || key === 'height') {
+      attrs[key] = Number.parseInt(value, 10)
+    } else {
+      attrs[key] = value
+    }
+  }
+
+  return { tag, attrs, children: [] }
+}
+
+function parseSvgPaths(rawSvg: string): ParsedSvg {
+  const viewBoxMatch = rawSvg.match(/viewBox="([^"]*)"/)
+  const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24'
+
+  const elements: SvgElement[] = []
+
+  const pathRegex = /<path([^>]*)\/>/g
+  let match
+  while ((match = pathRegex.exec(rawSvg)) !== null) {
+    const attrsStr = match[1]
+    const attrs: Record<string, string | number | undefined> = {
+      stroke: GOLD,
+      fill: 'none',
+      'stroke-width': 2,
+      'stroke-linecap': 'round',
+      'stroke-linejoin': 'round',
+    }
+
+    const attrMatches = attrsStr.matchAll(/(\w+(?:-\w+)?)="([^"]*)"/g)
+    for (const [, key, value] of attrMatches) {
+      attrs[key] = value
+    }
+
+    elements.push({ tag: 'path', attrs })
+  }
+
+  const polygonRegex = /<polygon([^>]*)\/>/g
+  while ((match = polygonRegex.exec(rawSvg)) !== null) {
+    const attrsStr = match[1]
+    const attrs: Record<string, string | number | undefined> = {
+      stroke: GOLD,
+      fill: 'none',
+      'stroke-width': 2,
+      'stroke-linecap': 'round',
+      'stroke-linejoin': 'round',
+    }
+
+    const attrMatches = attrsStr.matchAll(/(\w+(?:-\w+)?)="([^"]*)"/g)
+    for (const [, key, value] of attrMatches) {
+      attrs[key] = value
+    }
+
+    elements.push({ tag: 'polygon', attrs })
+  }
+
+  const circleRegex = /<circle([^>]*)\/>/g
+  while ((match = circleRegex.exec(rawSvg)) !== null) {
+    const attrsStr = match[1]
+    const attrs: Record<string, string | number | undefined> = {
+      stroke: GOLD,
+      fill: 'none',
+      'stroke-width': 2,
+    }
+
+    const attrMatches = attrsStr.matchAll(/(\w+(?:-\w+)?)="([^"]*)"/g)
+    for (const [, key, value] of attrMatches) {
+      attrs[key] = value
+    }
+
+    elements.push({ tag: 'circle', attrs })
+  }
+
+  const rectRegex = /<rect([^>]*)\/>/g
+  while ((match = rectRegex.exec(rawSvg)) !== null) {
+    const attrsStr = match[1]
+    const attrs: Record<string, string | number | undefined> = {
+      stroke: GOLD,
+      fill: 'none',
+      'stroke-width': 2,
+    }
+
+    const attrMatches = attrsStr.matchAll(/(\w+(?:-\w+)?)="([^"]*)"/g)
+    for (const [, key, value] of attrMatches) {
+      attrs[key] = value
+    }
+
+    elements.push({ tag: 'rect', attrs })
+  }
+
+  const lineRegex = /<line([^>]*)\/>/g
+  while ((match = lineRegex.exec(rawSvg)) !== null) {
+    const attrsStr = match[1]
+    const attrs: Record<string, string | number | undefined> = {
+      stroke: GOLD,
+      fill: 'none',
+      'stroke-width': 2,
+      'stroke-linecap': 'round',
+    }
+
+    const attrMatches = attrsStr.matchAll(/(\w+(?:-\w+)?)="([^"]*)"/g)
+    for (const [, key, value] of attrMatches) {
+      attrs[key] = value
+    }
+
+    elements.push({ tag: 'line', attrs })
+  }
+
+  return { viewBox, elements }
+}
+
+function svgElementToReact(element: SvgElement): ReturnType<typeof h> {
+  return h(element.tag, element.attrs, element.children?.map(svgElementToReact))
+}
+
 async function resolveIconSvg(iconName: string): Promise<ResolvedIcon> {
   const require = createRequire(import.meta.url)
   const packageJsonPath = require.resolve('lucide-static/package.json')
@@ -108,6 +242,8 @@ async function resolveIconSvg(iconName: string): Promise<ResolvedIcon> {
 }
 
 async function renderCoverPng(iconSvg: string) {
+  const parsed = parseSvgPaths(iconSvg)
+
   const markup = h(
     'div',
     {
@@ -142,11 +278,21 @@ async function renderCoverPng(iconSvg: string) {
         backgroundPosition: '0 0, 3px 2px',
       },
     }),
-    h('img', {
-      src: iconDataUri(iconSvg),
-      width: ICON_SIZE,
-      height: ICON_SIZE,
-    }),
+    h(
+      'svg',
+      {
+        xmlns: 'http://www.w3.org/2000/svg',
+        width: ICON_SIZE,
+        height: ICON_SIZE,
+        viewBox: parsed.viewBox,
+        fill: 'none',
+        stroke: GOLD,
+        'stroke-width': 2,
+        'stroke-linecap': 'round',
+        'stroke-linejoin': 'round',
+      },
+      parsed.elements.map(svgElementToReact),
+    ),
   )
 
   const svg = await satori(markup, {
