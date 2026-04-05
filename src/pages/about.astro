@@ -14,7 +14,7 @@ if (!page) {
 const { Content } = await render(page)
 ---
 
-<Layout canonicalUrl={currentUrl}>
+<Layout canonicalUrl={currentUrl} isWide>
   <PageHead
     slot="head"
     title={page.data.title}
