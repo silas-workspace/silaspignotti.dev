@@ -196,7 +196,7 @@
   }
 
   body {
-    @apply font-sans text-base leading-normal;
+    @apply font-sans text-base leading-relaxed sm:text-[1.0625rem];
   }
 
   h1,

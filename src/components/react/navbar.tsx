@@ -72,12 +72,20 @@ const Navbar = () => {
     }
   }, [mobileMenuOpen])
 
-  const sizeVariants: Record<number, { width: string }> = {
-    0: { width: '100%' },
-    1: { width: 'calc(100% - 1rem)' },
-    2: { width: 'calc(100% - 2rem)' },
-    3: { width: 'calc(100% - 3rem)' },
-    4: { width: 'calc(100% - 4rem)' },
+  const shellVariants: Record<number, { paddingInline: string }> = {
+    0: { paddingInline: '0rem' },
+    1: { paddingInline: '0.5rem' },
+    2: { paddingInline: '0.75rem' },
+    3: { paddingInline: '1rem' },
+    4: { paddingInline: '1.25rem' },
+  }
+
+  const contentVariants: Record<number, { paddingTop: string; paddingBottom: string }> = {
+    0: { paddingTop: '1rem', paddingBottom: '1rem' },
+    1: { paddingTop: '0.9rem', paddingBottom: '0.9rem' },
+    2: { paddingTop: '0.82rem', paddingBottom: '0.82rem' },
+    3: { paddingTop: '0.74rem', paddingBottom: '0.74rem' },
+    4: { paddingTop: '0.66rem', paddingBottom: '0.66rem' },
   }
 
   return (
@@ -86,8 +94,8 @@ const Navbar = () => {
         aria-label="Navigation"
         role="banner"
         layout={!isMobile}
-        initial={sizeVariants[0]}
-        animate={isMobile ? sizeVariants[0] : sizeVariants[scrollLevel]}
+        initial={shellVariants[0]}
+        animate={isMobile ? shellVariants[0] : shellVariants[scrollLevel]}
         className={cn(
           'fixed left-1/2 z-30 -translate-x-1/2 transform backdrop-blur-lg',
           'bg-background/80 border-0',
@@ -106,7 +114,11 @@ const Navbar = () => {
           isMobile && 'border-0'
         )}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 p-4">
+        <motion.div
+          initial={contentVariants[0]}
+          animate={isMobile ? contentVariants[0] : contentVariants[scrollLevel]}
+          className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4"
+        >
           <Link
             href="/"
             className="font-custom flex shrink-0 items-center gap-2 text-xl font-bold"
@@ -133,7 +145,7 @@ const Navbar = () => {
                     <Link
                       href={item.href}
                       className={cn(
-                        "text-sm font-medium capitalize transition-colors duration-200",
+                        "text-base font-medium capitalize transition-colors duration-200",
                         "relative py-1 px-1",
                         "after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300",
                         "hover:after:w-full hover:text-foreground",
@@ -170,7 +182,7 @@ const Navbar = () => {
               </Button>
             )}
           </div>
-        </div>
+        </motion.div>
       </motion.header>
       
       <AnimatePresence>
