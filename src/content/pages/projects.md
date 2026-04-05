@@ -1,10 +1,10 @@
 ---
 title: My Projects
-description: Portfolio projects presented as business cases, each demonstrating a specific competency in Geospatial Data Science or AI/Automation Engineering.
+description: Geospatial data science, ML/DL, and AI tooling projects. From satellite image classification to open-source CLI tools.
 slug: /projects
 ogImage: /ogImage.png
 ---
 
-# My Projects
+## My Projects
 
-Portfolio projects presented as business cases, each demonstrating a specific competency in Geospatial Data Science or AI/Automation Engineering.
+A selection of projects in geospatial data science, machine learning, and AI tooling.
