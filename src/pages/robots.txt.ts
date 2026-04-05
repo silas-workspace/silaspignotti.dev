@@ -21,6 +21,7 @@ Sitemap: ${sitemapURL.href}
 `
 
 export const GET: APIRoute = ({ site }) => {
-  const sitemapURL = new URL('sitemap.xml', site)
+  const siteBase = (site?.href ?? SITE.href).endsWith('/') ? (site?.href ?? SITE.href) : `${site?.href ?? SITE.href}/`
+  const sitemapURL = new URL('sitemap.xml', siteBase)
   return new Response(getRobotsTxt(sitemapURL))
 }

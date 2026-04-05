@@ -11,6 +11,7 @@ function formatDate(date: Date): string {
 export const GET: APIRoute = async (context) => {
   const requestUrl = new URL(context.request.url);
   const pathname = requestUrl.pathname;
+  const normalizedPath = pathname.replace(/\/+$/, '') || '/';
   const baseUrl = SITE.href.replace(/\/$/, '');
 
   const projects = await getCollection('projects');
@@ -64,7 +65,7 @@ export const GET: APIRoute = async (context) => {
 
   const numSitemaps = chunks.length;
 
-  if (pathname === '/sitemap.xml') {
+  if (normalizedPath.endsWith('/sitemap.xml')) {
     if (numSitemaps > 1) {
       const indexXml = generateSitemapIndex(numSitemaps, baseUrl);
       return new Response(indexXml, {
@@ -83,8 +84,8 @@ export const GET: APIRoute = async (context) => {
       });
     }
   } 
-  else if (pathname.startsWith('/sitemap-') && pathname.endsWith('.xml')) {
-    const indexStr = pathname.slice('/sitemap-'.length, -'.xml'.length);
+  else if (/\/sitemap-\d+\.xml$/.test(normalizedPath)) {
+    const indexStr = normalizedPath.match(/\/sitemap-(\d+)\.xml$/)?.[1] ?? '';
     const index = parseInt(indexStr, 10);
     if (isNaN(index) || index < 0 || index >= numSitemaps) {
       return new Response('Not Found', { status: 404 });
