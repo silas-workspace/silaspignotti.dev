@@ -20,16 +20,16 @@ const projects = defineCollection({
       slug: z.string(),
       category: z.enum(['Geospatial', 'AI/Automation']),
       tags: z.array(z.string()),
-      github: z.string().url(),
+      github: z.string().url().optional(),
       demo: z.string().url().optional(),
       paper: z.string().url().optional(),
       pypi: z.string().url().optional(),
       cover: z.string(),
       coverIcon: z.string().default('code-2'),
       tagline: z.string().optional(),
-      year: z.number(),
-      status: z.enum(['completed', 'ongoing']).default('completed'),
-      featuredOrder: z.number().optional(),
+      year: z.number().optional(),
+      completed: z.boolean().default(true),
+      featured: z.boolean().default(false),
       downloads: z
         .array(
           z.object({

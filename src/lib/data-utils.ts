@@ -4,12 +4,14 @@ export async function getAllProjects(): Promise<CollectionEntry<'projects'>[]> {
   const projects = await getCollection('projects')
   return projects
     .sort((a, b) => {
-      const aOrder = a.data.featuredOrder ?? Number.POSITIVE_INFINITY
-      const bOrder = b.data.featuredOrder ?? Number.POSITIVE_INFINITY
-      if (aOrder !== bOrder) {
-        return aOrder - bOrder
+      const aYear = a.data.year ?? 0
+      const bYear = b.data.year ?? 0
+      if (bYear !== aYear) {
+        return bYear - aYear
       }
-      return a.data.title.localeCompare(b.data.title)
+      const aOngoing = a.data.completed ? 1 : 0
+      const bOngoing = b.data.completed ? 1 : 0
+      return aOngoing - bOngoing
     })
 }
 

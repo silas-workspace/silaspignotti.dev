@@ -1,22 +1,38 @@
 {
   "building-detector": {
-    "icon": "house",
-    "generatedAt": "2026-04-04T18:53:21.007Z"
+    "icon": "layers",
+    "generatedAt": "2026-04-05T15:37:45.408Z"
   },
   "heatsense": {
-    "icon": "thermometer",
-    "generatedAt": "2026-04-04T18:54:27.214Z"
+    "icon": "satellite",
+    "generatedAt": "2026-04-05T15:37:49.272Z"
   },
   "kitamap": {
-    "icon": "map-pinned",
-    "generatedAt": "2026-04-04T18:53:23.947Z"
+    "icon": "map-pin",
+    "generatedAt": "2026-04-05T15:37:49.669Z"
   },
   "renamr": {
-    "icon": "file-code-2",
-    "generatedAt": "2026-04-04T18:53:24.314Z"
+    "icon": "wand-2",
+    "generatedAt": "2026-04-05T15:37:50.833Z"
   },
   "urbaniq": {
-    "icon": "map",
-    "generatedAt": "2026-04-04T18:53:24.656Z"
+    "icon": "building-2",
+    "generatedAt": "2026-04-05T15:37:51.582Z"
+  },
+  "context-engineering": {
+    "icon": "terminal",
+    "generatedAt": "2026-04-05T15:37:48.835Z"
+  },
+  "litresearch": {
+    "icon": "file-search",
+    "generatedAt": "2026-04-05T15:37:50.030Z"
+  },
+  "para-pm-system": {
+    "icon": "layout-dashboard",
+    "generatedAt": "2026-04-05T15:37:50.441Z"
+  },
+  "urban-tree-transfer": {
+    "icon": "trees",
+    "generatedAt": "2026-04-05T15:38:04.964Z"
   }
 }

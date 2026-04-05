@@ -1,26 +1,26 @@
 ---
-title: Urban Tree Transfer
-slug: urban-tree-transfer
-description: Cross-city transfer of tree species classification using Sentinel-2. End-to-end ML pipeline with spatial block CV across Berlin and Leipzig.
-category: Geospatial
+title: "Urban Tree Transfer"
+slug: "urban-tree-transfer"
+description: "Cross-city transfer of tree species classification using Sentinel-2. End-to-end ML pipeline with spatial block CV across Berlin and Leipzig."
+category: "Geospatial"
 tags:
-  - Python
-  - XGBoost
-  - scikit-learn
-  - GeoPandas
-  - Rasterio
-  - Google Earth Engine
-  - 1D-CNN
-github: https://github.com/spignotti/urban-tree-transfer
-cover: /covers/urban-tree-transfer.png
-coverIcon: trees
-tagline: Cross-city transfer of urban tree genus classification. Can a model trained in Berlin classify trees in Leipzig?
-year: 2024
-status: completed
-featuredOrder: 1
+  - "Python"
+  - "XGBoost"
+  - "scikit-learn"
+  - "GeoPandas"
+  - "Rasterio"
+  - "Google Earth Engine"
+  - "1D-CNN"
+github: "https://github.com/spignotti/urban-tree-transfer"
+cover: "/covers/urban-tree-transfer.png"
+coverIcon: "trees"
+tagline: "Cross-city transfer of urban tree genus classification. Can a model trained in Berlin classify trees in Leipzig?"
+featured: true
+year: 2026
+completed: true
 downloads:
-  - label: Thesis Report
-    href: /projects/urban-tree-transfer/report.pdf
+  - label: "Project report (PDF)"
+    href: "/projects/urban-tree-transfer/report.pdf"
 ---
 
 ## Problem
@@ -33,13 +33,13 @@ Fully reproducible end-to-end pipeline: multitemporal Sentinel-2 composites (12 
 
 ## Result
 
-XGBoost weighted F1 = 0.751 in Berlin under spatial block CV, exceeding published benchmarks despite higher class count and stricter evaluation. Zero-shot transfer to Leipzig: XGBoost -49.8%, 1D-CNN -37.4%. Fine-tuning sweet spot at 25-50% local data. Pipeline design (class balancing: +18 pp F1, spatial evaluation, feature engineering) contributes more to performance than algorithm or hyperparameter choice.
+XGBoost weighted F1 = 0.751 in Berlin under spatial block CV, exceeding published benchmarks despite higher class count and stricter evaluation. Zero-shot transfer to Leipzig: XGBoost -49.8%, 1D-CNN -37.4%. Fine-tuning sweet spot at 25–50% local data. Pipeline design (class balancing: +18 pp F1, spatial evaluation, feature engineering) contributes more to performance than algorithm or hyperparameter choice.
 
 ## Lessons Learned
 
 - Pipeline design matters more than algorithm choice. Class balancing alone added +18 pp weighted F1. Spatial block CV, feature engineering, and preprocessing decisions had more impact than hyperparameter tuning or switching between XGBoost and 1D-CNN.
-- Spatial autocorrelation is the silent accuracy killer in remote sensing ML. Standard random CV inflated accuracy by double digits. Spatial block CV with 1200 m blocks caught this. Straightforward to implement, unclear why it's still not standard practice in the field.
-- Zero-shot transfer confirmed what the literature suspected but rarely quantified: domain shift between cities is severe (up to -50% F1). The practical sweet spot for fine-tuning was 25-50% local data, not full retraining.
+- Spatial autocorrelation is the silent accuracy killer in remote sensing ML. Standard random CV inflated accuracy by double digits. Spatial block CV with 1200 m blocks caught this. Straightforward to implement, unclear why it is still not standard practice in the field.
+- Zero-shot transfer confirmed what the literature suspected but rarely quantified: domain shift between cities is severe (up to -50% F1). The practical sweet spot for fine-tuning was 25–50% local data, not full retraining.
 
 ## Deep Dive
 

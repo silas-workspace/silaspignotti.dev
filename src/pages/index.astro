@@ -10,12 +10,14 @@ import { SITE } from '@/consts'
 const currentUrl = Astro.url
 const page = (await getCollection('pages')).find((entry) => entry.data.slug === '/')
 const featuredProjects = (await getCollection('projects'))
-  .filter((project) => Number.isFinite(project.data.featuredOrder))
+  .filter((project) => project.data.featured)
   .sort((a, b) => {
-    const aOrder = a.data.featuredOrder ?? Number.POSITIVE_INFINITY
-    const bOrder = b.data.featuredOrder ?? Number.POSITIVE_INFINITY
-    if (aOrder !== bOrder) return aOrder - bOrder
-    return a.data.title.localeCompare(b.data.title)
+    const aYear = a.data.year ?? 0
+    const bYear = b.data.year ?? 0
+    if (bYear !== aYear) return bYear - aYear
+    const aOngoing = a.data.completed ? 1 : 0
+    const bOngoing = b.data.completed ? 1 : 0
+    return aOngoing - bOngoing
   })
   .slice(0, 3)
 
@@ -66,7 +68,7 @@ const ctaText = ctaSection.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '').trim().replac
 
   <section class="mx-auto w-full max-w-7xl px-4 pb-8 sm:px-8 sm:pb-10 lg:px-12">
     <h1 class="font-custom max-w-4xl text-4xl leading-tight font-bold text-foreground sm:text-5xl lg:text-6xl">
-      Portfolio / Silas Pignotti
+      Portfolio | Silas Pignotti
     </h1>
     <p class="mt-3 text-lg sm:text-xl text-muted-foreground">
       Geo Data Scientist · AI Engineer
@@ -139,7 +141,7 @@ const ctaText = ctaSection.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '').trim().replac
 
   <section aria-labelledby="landing-cta-heading" class="mx-auto w-full max-w-7xl px-4 pb-2 sm:px-8 lg:px-12">
     <h2 id="landing-cta-heading" class="font-custom text-2xl font-bold text-foreground sm:text-3xl">Get in Touch</h2>
-    {ctaText && <p class="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">{ctaText.replace(/\s*Based in Berlin\.\s*$/, '').trim()}</p>}
+    {ctaText && <p class="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{ctaText.replace(/\s*Based in Berlin\.\s*$/, '').trim()}</p>}
     <p class="mt-4 text-base text-muted-foreground">Based in Berlin.</p>
     <div class="mt-5 flex flex-wrap gap-3">
       <a href="https://www.linkedin.com/in/silas-pignotti/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary px-6 py-3 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90">

@@ -24,11 +24,13 @@ const {
 const HeadingTag = headingLevel
 const projectPath = `/projects/${project.data.slug}`
 const tags = project.data.tags.slice(0, tagLimit)
-const isFeatured = variant === 'featured'
+const isFeatured = project.data.featured
 
 const actions = [
   { label: 'View details', href: projectPath, external: false, primary: true },
-  { label: 'GitHub', href: project.data.github, external: true, primary: false },
+  ...(project.data.github
+    ? [{ label: 'GitHub', href: project.data.github, external: true, primary: false }]
+    : []),
   ...(project.data.demo
     ? [{ label: 'Demo', href: project.data.demo, external: true, primary: false }]
     : []),
@@ -63,16 +65,18 @@ const actions = [
             {project.data.category}
           </span>
         )}
-        <span class="inline-flex rounded-full border border-border bg-muted/50 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
-          {project.data.year}
-        </span>
+        {project.data.year && (
+          <span class="inline-flex rounded-full border border-border bg-muted/50 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+            {project.data.year}
+          </span>
+        )}
         <span class={cn(
           'inline-flex rounded-full border px-2.5 py-1 text-[11px] font-medium',
-          project.data.status === 'ongoing'
+          !project.data.completed
             ? 'border-blue-500/20 bg-blue-500/10 text-blue-600 dark:text-blue-400'
             : 'border-green-500/20 bg-green-500/10 text-green-600 dark:text-green-400'
         )}>
-          {project.data.status === 'ongoing' ? 'Ongoing' : 'Completed'}
+          {project.data.completed ? 'Completed' : 'Ongoing'}
         </span>
       </div>
 
