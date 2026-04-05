@@ -53,9 +53,9 @@ src/
 
 Both collections use type-safe schemas defined in `src/content.config.ts`.
 
-## Internal Publishing Workflow
+## Internal Workflows
 
-Use one internal command for content publishing:
+### Content publishing
 
 - `/deploy`
 
@@ -67,6 +67,24 @@ Use one internal command for content publishing:
 4. run optional media/cover steps when needed
 5. run publish checks + validation
 6. commit and push to `main`
+
+### Frontend and design work
+
+- `/design`
+
+`/design` will:
+
+1. load frontend design guidance
+2. reference existing local patterns and template lineage
+3. implement requested UI/frontend/config updates
+4. run SEO/integrity checks for touched routes
+5. validate
+6. commit and push to `main`
+
+### Security behavior
+
+No always-on security review runs for normal static changes.
+Security review is triggered only when work touches security-relevant surfaces (forms/input, API/server handlers, file processing, auth/session, external scripts, redirect/header behavior).
 
 ## Deployment
 

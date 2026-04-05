@@ -144,6 +144,27 @@ Then it handles the full pipeline internally:
 6. validate (`build`, and `check` for structural/batch changes)
 7. commit + push to `main`
 
+## Design Workflow
+
+Single command:
+
+- `/design`
+
+`/design` handles frontend/design/layout/config work and runs this internal pipeline:
+
+1. load frontend design guidance
+2. inspect local implementation patterns
+3. reference base template patterns when relevant
+4. implement requested UI/frontend/config updates
+5. run SEO/integrity checks on touched routes
+6. validate (`build`, and `check` for larger structural changes)
+7. commit + push to `main`
+
+## Security Review Behavior
+
+- No always-on security skill for normal static content/design work
+- Trigger security review only when changes touch forms/input, API/server routes, file processing, auth/session, external scripts/embeds, or redirect/header behavior
+
 ## Validation
 
 - `npm run build` (required before commit)

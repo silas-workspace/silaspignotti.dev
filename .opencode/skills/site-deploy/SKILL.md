@@ -132,6 +132,21 @@ For touched routes/files verify:
 - no obvious secrets in staged content
 - page/project slugs resolve to expected route structure
 
+### Conditional security review (not always-on)
+
+Do not run heavy security review for normal static content deploys.
+
+Trigger `security-review` skill only when deploy changes touch security-relevant surface:
+
+- form/user-input handling
+- API/server route behavior
+- file upload/processing logic
+- auth/session/access control
+- external script/embed injection
+- redirect/header/cookie/security policy behavior
+
+If triggered, run `security-review` before commit.
+
 ## Phase 5 — Validation gates
 
 Always run build gate with Node 24 wrapper:

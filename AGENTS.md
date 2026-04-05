@@ -53,10 +53,21 @@ public/          # static assets (fonts, images)
 
 ## Deploy Workflow (Internal)
 
-- Use one command only: `/deploy`
+- Use `/deploy` for content publishing workflows
 - `/deploy` auto-detects whether pasted content is a page update, project update, or batch update
 - `/deploy` normalizes messy Notion markdown wrappers and routes content to the correct `src/content/...` path
 - `/deploy` runs optional media + cover steps when needed, performs publish checks, validates, then commits and pushes
+
+## Design Workflow (Internal)
+
+- Use `/design` for frontend/design/layout/config requests
+- `/design` loads `frontend-design`, references the base template lineage, and implements UI work using existing local patterns first
+- `/design` runs SEO/integrity checks for touched routes, validates, then commits and pushes
+
+## Security Workflow (Internal)
+
+- No always-on security skill is required for normal static content/design changes
+- Trigger `security-review` only when changes touch user input, API/server handlers, file processing, auth/session, external script embeds, or security-relevant redirect/header behavior
 
 ## Astro Conventions
 

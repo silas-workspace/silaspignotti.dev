@@ -18,7 +18,10 @@ teaser.pptx
 !.opencode/commands/
 .opencode/commands/*
 !.opencode/commands/deploy.md
+!.opencode/commands/design.md
 !.opencode/skills/
 .opencode/skills/*
 !.opencode/skills/site-deploy/
 !.opencode/skills/site-deploy/SKILL.md
+!.opencode/skills/site-design/
+!.opencode/skills/site-design/SKILL.md
