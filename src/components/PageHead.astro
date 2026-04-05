@@ -17,7 +17,6 @@ const optimizedDescription = descTrimmed.length > 155
 
 // Create proper page title, clamp to ~60 chars
 // Special handling for homepage: use custom portfolio title without suffix
-const homepageDescription = 'Geo Data Scientist and AI Engineer in Berlin. M.Sc. Geoinformation at BHT Berlin.'
 const isHomepage = description.includes('BHT Berlin') && title === 'Silas Pignotti'
 const homepageTitle = 'Portfolio / Silas Pignotti'
 const rawTitle = isHomepage ? homepageTitle : (title === SITE.title ? SITE.title : `${title} | ${SITE.title}`)

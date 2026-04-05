@@ -55,13 +55,26 @@ const actions = [
     </div>
   </Link>
 
-  <div class="flex grow flex-col justify-between p-5">
+    <div class="flex grow flex-col justify-between p-5">
     <div>
-      {showCategory && (
-        <p class="mb-3 inline-flex rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-primary">
-          {project.data.category}
-        </p>
-      )}
+      <div class="mb-3 flex flex-wrap items-center gap-2">
+        {showCategory && (
+          <span class="inline-flex rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-primary">
+            {project.data.category}
+          </span>
+        )}
+        <span class="inline-flex rounded-full border border-border bg-muted/50 px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+          {project.data.year}
+        </span>
+        <span class={cn(
+          'inline-flex rounded-full border px-2.5 py-1 text-[11px] font-medium',
+          project.data.status === 'ongoing'
+            ? 'border-blue-500/20 bg-blue-500/10 text-blue-600 dark:text-blue-400'
+            : 'border-green-500/20 bg-green-500/10 text-green-600 dark:text-green-400'
+        )}>
+          {project.data.status === 'ongoing' ? 'Ongoing' : 'Completed'}
+        </span>
+      </div>
 
       <HeadingTag class={cn('mb-1 text-foreground', isFeatured ? 'text-xl font-semibold' : 'text-lg font-semibold')}>
         <Link href={projectPath} class="rounded-sm py-0.5 transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">

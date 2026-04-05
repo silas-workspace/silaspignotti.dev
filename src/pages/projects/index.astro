@@ -4,7 +4,7 @@ import PageHead from '@/components/PageHead.astro'
 import ProjectCard from '@/components/ProjectCard.astro'
 import Layout from '@/layouts/Layout.astro'
 import { getCollection } from 'astro:content'
-import { getAllProjects, getProjectsFeaturedTags } from '@/lib/data-utils'
+import { getAllProjects } from '@/lib/data-utils'
 
 const page = (await getCollection('pages')).find((entry) => entry.data.slug === '/projects')
 
@@ -13,7 +13,6 @@ if (!page) {
 }
 
 const projects = await getAllProjects()
-const featuredTags = await getProjectsFeaturedTags(8)
 
 const currentUrl = Astro.url
 ---
@@ -36,21 +35,6 @@ const currentUrl = Astro.url
     <header class="mb-10">
       <h1 class="font-custom text-foreground text-4xl font-bold">{page.data.title}</h1>
       <p class="text-muted-foreground text-md mt-3 max-w-3xl">{page.data.description}</p>
-
-      {
-        featuredTags.length > 0 && (
-          <div class="mt-5" aria-label="Featured technologies used across projects">
-            <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Featured Tags</p>
-            <ul class="flex flex-wrap gap-2" role="list">
-              {featuredTags.map((tag) => (
-                <li class="rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium text-foreground/90">
-                  {tag}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )
-      }
     </header>
 
     <ul class="grid grid-cols-1 gap-6 py-sm sm:grid-cols-2 sm:gap-8" role="list">

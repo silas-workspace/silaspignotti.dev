@@ -13,6 +13,8 @@ github: https://github.com/spignotti/kitamap
 cover: /covers/kitamap.png
 coverIcon: map-pinned
 tagline: Where are daycare spots missing in Berlin? A data-driven answer instead of guesswork.
+year: 2023
+status: completed
 featuredOrder: 3
 downloads:
   - label: Project report (PDF)

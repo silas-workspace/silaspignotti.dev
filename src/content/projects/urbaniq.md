@@ -14,6 +14,8 @@ github: https://github.com/spignotti/urbanIQ
 cover: /covers/urbaniq.png
 coverIcon: map
 tagline: Analyzing Berlin's districts. One question instead of ten datasets.
+year: 2024
+status: completed
 featuredOrder: 2
 screenshots:
   - src: /projects/urbaniq/screenshot-01.png

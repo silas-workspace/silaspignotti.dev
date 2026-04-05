@@ -15,6 +15,8 @@ github: https://github.com/spignotti/heatsense
 cover: /covers/heatsense.png
 coverIcon: thermometer
 tagline: Making urban heat islands visible. Satellites, weather data, and land use.
+year: 2023
+status: completed
 featuredOrder: 4
 screenshots:
   - src: /projects/heatsense/screenshot-01.png

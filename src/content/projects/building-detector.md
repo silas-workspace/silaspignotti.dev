@@ -15,6 +15,8 @@ github: https://github.com/spignotti/building-detector
 cover: /covers/building-detector.png
 coverIcon: house
 tagline: Detecting buildings in satellite imagery. With a click, not by hand.
+year: 2024
+status: completed
 featuredOrder: 1
 screenshots:
   - src: /projects/building-detector/screenshot-01.png

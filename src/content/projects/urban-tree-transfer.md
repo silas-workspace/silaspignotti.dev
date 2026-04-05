@@ -15,6 +15,8 @@ github: https://github.com/spignotti/urban-tree-transfer
 cover: /covers/urban-tree-transfer.png
 coverIcon: trees
 tagline: Cross-city transfer of urban tree genus classification. Can a model trained in Berlin classify trees in Leipzig?
+year: 2024
+status: completed
 featuredOrder: 1
 downloads:
   - label: Thesis Report

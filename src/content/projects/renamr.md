@@ -10,10 +10,12 @@ tags:
   - pypdf
   - pymupdf
 github: https://github.com/spignotti/renamr
-demo: https://pypi.org/project/renamr/
+pypi: https://pypi.org/project/renamr/
 cover: /covers/renamr.png
 coverIcon: file-code-2
 tagline: Let AI name your files. So you don't have to.
+year: 2024
+status: completed
 featuredOrder: 5
 ---
 
