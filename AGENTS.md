@@ -14,7 +14,7 @@ Personal portfolio website. Central professional presence for recruiters, freela
 ## Tech Stack
 
 - Astro 5.x
-- Node.js 22+
+- Node.js 24+
 - npm — default package manager
 - TypeScript via Astro tooling
 - TailwindCSS (via theme)

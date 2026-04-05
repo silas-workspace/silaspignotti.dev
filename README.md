@@ -13,6 +13,7 @@ Central professional presence for recruiters, freelance clients, and the develop
 ## Tech Stack
 
 - Astro 5.x (static site generator)
+- Node.js 24.x (runtime)
 - TailwindCSS (styling)
 - React (interactive islands)
 - TypeScript
