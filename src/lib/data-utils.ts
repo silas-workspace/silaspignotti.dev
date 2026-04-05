@@ -11,7 +11,7 @@ export async function getAllProjects(): Promise<CollectionEntry<'projects'>[]> {
       }
       return a.data.title.localeCompare(b.data.title)
     })
-} 
+}
 
 export async function getProjectsFeaturedTags(maxCount: number): Promise<string[]> {
   const projects = await getAllProjects()

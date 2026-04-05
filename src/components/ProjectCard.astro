@@ -1,0 +1,101 @@
+---
+import Link from '@/components/Link.astro'
+import { badgeVariants } from '@/components/ui/badge'
+import { withBasePath } from '@/lib/paths'
+import { cn } from '@/lib/utils'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  project: CollectionEntry<'projects'>
+  variant?: 'featured' | 'catalog'
+  headingLevel?: 'h2' | 'h3'
+  showCategory?: boolean
+  tagLimit?: number
+}
+
+const {
+  project,
+  variant = 'catalog',
+  headingLevel = 'h2',
+  showCategory = true,
+  tagLimit = 6,
+} = Astro.props as Props
+
+const HeadingTag = headingLevel
+const projectPath = `/projects/${project.data.slug}`
+const tags = project.data.tags.slice(0, tagLimit)
+const isFeatured = variant === 'featured'
+
+const actions = [
+  { label: 'View details', href: projectPath, external: false, primary: true },
+  { label: 'GitHub', href: project.data.github, external: true, primary: false },
+  ...(project.data.demo
+    ? [{ label: 'Demo', href: project.data.demo, external: true, primary: false }]
+    : []),
+  ...(project.data.paper
+    ? [{ label: 'Paper', href: project.data.paper, external: true, primary: false }]
+    : []),
+]
+---
+
+<article
+  class={cn(
+    'group flex h-full flex-col overflow-hidden rounded-2xl border border-card-foreground/10 bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg',
+    isFeatured && 'border-primary/20 bg-linear-to-b from-card to-muted/20',
+  )}
+>
+  <Link href={projectPath} aria-label={`Open ${project.data.title} details`}>
+    <div class="aspect-[16/10] w-full overflow-hidden border-b border-border/40 bg-muted/30">
+      <img
+        src={withBasePath(project.data.cover)}
+        alt={`${project.data.title} project cover image`}
+        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+        loading="lazy"
+      />
+    </div>
+  </Link>
+
+  <div class="flex grow flex-col justify-between p-5">
+    <div>
+      {showCategory && (
+        <p class="mb-3 inline-flex rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-primary">
+          {project.data.category}
+        </p>
+      )}
+
+      <HeadingTag class={cn('mb-1 text-foreground', isFeatured ? 'text-xl font-semibold' : 'text-lg font-semibold')}>
+        <Link href={projectPath} class="rounded-sm py-0.5 transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+          {project.data.title}
+        </Link>
+      </HeadingTag>
+
+      {project.data.tagline && <p class="mb-2 text-sm font-medium text-foreground/90">{project.data.tagline}</p>}
+
+      <p class="text-sm leading-relaxed text-muted-foreground">{project.data.description}</p>
+
+      <ul class="mt-4 flex flex-wrap gap-2" role="list" aria-label={`${project.data.title} tags`}>
+        {tags.map((tag) => (
+          <li class={badgeVariants({ variant: 'secondary' })}>{tag}</li>
+        ))}
+      </ul>
+    </div>
+
+    <ul class="mt-5 flex flex-wrap items-center gap-3 border-t border-border/50 pt-3" role="list" aria-label={`${project.data.title} links`}>
+      {actions.map((action) => (
+        <li>
+          <Link
+            href={action.href}
+            external={action.external}
+            underline
+            class={cn(
+              'rounded-sm px-0.5 py-1 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+              action.primary ? 'text-primary' : 'text-muted-foreground hover:text-foreground',
+            )}
+          >
+            {action.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+</article>

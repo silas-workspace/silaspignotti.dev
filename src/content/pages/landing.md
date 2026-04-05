@@ -5,8 +5,6 @@ slug: /
 ogImage: /ogImage.png
 ---
 
-# Geo Data Scientist | AI Engineer
-
 I train ML and deep learning models on satellite imagery, build geospatial analysis pipelines, and develop AI-powered developer tools. My work covers remote sensing, urban analytics, and workflow automation.
 
 ## What I Do
@@ -22,10 +20,6 @@ Context Engineering, agentic workflows, and LLM-based tooling. I build structure
 ### Open Source
 
 Python CLI tools and web applications on PyPI and GitHub. Built to solve real problems in my own work, released for others to use.
-
-## Tech Stack
-
-`Python` `SQL` `PyTorch` `Google Earth Engine` `PostGIS` `GCP` `FastAPI` `Docker` `Git`
 
 ## Get in Touch
 

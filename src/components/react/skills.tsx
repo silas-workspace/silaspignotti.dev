@@ -1,58 +1,81 @@
-import { useEffect } from 'react'
 import { technologies, type Technologies, type Category } from '../../consts'
 import { InfiniteScroll } from '../ui/infinite-scroll'
 import { type IconType } from 'react-icons'
 import { FaQuestionCircle } from 'react-icons/fa'
 import {
-  SiHtml5,
-  SiJavascript,
-  SiCss3,
-  SiPhp,
   SiAstro,
-  SiTailwindcss,
+  SiApachespark,
+  SiDocker,
+  SiDuckdb,
+  SiFastapi,
   SiGit,
-  SiDigitalocean,
-  SiCloudflare,
-  SiNetlify,
-  SiUbuntu,
-  SiLua,
-  SiGo,
+  SiGithubactions,
+  SiGooglecloud,
+  SiGoogleearth,
   SiNodedotjs,
-  SiApache,
-  SiNginx,
-  SiMysql,
-  SiMongodb,
-  SiDiscord,
-  SiSpotify,
-  SiBrave,
+  SiNumpy,
+  SiOpenstreetmap,
+  SiPandas,
+  SiPostgresql,
+  SiPython,
+  SiPytorch,
+  SiQgis,
+  SiScikitlearn,
+  SiTypescript,
 } from 'react-icons/si'
-import { FileCode, LucideAppWindow, Code } from 'lucide-react'
+import {
+  Bot,
+  Brain,
+  Database,
+  FileCode,
+  GitBranch,
+  Map,
+  Satellite,
+  ScanSearch,
+  Server,
+  ShieldCheck,
+  Sparkles,
+  Terminal,
+  WandSparkles,
+  Waypoints,
+  Workflow,
+} from 'lucide-react'
 
 const iconMap: { [key: string]: IconType } = {
-  'mdi:language-html5': SiHtml5,
-  'mdi:language-javascript': SiJavascript,
-  'mdi:language-css3': SiCss3,
-  'mdi:language-php': SiPhp,
   'simple-icons:astro': SiAstro,
-  'mdi:tailwind': SiTailwindcss,
+  'si:apachespark': SiApachespark,
+  'si:docker': SiDocker,
+  'si:duckdb': SiDuckdb,
+  'si:fastapi': SiFastapi,
   'mdi:git': SiGit,
-  'mdi:digital-ocean': SiDigitalocean,
-  'cib:cloudflare': SiCloudflare,
-  'cib:netlify': SiNetlify,
-  'mdi:ubuntu': SiUbuntu,
-  'mdi:language-lua': SiLua,
-  'mdi:language-go': SiGo,
+  'si:githubactions': SiGithubactions,
+  'si:googlecloud': SiGooglecloud,
+  'si:googleearth': SiGoogleearth,
   'mdi:nodejs': SiNodedotjs,
-  'cib:apache': SiApache,
-  'cib:nginx': SiNginx,
-  'cib:mysql': SiMysql,
-  'cib:mongodb': SiMongodb,
-  'mdi:discord': SiDiscord,
-  'mdi:spotify': SiSpotify,
-  'cib:brave': SiBrave,
+  'si:numpy': SiNumpy,
+  'si:openstreetmap': SiOpenstreetmap,
+  'si:pandas': SiPandas,
+  'si:postgresql': SiPostgresql,
+  'si:python': SiPython,
+  'si:pytorch': SiPytorch,
+  'si:qgis': SiQgis,
+  'si:scikitlearn': SiScikitlearn,
+  'si:typescript': SiTypescript,
+  'lucide:bot': Bot,
+  'lucide:brain': Brain,
+  'lucide:database': Database,
+  'lucide:git-branch': GitBranch,
+  'lucide:map': Map,
+  'lucide:satellite': Satellite,
+  'lucide:scan-search': ScanSearch,
+  'lucide:server': Server,
+  'lucide:shield-check': ShieldCheck,
+  'lucide:sparkles': Sparkles,
+  'lucide:terminal': Terminal,
+  'lucide:wand-sparkles': WandSparkles,
+  'lucide:waypoints': Waypoints,
+  'lucide:workflow': Workflow,
   'mdi:visual-studio-code': FileCode,
-  'mdi:windows': LucideAppWindow,
-  'mdi:visual-studio': Code,
 }
 
 const categories = Object.keys(technologies)
@@ -64,22 +87,16 @@ const categoryGroups = [
 ]
 
 const Skills: React.FC = () => {
-  useEffect(() => {
-    document.querySelectorAll('.tech-badge').forEach((badge) => {
-      badge.classList.add('tech-badge-visible')
-    })
-  }, [])
-
   return (
-    <div className="z-30 mt-12 flex w-full flex-col max-w-[calc(100vw-5rem)] mx-auto lg:max-w-full">
-      <div className="space-y-2">
+    <div className="mx-auto mt-6 flex w-full max-w-[calc(100vw-2rem)] flex-col lg:max-w-full">
+      <div className="space-y-3">
         {categoryGroups.map((group, groupIndex) => (
           <InfiniteScroll
             key={groupIndex}
-            duration={50000}
+            duration={46000}
             direction={groupIndex % 2 === 0 ? 'normal' : 'reverse'}
             showFade={true}
-            className="flex flex-row justify-center"
+            className="flex flex-row justify-start"
           >
             {group.flatMap((category) =>
               technologies[category as keyof Technologies].map(
@@ -88,13 +105,13 @@ const Skills: React.FC = () => {
                   return (
                     <div
                       key={`${category}-${techIndex}`}
-                      className="tech-badge repo-card border-border bg-card text-muted-foreground mr-5 flex items-center gap-3 rounded-full border p-3 shadow-sm backdrop-blur-sm transition-all duration-300 hover:shadow-md"
+                      className="tech-badge mr-4 flex min-h-12 items-center gap-3 rounded-full border border-border bg-card px-3 py-2 text-muted-foreground shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
                       data-tech-name={`${category}-${techIndex}`}
                     >
-                      <span className="bg-muted flex h-10 w-10 items-center justify-center rounded-full p-2 text-lg shadow-inner">
-                        <IconComponent className="tech-icon text-primary" />
+                      <span className="bg-muted flex h-9 w-9 items-center justify-center rounded-full p-2 text-base shadow-inner">
+                        <IconComponent className="tech-icon text-primary" aria-hidden="true" />
                       </span>
-                      <span className="text-foreground font-medium">
+                      <span className="text-foreground text-sm font-medium sm:text-base">
                         {tech.text}
                       </span>
                     </div>

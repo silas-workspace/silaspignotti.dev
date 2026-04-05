@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useRef, useEffect, useState } from 'react'
-import { motion, useAnimationControls } from 'framer-motion'
+import { motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 interface InfiniteScrollProps {
@@ -28,6 +28,7 @@ export function InfiniteScroll({
   const scrollerRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const controls = useAnimationControls()
+  const shouldReduceMotion = useReducedMotion()
   const elapsedTimeRef = useRef(0)
   const lastTimeRef = useRef(0)
 
@@ -47,6 +48,12 @@ export function InfiniteScroll({
 
   useEffect(() => {
     if (!contentWidth) return
+
+    if (shouldReduceMotion) {
+      controls.stop()
+      controls.set({ x: 0 })
+      return
+    }
 
     const startX = direction === 'normal' ? 0 : -contentWidth
     const endX = direction === 'normal' ? -contentWidth : 0
@@ -73,10 +80,10 @@ export function InfiniteScroll({
 
       lastTimeRef.current = Date.now()
     }
-  }, [controls, direction, duration, contentWidth, isPaused])
+  }, [controls, direction, duration, contentWidth, isPaused, shouldReduceMotion])
 
   const handleMouseEnter = () => {
-    if (!pauseOnHover) return
+    if (!pauseOnHover || shouldReduceMotion) return
 
     const currentTime = Date.now()
     const deltaTime = currentTime - lastTimeRef.current
@@ -87,7 +94,7 @@ export function InfiniteScroll({
   }
 
   const handleMouseLeave = () => {
-    if (!pauseOnHover) return
+    if (!pauseOnHover || shouldReduceMotion) return
     lastTimeRef.current = Date.now()
     setIsPaused(false)
   }
