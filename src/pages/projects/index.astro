@@ -76,8 +76,8 @@ const currentUrl = Astro.url
                     {project.data.category}
                   </p>
 
-                  <ul class="mb-5 flex flex-wrap gap-2" role="list" aria-label={`${project.data.title} tech stack`}>
-                    {project.data.stack.map((tag) => (
+                  <ul class="mb-5 flex flex-wrap gap-2" role="list" aria-label={`${project.data.title} tags`}>
+                    {project.data.tags.map((tag) => (
                       <li class="rounded-full bg-secondary/80 px-2 py-1 text-xs font-medium text-secondary-foreground">
                         {tag}
                       </li>

@@ -23,10 +23,6 @@ Context Engineering, agentic workflows, and process automation. AI as a core par
 
 CLI tools and web applications, published on PyPI and available on GitHub.
 
-## Featured Projects
-
-Explore selected work in geospatial data science and AI automation.
-
 ## Tech Stack
 
 `Python` `SQL` `PostGIS` `GeoPandas` `scikit-learn` `PyTorch` `Google Earth Engine` `FastAPI` `Docker` `Git` `LangChain`

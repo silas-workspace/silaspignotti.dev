@@ -63,7 +63,7 @@ Verify final markup includes:
 
 - Missing required frontmatter (`title`, `description`, `slug`)
 - Broken internal links on deployed routes
-- Missing required project frontmatter (`cover`, `github`, `category`, `stack`)
+- Missing required project frontmatter (`cover`, `github`, `category`, `tags`)
 - Missing `h1`
 
 ### Warnings (deploy may proceed)

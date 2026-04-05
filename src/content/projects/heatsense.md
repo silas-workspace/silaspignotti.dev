@@ -2,8 +2,8 @@
 title: heatsense
 description: Urban Heat Island analysis combining satellite data, weather stations, and land use classification for Berlin.
 slug: heatsense
-category: Geo Data Science
-stack:
+category: Geospatial
+tags:
   - Python
   - Google Earth Engine
   - Flask

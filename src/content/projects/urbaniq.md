@@ -2,8 +2,8 @@
 title: urbanIQ
 description: Smart geodata aggregation for automated district-level analytics in Berlin.
 slug: urbaniq
-category: Geo Data Science
-stack:
+category: Geospatial
+tags:
   - Python
   - FastAPI
   - LangChain

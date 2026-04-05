@@ -2,8 +2,8 @@
 title: building-detector
 description: Point-guided building detection from satellite imagery using SAM2. Interactive web app for selecting points on a map and extracting building footprints.
 slug: building-detector
-category: Geo Data Science
-stack:
+category: Geospatial
+tags:
   - Python
   - SAM2/PyTorch
   - Flask

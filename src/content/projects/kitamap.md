@@ -2,8 +2,8 @@
 title: kitamap
 description: "GIS-based analysis of childcare availability in Berlin: ETL pipelines, time series forecasting, and accessibility analysis."
 slug: kitamap
-category: Geo Data Science
-stack:
+category: Geospatial
+tags:
   - Python
   - scikit-learn
   - Prophet

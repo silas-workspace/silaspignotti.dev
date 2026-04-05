@@ -3,14 +3,14 @@ title: renamr
 description: AI-powered CLI for automatic file renaming. Analyzes PDFs, scans, and images via LLM. Open source, published on PyPI.
 slug: renamr
 category: AI/Automation
-stack:
+tags:
   - Python
   - Typer
   - LiteLLM
   - pypdf
   - pymupdf
 github: https://github.com/spignotti/renamr
-pypi: https://pypi.org/project/renamr/
+demo: https://pypi.org/project/renamr/
 cover: /covers/renamr.png
 coverIcon: file-code-2
 tagline: Let AI name your files. So you don't have to.

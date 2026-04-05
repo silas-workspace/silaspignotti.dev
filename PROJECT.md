@@ -1,202 +1,150 @@
 ## Identity
 
-- **What:** Personal portfolio and blog website. Project showcases as business cases, technical blog, CV, and contact hub.
-- **Why:** Central professional presence for recruiters, freelance clients, and the developer community. Replaces scattered profiles with a single, curated source of truth.
+- **What:** Personal portfolio website. Project showcases as business cases plus profile pages.
+- **Why:** Central professional presence for recruiters, freelance clients, and the developer community.
 - **Type:** static-site
 - **Category:** portfolio
 
 ## Architecture
 
-- **Framework:** Astro 5.x (static site generator)
-- **Theme:** [Developer Portfolio](https://github.com/cojocaru-david/portfolio) (cloned, not forked: clean history, full control)
-- **Styling:** TailwindCSS (via theme)
-- **Content:** Markdown/MDX via Astro Content Collections (type-safe, schema-validated)
-- **Hosting:** GitHub Pages (free, custom domain)
-- **CI/CD:** GitHub Actions (auto-deploy on push to main)
-- **Domain:** [silaspignotti.dev](http://silaspignotti.dev)
+- **Framework:** Astro 5.x
+- **Theme:** [Developer Portfolio](https://github.com/cojocaru-david/portfolio)
+- **Styling:** TailwindCSS
+- **Content:** Astro Content Collections with Markdown (`src/content/pages`, `src/content/projects`)
+- **Hosting:** GitHub Pages
+- **CI/CD:** GitHub Actions (push to `main` triggers deploy)
+- **Live URL:** https://silas-workspace.github.io/silaspignotti.dev/
 
 ### Site Structure
 
-```
+```text
 src/
-├── components/         # Reusable UI components (.astro)
-├── layouts/            # Page layouts (BaseLayout, BlogPostLayout, ProjectLayout)
 ├── pages/
-│   ├── index.astro          # Landing Page (Hero + What I Do + Tech Stack + CTA)
-│   ├── about.astro          # Bio + CV (Experience, Education, Skills)
-│   ├── contact.astro        # Contact info + social links
-│   ├── projects/
-│   │   ├── index.astro      # Portfolio overview (grid, filterable by category)
-│   │   └── [slug].astro     # Dynamic project detail page
-│   └── blog/
-│       ├── index.astro      # Blog overview (by category)
-│       └── [slug].astro     # Dynamic blog post page
+│   ├── index.astro
+│   ├── about.astro
+│   ├── contact.astro
+│   └── projects/
+│       ├── index.astro
+│       └── [...id].astro
 ├── content/
-│   ├── config.ts            # Content Collection schemas
-│   ├── projects/            # Markdown files per portfolio project
-│   │   └── building-detector.md
-│   └── blog/                # Markdown/MDX files per blog post
-│       └── first-post.md
-└── styles/                  # Global styles, Tailwind config overrides
+│   ├── pages/
+│   │   ├── landing.md
+│   │   ├── about.md
+│   │   ├── projects.md
+│   │   └── contact.md
+│   └── projects/
+├── components/
+├── layouts/
+└── lib/
+
+public/
+├── covers/
+└── projects/
 ```
 
-### Content Collections Schema
+## Content Contract (Projects)
 
-```tsx
-// src/content/config.ts
-import { defineCollection, z } from 'astro:content';
+`src/content.config.ts` defines the project schema.
 
-const projects = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    tagline: z.string(),
-    category: z.enum(['Geo Data Science', 'AI/Automation']),
-    stack: z.array(z.string()),
-    github: z.string().url().optional(),
-    featured: z.boolean().default(false),
-    sortOrder: z.number().default(0),
-  }),
-});
+Required fields:
 
-const blog = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    category: z.enum([
-      'Geo & Remote Sensing',
-      'AI & Automation',
-      'Tools & Workflows',
-      'Career & Reflections',
-    ]),
-    tags: z.array(z.string()).default([]),
-    description: z.string(),
-    pubDate: z.date(),
-    draft: z.boolean().default(false),
-  }),
-});
+- `title`
+- `slug`
+- `description`
+- `category` (`Geospatial` | `AI/Automation`)
+- `tags`
+- `github`
+- `cover`
+- `coverIcon`
 
-export const collections = { projects, blog };
-```
+Optional fields:
 
-### Project Markdown Format
+- `demo`
+- `paper`
+- `tagline`
+- `featuredOrder`
+- `downloads`
+- `screenshots`
 
-```markdown
----
-title: "building-detector"
-tagline: "Automated building footprint detection from satellite imagery using SAM2."
-category: "Geo Data Science"
-stack: ["Python", "SAM2", "Rasterio", "GeoPandas"]
-github: "https://github.com/silas-workspace/building-detector"
-featured: true
-sortOrder: 1
----
+Featured landing logic:
 
-## Problem
-[Context and pain point]
+- `featuredOrder` controls landing featured projects
+- Lower number = higher priority
+- Landing shows up to 3 projects with `featuredOrder`
 
-## Solution
-[What was built, key technical decisions]
+## Notion Export Contract
 
-## Result
-[Outcomes, demonstrated competence]
-```
+- Canonical template: `docs/notion-project-export-spec.md`
+- Export projects as `.md` (not `.mdx`) to `src/content/projects/<slug>.md`
+- Use `tags` (not `stack`)
+- Use category values: `Geospatial` | `AI/Automation`
+- Use `cover: /covers/<slug>.png`
+- For featured landing projects, include `featuredOrder`
 
-## Objectives
+## Media Workflow
 
-### MVP (v1)
+Published media:
 
-- [ ]  Clone theme, strip demo content, configure for [silaspignotti.dev](http://silaspignotti.dev)
-- [ ]  Set up Content Collections with project and blog schemas
-- [ ]  Implement Landing Page (Hero, What I Do, Tech Stack, CTA)
-- [ ]  Implement About & CV page (Bio, Experience, Education, Skills)
-- [ ]  Implement Contact page (info + social links)
-- [ ]  Implement Projects overview (grid/list, category filter) + detail pages
-- [ ]  Implement Blog overview + post pages (Markdown rendering)
-- [ ]  Migrate 5 portfolio-ready projects from Notion Content-Spiegel to Markdown
-- [ ]  Set up GitHub Actions deployment to GitHub Pages
-- [ ]  Configure custom domain ([silaspignotti.dev](http://silaspignotti.dev))
-- [ ]  SEO basics: meta tags, Open Graph, sitemap, robots.txt
+- Covers: `public/covers/<slug>.png`
+- Project assets: `public/projects/<slug>/...`
 
-### Non-Goals
+Intake media:
 
-- CMS or admin UI (content managed in Notion, exported as Markdown)
-- Comments, interactions, or user-generated content
-- Analytics (add Plausible in v1.1)
-- i18n / multi-language support
-- Notion-to-Markdown automation (manual handoff for v1)
-- Newsletter / mailing list
-- Search functionality
-- Custom component development beyond theme customization
+- Stage raw files in `tmp/` (local only)
+- Never reference `tmp/` in content
 
-## Constraints
-
-- **Blocker:** GitHub profile and repo structure (GitHub Housekeeping project) should be presentable before website goes live.
-- **Content tone:** Factual, honest, confident. No self-branding theater. Projects speak for themselves.
-- **Minimal customization:** Theme is the baseline. v1 = colors, content, minor layout tweaks. No custom components unless strictly necessary.
-- **Content source:** All page content comes from Notion Content-Spiegel (5 subpages). Projects and blog posts are converted to Markdown with frontmatter matching the Content Collection schemas.
-
-## Setup
-
-- **Category:** portfolio
-- **Git Remote:** https://github.com/silas-workspace/silaspignotti.dev
-
-### Setup Steps
+Process media with explicit mappings only:
 
 ```bash
-# 1. Clone theme repo
-git clone https://github.com/cojocaru-david/portfolio silaspignotti.dev
-
-# 2. Remove original git history
-cd silaspignotti.dev && rm -rf .git
-
-# 3. Initialize fresh repo
-git init
-git remote add origin https://github.com/silas-workspace/silaspignotti.dev.git
-
-# 4. Install dependencies
-npm install
-
-# 5. Start dev server
-npm run dev
-
-# 6. Strip demo content, configure site metadata
-# 7. Add Content Collections + Markdown files
+npx tsx scripts/process-project-media.ts \
+  --slug heatsense \
+  --file "tmp/heatsense_screenshot.png -> screenshot-01.png" \
+  --file "tmp/heatsense_report.pdf -> report.pdf"
 ```
 
-### Cover generation workflow
+## Cover Workflow
 
-- Project covers are generated to `public/covers/[slug].png`
-- Project frontmatter must include `coverIcon` (Lucide icon name) and `cover` (recommended: `/covers/<slug>.png`)
-- Deploy commands for projects run technical SEO and then project-cover generation
-
-Manual usage:
+Generate missing covers:
 
 ```bash
-# generate missing covers
 npx tsx scripts/generate-cover.ts
+```
 
-# regenerate one project cover
-npx tsx scripts/generate-cover.ts --slug heatsense --force
+Single project:
 
-# regenerate all covers
+```bash
+npx tsx scripts/generate-cover.ts --slug heatsense
+```
+
+Force regenerate:
+
+```bash
 npx tsx scripts/generate-cover.ts --force
 ```
 
-## Context
+## Deploy Commands
 
-- **Product Spec:** Notion subpage under Website project (Artefakte)
-- **Content-Spiegel:** 5 Notion subpages (Landing Page, About & CV, Contact, My Projects, Blog) as SSOT
-- **Portfolio-Projekte DB:** 12 projects total, 5 portfolio-ready with full business case content
-- **Blog-Artikel DB:** Structure ready, no published articles yet
+- `/deploy-page <landing|about|projects|contact>`
+- `/deploy-project <slug>`
+- `/deploy-all`
 
-### Decisions
+Project deploy flow:
 
-| # | Question | Decision | Rationale |
-| --- | --- | --- | --- |
-| 1 | Framework | Astro | Content-first SSG, Markdown-native, islands architecture for future interactivity |
-| 2 | Theme strategy | Clone (not fork) | Clean history, full control, no upstream dependency |
-| 3 | Hosting | GitHub Pages | Free, simple, GitHub-native CI/CD |
-| 4 | Content source | Notion Content-Spiegel to Markdown | SSOT in Notion (where planning happens), static export for performance |
-| 5 | Blog engine | Astro Content Collections | Type-safe schemas, frontmatter validation, same stack as portfolio |
-| 6 | Alternatives rejected | Jekyll, Next.js, Framer, Notion Site | Ruby/not in stack, overpowered, vendor lock-in, too limited |
+1. write/update markdown
+2. optional `project-media` (if `Files:` mappings provided)
+3. `technical-seo`
+4. `project-cover`
+5. `npm run build`
+6. commit + push to `main`
+
+## Validation
+
+- `npm run build` (required before commit)
+- `npm run check` (schema/structure changes and larger pushes)
+
+## Constraints
+
+- Content is authored in Notion and exported to Markdown
+- No CMS/admin UI
+- No i18n in v1
+- Keep customizations minimal; prefer existing theme patterns

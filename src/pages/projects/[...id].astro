@@ -27,7 +27,7 @@ const projectSchema = {
   name: project.data.title,
   description: project.data.description,
   codeRepository: project.data.github,
-  programmingLanguage: project.data.stack,
+  keywords: project.data.tags,
   url: new URL(`/projects/${project.data.slug}`, Astro.site).toString(),
   image: new URL(coverPath, Astro.site).toString(),
 }
@@ -76,9 +76,9 @@ const projectSchema = {
           </span>
         </div>
 
-        <ul class="mt-4 flex flex-wrap gap-2" role="list" aria-label={`${project.data.title} stack`}>
+        <ul class="mt-4 flex flex-wrap gap-2" role="list" aria-label={`${project.data.title} tags`}>
           {
-            project.data.stack.map((tag) => (
+            project.data.tags.map((tag) => (
               <li class={badgeVariants({ variant: 'secondary' })}>{tag}</li>
             ))
           }
@@ -144,9 +144,14 @@ const projectSchema = {
           <li>
             <Link href={project.data.github} external underline class="text-primary">GitHub Repository</Link>
           </li>
-          {project.data.pypi && (
+          {project.data.demo && (
             <li>
-              <Link href={project.data.pypi} external underline class="text-primary">PyPI Package</Link>
+              <Link href={project.data.demo} external underline class="text-primary">Live Demo</Link>
+            </li>
+          )}
+          {project.data.paper && (
+            <li>
+              <Link href={project.data.paper} external underline class="text-primary">Paper</Link>
             </li>
           )}
         </ul>

@@ -18,8 +18,8 @@ export async function getProjectsFeaturedTags(maxCount: number): Promise<string[
   const tags = new Set<string>()
 
   for (const project of projects) {
-    if (project.data.stack) {
-      for (const tag of project.data.stack) {
+    if (project.data.tags) {
+      for (const tag of project.data.tags) {
         tags.add(tag)
       }
     }

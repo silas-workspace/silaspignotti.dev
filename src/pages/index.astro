@@ -1,10 +1,16 @@
 ---
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
+import Link from '@/components/Link.astro'
 import { getCollection, render } from 'astro:content'
+import { withBasePath } from '@/lib/paths'
 
 const currentUrl = Astro.url
 const page = (await getCollection('pages')).find((entry) => entry.data.slug === '/')
+const featuredProjects = (await getCollection('projects'))
+  .filter((project) => Number.isFinite(project.data.featuredOrder))
+  .sort((a, b) => (a.data.featuredOrder ?? Number.POSITIVE_INFINITY) - (b.data.featuredOrder ?? Number.POSITIVE_INFINITY))
+  .slice(0, 3)
 
 if (!page) {
   throw new Error('Missing pages/landing.md content entry')
@@ -23,4 +29,71 @@ const { Content } = await render(page)
   <article class="prose prose-neutral dark:prose-invert max-w-none px-4 py-8 sm:px-8 lg:px-16">
     <Content />
   </article>
+
+  {
+    featuredProjects.length > 0 && (
+      <section aria-labelledby="featured-projects-heading" class="px-4 pb-12 sm:px-8 lg:px-16">
+        <div class="mb-6 flex items-end justify-between gap-4">
+          <div>
+            <h2 id="featured-projects-heading" class="font-custom text-foreground text-2xl font-bold">Featured Projects</h2>
+            <p class="text-muted-foreground mt-2 max-w-2xl text-sm">
+              Selected projects highlighted on the landing page.
+            </p>
+          </div>
+          <Link href="/projects" class="text-primary text-sm font-medium" underline>
+            View all
+          </Link>
+        </div>
+
+        <ul class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3" role="list">
+          {featuredProjects.map((project) => (
+            <li class="group h-full w-full transition-all duration-300 hover:translate-y-[-4px]">
+              <article class="flex h-full flex-col overflow-hidden rounded-2xl border border-card-foreground/10 bg-card transition-all duration-300 hover:shadow-lg">
+                <Link href={`/projects/${project.data.slug}`} aria-label={`Open ${project.data.title} details`}>
+                  <div class="aspect-[16/10] w-full overflow-hidden">
+                    <img
+                      src={withBasePath(project.data.cover)}
+                      alt={`${project.data.title} project cover image`}
+                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
+                </Link>
+
+                <div class="flex flex-grow flex-col justify-between p-5">
+                  <div>
+                    <h3 class="mb-2 text-lg font-medium text-foreground">
+                      <Link href={`/projects/${project.data.slug}`} class="hover:text-primary transition-colors">
+                        {project.data.title}
+                      </Link>
+                    </h3>
+
+                    {project.data.tagline && (
+                      <p class="mb-2 text-sm font-medium text-foreground/90">{project.data.tagline}</p>
+                    )}
+
+                    <p class="mb-3 text-sm leading-relaxed text-muted-foreground">{project.data.description}</p>
+
+                    <ul class="flex flex-wrap gap-2" role="list" aria-label={`${project.data.title} tags`}>
+                      {project.data.tags.slice(0, 4).map((tag) => (
+                        <li class="rounded-full bg-secondary/80 px-2 py-1 text-xs font-medium text-secondary-foreground">
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div class="mt-4 border-t border-border/40 pt-3">
+                    <Link href={`/projects/${project.data.slug}`} class="text-primary text-sm font-medium" underline>
+                      View details
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
 </Layout>

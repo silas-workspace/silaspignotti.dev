@@ -1,7 +1,7 @@
 {
   "license": "MIT",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.0.0 <23.0.0"
   },
   "browserslist": "> 0.5%, last 2 versions, Firefox ESR, not dead",
   "keywords": [
@@ -26,6 +26,7 @@
     "precheck": "node scripts/ensure-node-version.mjs",
     "generate:cover": "tsx scripts/generate-cover.ts",
     "generate:cover:force": "tsx scripts/generate-cover.ts --force",
+    "process:project-media": "tsx scripts/process-project-media.ts",
     "dev": "astro dev --port 3010",
     "start": "astro preview",
     "build": "astro build",

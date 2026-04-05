@@ -1,10 +1,10 @@
 # silaspignotti.dev
 
-Personal portfolio and blog website built with Astro.
+Personal portfolio website built with Astro.
 
 ## What
 
-Professional portfolio showcasing projects as business cases, technical blog posts, CV, and contact information.
+Professional portfolio showcasing projects as business cases, CV, and contact information.
 
 ## Why
 
@@ -39,7 +39,7 @@ npm run check
 ```
 src/
 ├── components/       # Reusable UI components
-├── content/           # Content Collections (blog, projects)
+├── content/           # Content Collections (pages, projects)
 ├── layouts/           # Page layouts
 ├── pages/             # Route-based pages
 └── styles/            # Global styles
@@ -47,7 +47,7 @@ src/
 
 ## Content
 
-- **Blog posts**: Add markdown files to `src/content/blog/`
+- **Pages**: Edit markdown files in `src/content/pages/`
 - **Projects**: Add markdown files to `src/content/projects/`
 
 Both collections use type-safe schemas defined in `src/content.config.ts`.

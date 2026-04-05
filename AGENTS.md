@@ -1,6 +1,6 @@
 # silaspignotti.dev
 
-Personal portfolio and blog website. Central professional presence for recruiters, freelance clients, and the developer community. Replaces scattered profiles with a single, curated source of truth.
+Personal portfolio website. Central professional presence for recruiters, freelance clients, and the developer community. Replaces scattered profiles with a single, curated source of truth.
 
 ## Repository Category
 
@@ -19,7 +19,7 @@ Personal portfolio and blog website. Central professional presence for recruiter
 - TypeScript via Astro tooling
 - TailwindCSS (via theme)
 - React (islands for interactivity)
-- MDX and Content Collections (type-safe markdown content)
+- Content Collections (type-safe markdown content)
 
 ## Theme Reference
 
@@ -38,7 +38,7 @@ src/
   pages/         # route-based pages
   components/    # reusable Astro/UI components + React islands
   layouts/       # shared page layouts
-  content/       # Content Collections (blog, projects)
+  content/       # Content Collections (pages, projects)
   lib/           # utility functions
   styles/        # global styles, Tailwind config
 public/          # static assets (fonts, images)
@@ -54,7 +54,7 @@ public/          # static assets (fonts, images)
 ## Astro Conventions
 
 - keep the site static-first; add client islands only when interactivity clearly needs them
-- use Astro Content Collections for structured portfolio or blog content
+- use Astro Content Collections for structured page and project content
 - preserve performance and simplicity over novelty
 - content managed in Notion, exported as Markdown with frontmatter
 
@@ -71,7 +71,7 @@ Context7 MCP is available in this project. When working with any external librar
 
 ## Known Constraints
 
-- Content source: All page content comes from Notion Content-Spiegel (5 subpages). Projects and blog posts are converted to Markdown with frontmatter matching the Content Collection schemas.
+- Content source: All page and project content comes from Notion Content-Spiegel and is exported to Markdown with frontmatter matching Content Collection schemas.
 - Blocker: GitHub profile and repo structure should be presentable before website goes live.
 - No CMS or admin UI (content managed in Notion, exported as Markdown)
 - No i18n / multi-language support in v1
