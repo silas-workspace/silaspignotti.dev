@@ -7,33 +7,31 @@ ogImage: /ogImage.png
 
 # About
 
-I'm a Geo Data Scientist based in Berlin, currently finishing my M.Sc. in Geoinformation at BHT Berlin (GPA 1.15). I studied Urban Planning at TU Berlin before that. Working with cities and infrastructure is what drew me to geospatial data in the first place.
-
-Day to day, that means training ML and deep learning models on satellite imagery, building geospatial analysis pipelines, and developing open-source developer tools. I also work with Context Engineering and agentic systems to integrate AI into my development and analysis workflows.
+I'm a Geo Data Scientist based in Berlin, currently finishing my M.Sc. in Geoinformation at BHT Berlin (GPA 1.15). I studied Urban Planning at TU Berlin before that. Working with cities and infrastructure is what drew me to geospatial data. Day to day, that means training ML and deep learning models on satellite imagery, building geospatial analysis pipelines, and developing open-source tools. Context Engineering and agentic systems are a second focus: structuring AI-assisted development and integrating LLMs into analysis workflows.
 
 ## Experience
 
 ### Data Analytics · Interzero Plastics Sorting GmbH
 
-2025-present
+2025–present
 
 KPI automation on industrial plant data (Python, SQL). Migrated manual Excel workflows to reproducible, SQL-based analysis pipelines.
 
 ### Construction Management · Büro Tacke e.K.
 
-2023-2025
+2023–2025
 
 AI-powered database maintenance, GIS-based analyses for funding applications, project oversight for a sustainable housing development (51 units, €11.5M).
 
 ### Location Development · LOKATION:S
 
-2022-2023
+2022–2023
 
 GIS-based site and market analysis for municipal and private stakeholders. Analytical reports, maps, and visualizations for strategic decisions.
 
 ### Project Development · KlimaGut AG
 
-2021-2022
+2021–2022
 
 Real estate database management, GIS-based site analysis with direct impact on investment decisions.
 
@@ -41,7 +39,7 @@ Real estate database management, GIS-based site analysis with direct impact on i
 
 ### M.Sc. Geoinformation · BHT Berlin
 
-2024-2026 (expected)
+2024–2026 (expected)
 
 GPA 1.15
 
@@ -50,7 +48,7 @@ GPA 1.15
 
 ### B.Sc. Urban & Regional Planning · TU Berlin
 
-2020-2024
+2020–2024
 
 GPA 1.6
 
