@@ -1,7 +1,7 @@
 ---
 title: "renamr"
 slug: "renamr"
-description: "AI-powered CLI for automatic file renaming. Analyzes PDFs, scans, and images via LLM. Open source, published on PyPI."
+description: "AI-powered CLI tool that automatically renames files using LLMs — local-first via Ollama, no API costs, privacy-safe for sensitive documents."
 category: "AI/Automation"
 tags:
   - "Python"
@@ -9,12 +9,14 @@ tags:
   - "LiteLLM"
   - "pypdf"
   - "pymupdf"
+  - "Git"
 github: "https://github.com/spignotti/renamr"
-demo: "https://pypi.org/project/renamr/"
+pypi: "https://pypi.org/project/renamr/"
 coverIcon: "wand-2"
-tagline: "CLI tool for batch file renaming using LLM-extracted content summaries."
+tagline: "Rename files by what they contain, not what they're called."
 year: 2026
 completed: true
+featured: false
 ---
 
 ## Problem
