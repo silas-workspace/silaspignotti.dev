@@ -75,9 +75,6 @@ export default defineConfig({
         "lucide-react",
         "lodash.debounce",
         "@radix-ui/react-icons",
-        "@radix-ui/react-avatar",
-        "@radix-ui/react-dropdown-menu",
-        "@radix-ui/react-scroll-area",
         "@radix-ui/react-separator",
         "@radix-ui/react-slot"
       ]

@@ -215,7 +215,7 @@ const Navbar = () => {
                   <p className="text-muted-foreground text-base" aria-label="open-source description">
                     <Link
                       href="https://github.com/silas-workspace/silaspignotti.dev"
-                      class="text-foreground"
+                      className="text-foreground"
                       external
                       underline>Open-source</Link
                     > under MIT license

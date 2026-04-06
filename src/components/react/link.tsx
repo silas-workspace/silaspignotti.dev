@@ -1,33 +1,36 @@
-import { cn } from '@/lib/utils';
-import { withBasePath } from '@/lib/paths';
-import React from 'react';
+import React from 'react'
+import { cn } from '@/lib/utils'
 
-interface Props {
-  href: string;
-  external?: boolean;
-  className?: string;
-  underline?: boolean;
-  [key: string]: any;
+interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  href: string
+  external?: boolean
+  underline?: boolean
 }
 
-const Link: React.FC<Props> = ({ href, external, className, underline, children, ...rest }) => {
-  const resolvedHref = external ? href : withBasePath(href)
+const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(
+  ({ href, external, underline, className, children, ...props }, ref) => {
+    const isExternal = external || href.startsWith('http') || href.startsWith('https')
+    
+    return (
+      <a
+        ref={ref}
+        href={href}
+        className={cn(
+          'transition-colors duration-200',
+          underline && 'underline underline-offset-4',
+          className
+        )}
+        {...(isExternal
+          ? { target: '_blank', rel: 'noopener noreferrer' }
+          : {})}
+        {...props}
+      >
+        {children}
+      </a>
+    )
+  }
+)
 
-  return (
-    <a
-      href={resolvedHref}
-      target={external ? '_blank' : '_self'}
-      className={cn(
-        'inline-block transition-colors duration-300 ease-in-out',
-        underline &&
-          'underline decoration-muted-foreground underline-offset-[3px] hover:decoration-foreground',
-        className
-      )}
-      {...rest}
-    >
-      {children}
-    </a>
-  );
-};
+Link.displayName = 'Link'
 
-export default Link;
+export default Link

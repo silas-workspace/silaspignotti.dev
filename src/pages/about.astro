@@ -4,7 +4,7 @@ import Layout from '@/layouts/Layout.astro'
 import { SITE } from '@/consts'
 import { getCollection } from 'astro:content'
 import { badgeVariants } from '@/components/ui/badge'
-import { Calendar, Award, GraduationCap, Briefcase, Brain, Sparkles, Server, Languages } from 'lucide-react'
+import { Calendar, Award, GraduationCap, Briefcase, Brain } from 'lucide-react'
 
 const currentUrl = Astro.url
 const page = (await getCollection('pages')).find((entry) => entry.data.slug === '/about')
@@ -58,8 +58,8 @@ const educationSection = extractSection('Education')
 const educationItems = educationSection
   ? educationSection.split(/\n###\s+/)
       .filter(Boolean)
-      .map(part => {
-        const lines = part.split('\n').map(l => l.trim()).filter(Boolean)
+      .map((part: string) => {
+        const lines = part.split('\n').map((l: string) => l.trim()).filter(Boolean)
         if (lines.length === 0) return null
         
         const titleLine = (lines[0] || '').replace(/^###\s*/, '').trim()
@@ -68,7 +68,7 @@ const educationItems = educationSection
         const details = lines.slice(3).join('\n').trim()
         
         const [degree, institution] = titleLine.includes('·')
-          ? titleLine.split('·').map(s => s.trim())
+          ? titleLine.split('·').map((s: string) => s.trim())
           : [titleLine.trim(), '']
         
         const gpaMatch = gpaOrNote.match(/GPA\s+([\d.]+)/)
@@ -85,8 +85,8 @@ const skillsSection = extractSection('Skills')
 const skillsItems = skillsSection
   ? skillsSection.split(/\n###\s+/)
       .filter(Boolean)
-      .map(part => {
-        const lines = part.split('\n').map(l => l.trim()).filter(Boolean)
+      .map((part: string) => {
+        const lines = part.split('\n').map((l: string) => l.trim()).filter(Boolean)
         if (lines.length === 0) return null
         
         const title = (lines[0] || '').replace(/^###\s*/, '').trim()
@@ -98,7 +98,7 @@ const skillsItems = skillsSection
         let tags: string[] = []
         
         if (codeBlockMatch) {
-          tags = rest.match(/`([^`]+)`/g)?.map(t => t.replace(/`/g, '')) ?? []
+          tags = rest.match(/`([^`]+)`/g)?.map((t: string) => t.replace(/`/g, '')) ?? []
           // Remove the code block from description
           description = rest.replace(/(`[^`]+`\s*)+/, '').trim()
         }
@@ -108,16 +108,6 @@ const skillsItems = skillsSection
       })
       .filter(Boolean)
   : []
-
-// Icon mapping for skills
-const getSkillIcon = (title: string) => {
-  const t = title.toLowerCase()
-  if (t.includes('geospatial') || t.includes('geo')) return Brain
-  if (t.includes('ai') || t.includes('automation') || t.includes('assisted')) return Sparkles
-  if (t.includes('infrastructure') || t.includes('tooling')) return Server
-  if (t.includes('language')) return Languages
-  return Sparkles
-}
 ---
 
 <Layout canonicalUrl={currentUrl}>
@@ -157,7 +147,7 @@ const getSkillIcon = (title: string) => {
     {intro && (
       <div class="mb-12">
         <div class="prose prose-neutral dark:prose-invert max-w-none">
-          {intro.split('\n\n').filter(Boolean).map(paragraph => (
+          {intro.split('\n\n').filter(Boolean).map((paragraph: string) => (
             <p class="text-lg leading-relaxed text-foreground/90">{paragraph.replace(/\n/g, ' ')}</p>
           ))}
         </div>
@@ -211,7 +201,7 @@ const getSkillIcon = (title: string) => {
         </div>
         
         <div class="space-y-4">
-          {educationItems.map((item) => (
+          {educationItems.map((item: typeof educationItems[number]) => (
             <article class="rounded-2xl border border-border/60 bg-card p-5 shadow-sm transition-all duration-300 hover:shadow-md">
               <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                 <div class="flex-1">
@@ -235,7 +225,7 @@ const getSkillIcon = (title: string) => {
               </div>
               {item.details && (
                 <div class="mt-3 space-y-1 text-sm text-foreground/70">
-                  {item.details.split('\n').filter(l => l.trim()).map(line => (
+                  {item.details.split('\n').filter((l: string) => l.trim()).map((line: string) => (
                     <p>{line.replace(/^[-•]\s*/, '')}</p>
                   ))}
                 </div>
@@ -257,7 +247,7 @@ const getSkillIcon = (title: string) => {
         </div>
         
         <div class="grid gap-5 md:grid-cols-2">
-          {skillsItems.map((skill) => {
+          {skillsItems.map((skill: typeof skillsItems[number]) => {
             return (
               <article class="rounded-2xl border border-border/60 bg-card p-5 shadow-sm transition-all duration-300 hover:shadow-md">
                 <div class="flex flex-col gap-3">
@@ -269,7 +259,7 @@ const getSkillIcon = (title: string) => {
                     
                     {skill.tags.length > 0 && (
                       <ul class="mt-3 flex flex-wrap gap-2" role="list">
-                        {skill.tags.map((tag) => (
+                        {skill.tags.map((tag: string) => (
                           <li class={badgeVariants({ variant: 'secondary' })}>{tag}</li>
                         ))}
                       </ul>

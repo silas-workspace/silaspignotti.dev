@@ -90,29 +90,6 @@ async function saveManifest(manifest: CoverManifest) {
   await writeFile(MANIFEST_PATH, `${JSON.stringify(manifest, null, 2)}\n`, 'utf8')
 }
 
-function iconDataUri(svg: string) {
-  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`
-}
-
-function parseSvgElement(raw: string, tag: string): SvgElement | null {
-  const match = raw.match(new RegExp(`<${tag}([^>]*)>([^<]*)<\\/${tag}>`, 's'))
-  if (!match) return null
-
-  const attrsStr = match[1]
-  const attrs: Record<string, string | number | undefined> = {}
-
-  const attrMatches = attrsStr.matchAll(/(\w+(?:-\w+)?)="([^"]*)"/g)
-  for (const [, key, value] of attrMatches) {
-    if (key === 'width' || key === 'height') {
-      attrs[key] = Number.parseInt(value, 10)
-    } else {
-      attrs[key] = value
-    }
-  }
-
-  return { tag, attrs, children: [] }
-}
-
 function parseSvgPaths(rawSvg: string): ParsedSvg {
   const viewBoxMatch = rawSvg.match(/viewBox="([^"]*)"/)
   const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24'
