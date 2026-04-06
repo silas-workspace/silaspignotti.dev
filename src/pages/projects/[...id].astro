@@ -55,7 +55,7 @@ if (project.data.paper) links.push({ label: 'Paper (PDF)', href: project.data.pa
 if (project.data.downloads) {
   project.data.downloads.forEach((item) => {
     if (item.href) {
-      links.push({ label: item.label, href: item.href, external: item.href.startsWith('http') })
+      links.push({ label: item.label, href: item.href, external: item.href.startsWith('http') || item.href.endsWith('.pdf') })
     }
   })
 }

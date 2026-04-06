@@ -13,7 +13,7 @@ tags:
 github: "https://github.com/spignotti/renamr"
 pypi: "https://pypi.org/project/renamr/"
 coverIcon: "wand-2"
-tagline: "CLI tool for batch file renaming using LLM-extracted content summaries."
+tagline: "Rename downloaded files to a consistent schema without manual sorting."
 year: 2026
 completed: true
 featured: false

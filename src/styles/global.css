@@ -180,7 +180,7 @@
   }
 
   html {
-    @apply bg-background text-foreground scheme-light;
+    @apply bg-background text-foreground scheme-light overflow-x-hidden;
 
     &.dark {
       @apply scheme-dark;
