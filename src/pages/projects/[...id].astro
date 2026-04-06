@@ -4,9 +4,9 @@ import Layout from '@/layouts/Layout.astro'
 import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
 import { badgeVariants } from '@/components/ui/badge'
-import { withBasePath } from '@/lib/paths'
 import { getCollection, render } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
+import { Calendar, Layers, Terminal, Satellite, MapPin, FileSearch, LayoutDashboard, Wand2, Trees, Building2 } from 'lucide-react'
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects')
@@ -19,7 +19,22 @@ export async function getStaticPaths() {
 const { project } = Astro.props as { project: CollectionEntry<'projects'> }
 const currentUrl = Astro.url
 const { Content } = await render(project)
-const coverPath = withBasePath(project.data.cover) ?? '/ogImage.png'
+const displayYear = project.data.completed ? project.data.year : 'Ongoing'
+
+// Icon mapping for coverIcon
+const iconMap: Record<string, typeof Building2> = {
+  'layers': Layers,
+  'terminal': Terminal,
+  'satellite': Satellite,
+  'map-pin': MapPin,
+  'file-search': FileSearch,
+  'layout-dashboard': LayoutDashboard,
+  'wand-2': Wand2,
+  'trees': Trees,
+  'building-2': Building2,
+}
+
+const IconComponent = iconMap[project.data.coverIcon] || Layers
 
 const projectSchema = {
   '@context': 'https://schema.org',
@@ -29,7 +44,6 @@ const projectSchema = {
   codeRepository: project.data.github,
   keywords: project.data.tags,
   url: new URL(`/projects/${project.data.slug}`, Astro.site).toString(),
-  image: new URL(coverPath, Astro.site).toString(),
 }
 ---
 
@@ -38,7 +52,6 @@ const projectSchema = {
     slot="head"
     title={`${project.data.title} | Project`}
     description={project.data.description}
-    imagePath={coverPath}
   />
 
   <script type="application/ld+json" is:inline set:html={JSON.stringify(projectSchema)} />
@@ -55,37 +68,28 @@ const projectSchema = {
 
     <section class="col-start-2 flex flex-col gap-y-6 text-start">
       <header>
-        <div class="aspect-[16/8] w-full overflow-hidden rounded-2xl border border-border/60 bg-muted/40">
-          <img
-            src={coverPath}
-            alt={`${project.data.title} cover image`}
-            class="h-full w-full object-cover"
-            loading="lazy"
-          />
+        <!-- Icon + Title + Tagline Header (instead of cover image) -->
+        <div class="flex items-center gap-4 mb-2">
+          <!-- Icon Circle -->
+          <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary/10">
+            <IconComponent className="h-7 w-7 text-primary" />
+          </div>
+          
+          <div>
+            <h1 class="text-3xl leading-tight font-medium text-pretty sm:text-5xl">
+              {project.data.title}
+            </h1>
+            {project.data.tagline && <p class="text-foreground/90 text-base sm:text-lg mt-1">{project.data.tagline}</p>}
+          </div>
         </div>
 
-        <h1 class="mt-6 mb-2 text-3xl leading-tight font-medium text-pretty sm:text-5xl">
-          {project.data.title}
-        </h1>
-        {project.data.tagline && <p class="text-foreground/90 text-base sm:text-lg">{project.data.tagline}</p>}
-
         <div class="mt-4 flex flex-wrap items-center gap-2">
-          <span class="text-muted-foreground text-sm">Category:</span>
-          <span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-            {project.data.category}
-          </span>
           {project.data.year && (
-            <span class="rounded-full bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground">
-              {project.data.year}
+            <span class="inline-flex items-center gap-1 rounded-full bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground">
+              <Calendar className="h-3 w-3" />
+              {displayYear}
             </span>
           )}
-          <span class={`rounded-full px-3 py-1 text-xs font-medium ${
-            !project.data.completed
-              ? 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20'
-              : 'bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20'
-          }`}>
-            {project.data.completed ? 'Completed' : 'Ongoing'}
-          </span>
         </div>
 
         <ul class="mt-4 flex flex-wrap gap-2" role="list" aria-label={`${project.data.title} tags`}>
@@ -135,7 +139,7 @@ const projectSchema = {
                 {project.data.screenshots.map((screenshot) => (
                   <li class="overflow-hidden rounded-xl border border-border/60 bg-muted/30">
                     <img
-                      src={withBasePath(screenshot.src)}
+                      src={screenshot.src}
                       alt={screenshot.alt}
                       class="h-full w-full object-cover"
                       loading="lazy"

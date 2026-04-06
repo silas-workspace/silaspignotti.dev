@@ -28,14 +28,14 @@ const categories = ['All', 'Geospatial', 'AI/Automation'] as const
     imagePath={page.data.ogImage}
   />
 
-  <Breadcrumbs
-    items={[
-      { label: 'Projects', href: '/projects', icon: 'lucide:folder' },
-    ]}
-  />
-
   <section class="mx-auto mt-10 w-full max-w-7xl px-4 sm:px-8 md:mt-12 lg:px-12">
-    <header class="mb-10">
+    <Breadcrumbs
+      items={[
+        { label: 'Projects', href: '/projects', icon: 'lucide:folder' },
+      ]}
+    />
+
+    <header class="mb-10 mt-6">
       <h1 class="font-custom text-foreground text-4xl font-bold">{page.data.title}</h1>
       <p class="text-muted-foreground text-md mt-3">{page.data.description}</p>
     </header>
@@ -46,14 +46,15 @@ const categories = ['All', 'Geospatial', 'AI/Automation'] as const
     <!-- Projects Grid -->
     <ul 
       id="projects-grid"
-      class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+      class="grid grid-cols-1 md:grid-cols-2 gap-6"
       role="list"
     >
       {
-        projects.map((project) => (
+        projects.map((project, index) => (
           <li 
-            class="project-item" 
+            class="project-item"
             data-category={project.data.category}
+            style={index % 2 === 1 ? 'transform: translateY(0.75rem)' : ''}
           >
             <ProjectCard project={project} tagLimit={3} />
           </li>
