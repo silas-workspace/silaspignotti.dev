@@ -111,20 +111,17 @@ const ctaText = ctaSection.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '').trim().replac
       <div class="mb-6 flex items-end justify-between gap-4">
         <div>
           <h2 id="featured-projects-heading" class="font-custom text-2xl font-bold text-foreground sm:text-3xl">
-            Featured Projects
+            Projects
           </h2>
-          <p class="mt-2 text-sm text-muted-foreground sm:text-base">
-            Selected projects that represent core strengths across geospatial ML and AI tooling.
-          </p>
         </div>
         <Link href="/projects" class="text-sm font-medium text-primary" underline>
           View all
         </Link>
       </div>
 
-      <ul class="grid grid-cols-1 md:grid-cols-2 gap-6" role="list">
-        {featuredProjects.map((project, index) => (
-          <li style={index % 2 === 1 ? 'transform: translateY(0.75rem)' : ''}>
+      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list">
+        {featuredProjects.map((project) => (
+          <li>
             <ProjectCard project={project} tagLimit={3} />
           </li>
         ))}

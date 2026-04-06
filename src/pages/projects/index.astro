@@ -50,11 +50,10 @@ const categories = ['All', 'Geospatial', 'AI/Automation'] as const
       role="list"
     >
       {
-        projects.map((project, index) => (
+        projects.map((project) => (
           <li 
             class="project-item"
             data-category={project.data.category}
-            style={index % 2 === 1 ? 'transform: translateY(0.75rem)' : ''}
           >
             <ProjectCard project={project} tagLimit={3} />
           </li>

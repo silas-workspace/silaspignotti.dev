@@ -71,7 +71,7 @@ const projectSchema = {
         <!-- Icon + Title + Tagline Header (instead of cover image) -->
         <div class="flex items-center gap-4 mb-2">
           <!-- Icon Circle -->
-          <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary/10">
+          <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-primary/50">
             <IconComponent className="h-7 w-7 text-primary" />
           </div>
           
@@ -84,12 +84,13 @@ const projectSchema = {
         </div>
 
         <div class="mt-4 flex flex-wrap items-center gap-2">
-          {project.data.year && (
-            <span class="inline-flex items-center gap-1 rounded-full bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground">
-              <Calendar className="h-3 w-3" />
-              {displayYear}
-            </span>
-          )}
+          <span class="inline-flex items-center gap-1 rounded-full bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground">
+            <Calendar className="h-3 w-3" />
+            {displayYear}
+          </span>
+          <span class="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+            {project.data.category}
+          </span>
         </div>
 
         <ul class="mt-4 flex flex-wrap gap-2" role="list" aria-label={`${project.data.title} tags`}>
@@ -155,31 +156,42 @@ const projectSchema = {
 
     <aside class="group col-start-2 rounded-xl border p-4 xl:sticky xl:top-26 xl:col-start-3 xl:mr-auto xl:ml-8 xl:h-fit xl:max-w-fit xl:rounded-none xl:border-none xl:p-0">
       <div class="flex flex-col gap-4 rounded-xl border bg-card p-4 shadow-md transition-all duration-300 group-hover:shadow-lg xl:group-hover:shadow-none">
-        <h2 class="text-lg font-semibold">Project Links</h2>
-        <ul class="flex flex-col gap-2 text-sm text-muted-foreground">
+        <ul class="flex flex-col gap-3 text-sm text-muted-foreground">
           {project.data.github && (
-            <li>
-              <Link href={project.data.github} external underline class="text-primary">GitHub Repository</Link>
-            </li>
+            <>
+              <li>
+                <Link href={project.data.github} external underline class="text-primary">GitHub Repository</Link>
+              </li>
+              <li class="border-t border-border/40"></li>
+            </>
           )}
           {project.data.demo && (
-            <li>
-              <Link href={project.data.demo} external underline class="text-primary">Live Demo</Link>
-            </li>
+            <>
+              <li>
+                <Link href={project.data.demo} external underline class="text-primary">Live Demo</Link>
+              </li>
+              <li class="border-t border-border/40"></li>
+            </>
           )}
           {project.data.pypi && (
-            <li>
-              <Link href={project.data.pypi} external underline class="text-primary">PyPI</Link>
-            </li>
+            <>
+              <li>
+                <Link href={project.data.pypi} external underline class="text-primary">PyPI</Link>
+              </li>
+              <li class="border-t border-border/40"></li>
+            </>
           )}
           {project.data.paper && (
-            <li>
-              <Link href={project.data.paper} external underline class="text-primary">Paper</Link>
-            </li>
+            <>
+              <li>
+                <Link href={project.data.paper} external underline class="text-primary">Paper</Link>
+              </li>
+              <li class="border-t border-border/40"></li>
+            </>
           )}
         </ul>
 
-        <hr class="my-2 border-t" />
+        <li class="border-t border-border/40 list-none"></li>
 
         <Link href="/projects" underline class="text-sm font-medium text-primary">
           Back to all projects
