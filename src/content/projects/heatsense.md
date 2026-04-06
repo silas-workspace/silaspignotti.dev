@@ -12,7 +12,6 @@ tags:
   - "Rasterio"
   - "Leaflet"
 github: "https://github.com/spignotti/heatsense"
-cover: "/covers/heatsense.png"
 coverIcon: "satellite"
 tagline: "Making urban heat islands visible. Satellites, weather data, and land use."
 year: 2025

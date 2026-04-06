@@ -11,7 +11,6 @@ tags:
   - "pymupdf"
 github: "https://github.com/spignotti/renamr"
 demo: "https://pypi.org/project/renamr/"
-cover: "/covers/renamr.png"
 coverIcon: "wand-2"
 tagline: "CLI tool for batch file renaming using LLM-extracted content summaries."
 year: 2026

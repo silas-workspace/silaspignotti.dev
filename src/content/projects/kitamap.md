@@ -11,7 +11,6 @@ tags:
   - "OpenRouteService"
 github: "https://github.com/spignotti/kitamap"
 demo: "https://pinea.app.carto.com/map/81885962-c7a8-4639-8124-372e0caa6e60"
-cover: "/covers/kitamap.png"
 coverIcon: "map-pin"
 tagline: "Spatial analysis of daycare supply in Berlin: coverage assessment, demand forecasting, and accessibility mapping."
 year: 2024

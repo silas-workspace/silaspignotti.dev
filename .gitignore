@@ -13,6 +13,7 @@ teaser.pptx
 ~$teaser.pptx
 .vercel
 .venv/
+inbox/
 
 # OpenCode
 .opencode/*

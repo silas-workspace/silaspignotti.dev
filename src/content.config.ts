@@ -24,7 +24,6 @@ const projects = defineCollection({
       demo: z.string().url().optional(),
       paper: z.string().url().optional(),
       pypi: z.string().url().optional(),
-      cover: z.string(),
       coverIcon: z.string().default('code-2'),
       tagline: z.string().optional(),
       year: z.number().optional(),

@@ -11,7 +11,6 @@ tags:
   - "pypdf"
 github: "https://github.com/spignotti/litresearch"
 demo: "https://pypi.org/project/litresearch/"
-cover: "/covers/litresearch.png"
 coverIcon: "file-search"
 tagline: "Automated literature search from a research question to a curated, deduplicated source set."
 featured: true

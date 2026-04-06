@@ -12,7 +12,6 @@ tags:
   - "GeoPandas"
   - "Rasterio"
 github: "https://github.com/spignotti/building-detector"
-cover: "/covers/building-detector.png"
 coverIcon: "layers"
 tagline: "Building footprint detection in satellite imagery using a fine-tuned segmentation model."
 year: 2024

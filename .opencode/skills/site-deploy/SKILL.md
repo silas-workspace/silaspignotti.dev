@@ -1,188 +1,184 @@
 ---
 name: site-deploy
-description: Unified portfolio deployment workflow. Auto-detect page/project/batch content, normalize Notion markdown, optionally process media and covers, run publish checks, validate, then commit and push.
+description: Unified portfolio deployment workflow. Auto-detect page/project content, process media, run SEO checks, validate, then commit and push.
 ---
 
 # Site Deploy Skill
 
-Use this skill for **all** content publishing in this repository.
+Use this skill for **all content publishing** in this repository.
 
 Single entrypoint: `/deploy`
 
 ## Goal
 
-Given content pasted in chat, handle the complete publish workflow end-to-end:
+Given content in chat, handle the complete publish workflow end-to-end:
 
-1. infer content type (page/project/batch)
+1. infer content type (page/project)
 2. normalize and route to correct files
-3. run optional media and cover steps
+3. process media (screenshots, PDFs)
 4. run SEO/integrity checks
-5. run validation
+5. validate
 6. commit and push
 
 ## Inputs
 
-- Primary input: pasted content in chat
+- Primary input: content pasted in chat
 - Optional command flags:
-  - `--all`
   - `--dry-run`
   - `--skip-media`
-  - `--skip-cover`
   - `--skip-check`
   - `--skip-push`
   - `--message "..."`
-  - repeated `--file "tmp/source.ext -> final-name.ext"`
 
 ## Repository contracts
 
-Pages:
+### Pages
 
-- `src/content/pages/landing.md`
-- `src/content/pages/about.md`
-- `src/content/pages/projects.md`
-- `src/content/pages/contact.md`
+- `src/content/pages/landing.md` (slug: `/`)
+- `src/content/pages/about.md` (slug: `/about`)
+- `src/content/pages/projects.md` (slug: `/projects`)
+- `src/content/pages/contact.md` (slug: `/contact`)
 
-Projects:
+### Projects
 
 - `src/content/projects/<slug>.md`
 
-Project schema (from `src/content.config.ts`):
+### Project Schema (required)
 
-- required: `title`, `description`, `slug`, `category`, `tags`, `github`, `cover`, `coverIcon`
-- optional: `tagline`, `demo`, `paper`, `featuredOrder`, `downloads`, `screenshots`
+```yaml
+title: "Project Name"
+slug: "project-slug"
+description: "Brief description for SEO and cards"
+category: "Geospatial" | "AI/Automation"
+tags: ["Tag1", "Tag2", ...]
+github: "https://github.com/..."
+```
 
-Published media:
+### Project Schema (optional)
 
-- covers: `public/covers/<slug>.png`
-- project assets: `public/projects/<slug>/...`
+```yaml
+tagline: "Short tagline for project cards"
+demo: "https://demo-url.com"
+paper: "https://paper-url.com"
+pypi: "https://pypi.org/project/..."
+downloads:
+  - label: "Download Label"
+    href: "/path/to/file.pdf"
+screenshots:
+  - src: "/projects/slug/screenshot.png"
+    alt: "Description of screenshot"
+```
 
-## Phase 1 — Infer scope and targets
+### Project Schema (auto-assigned)
 
-Infer in this order:
+```yaml
+coverIcon: "auto-selected-from-category"  # Default: code-2
+year: 2025  # Auto-detected or provided
+completed: true  # Default: true
+featured: false  # Default: false
+```
 
-1. **Batch deploy**
-   - multiple content blocks or explicit file targets
-   - or `--all`
-2. **Page deploy**
+### Published Media
+
+- Project screenshots: `public/projects/<slug>/<files>`
+- All media referenced in frontmatter must exist at the specified path
+
+## Icon Selection (auto)
+
+The system selects `coverIcon` based on category and tags:
+
+**Geospatial projects:**
+- `map-pin` (default for location/mapping projects)
+- `satellite` (for satellite/remote sensing)
+- `building-2` (for urban/architecture)
+- `layers` (for layer-based tools)
+
+**AI/Automation projects:**
+- `terminal` (default for CLI/code tools)
+- `wand-2` (for AI generation tools)
+- `sparkles` (for AI/ML features)
+- `workflow` (for automation)
+
+Icons are never reused. If multiple projects could use the same icon, select the next available from the category's list.
+
+## Phase 1 — Infer scope
+
+1. **Page deploy**
    - frontmatter `slug` equals `/`, `/about`, `/projects`, `/contact`
-   - or wrapper/title clearly indicates one of those pages
-3. **Project deploy**
-   - includes project-shaped keys (`category`, `tags`, `github`, `cover`, `coverIcon`)
+   - or title indicates one of these pages
+2. **Project deploy**
+   - project-shaped keys (`category`, `tags`, `github`)
    - or slug is not one of the fixed page slugs
-4. **Fallback**
-   - infer from file target/title/body context
-5. **Ambiguous**
+3. **Ambiguous**
    - ask exactly one targeted question
 
-Routing:
+## Phase 2 — Normalize content
 
-- `/` -> `src/content/pages/landing.md`
-- `/about` -> `src/content/pages/about.md`
-- `/projects` -> `src/content/pages/projects.md`
-- `/contact` -> `src/content/pages/contact.md`
-- project -> `src/content/projects/<slug>.md`
+- drop wrappers like `File target`, `Frontmatter`, `Body Content`
+- if frontmatter in fenced code block, extract as true YAML
+- if body in fenced markdown, extract only body
+- enforce `.md` output
+- remove local/temp references from final content
 
-## Phase 2 — Normalize pasted content
+## Phase 3 — Media processing
 
-Normalize before writing files:
+Only when files are provided and `--skip-media` is not set:
 
-- drop wrappers like `File target`, `Frontmatter`, `Body Content`, `Media`
-- if frontmatter appears in fenced code block, extract as true YAML frontmatter
-- if body appears in fenced markdown, extract only body
-- remove duplicate paragraphs/sections from copy-paste merges
-- enforce `.md` output (no `.mdx`)
-- remove local/temp references (`tmp/`, local file paths, Notion URLs) from final published content
-
-Landing-specific rules:
-
-- do not allow manual featured-project section in landing markdown
-- do not keep plain markdown tech-stack chips if they duplicate rendered UI sections
-
-Project-specific rules:
-
-- `slug` must match target filename
-- normalize `cover` to `/covers/<slug>.png` when safe
-- map ad hoc links/visuals into frontmatter fields when possible (`demo`, `paper`, `downloads`, `screenshots`)
-- keep screenshot/download paths under `/projects/<slug>/...`
-
-## Phase 3 — Optional media and cover tasks
-
-Media processing (only when mappings are explicitly provided and `--skip-media` is not set):
-
-```bash
-npm run process:project-media -- --slug <slug> --file "tmp/source.ext -> final-name.ext"
-```
-
-Cover generation (for touched/new project slugs unless `--skip-cover`):
-
-```bash
-npm run generate:cover -- --slug <slug>
-```
-
-Use `--force` only when explicitly requested.
+1. Check `inbox/` folder for new files
+2. Move screenshots to `public/projects/<slug>/`
+3. Move PDFs/docs to `public/projects/<slug>/`
+4. Update screenshot paths in frontmatter
 
 ## Phase 4 — Publish integrity checks
 
-For touched routes/files verify:
+For touched routes verify:
 
 - required frontmatter keys exist
-- URL fields are valid URLs where schema requires them
-- no `tmp/` references remain in final markdown/frontmatter
+- URL fields are valid URLs
 - screenshots have alt text
-- no obvious secrets in staged content
-- page/project slugs resolve to expected route structure
+- no obvious secrets in content
+- page/project slugs resolve correctly
 
-### Conditional security review (not always-on)
+### Conditional security review
 
-Do not run heavy security review for normal static content deploys.
+Do **not** run for normal content deploys.
 
-Trigger `security-review` skill only when deploy changes touch security-relevant surface:
-
+Trigger `security-review` only when changes touch:
 - form/user-input handling
 - API/server route behavior
-- file upload/processing logic
-- auth/session/access control
-- external script/embed injection
-- redirect/header/cookie/security policy behavior
-
-If triggered, run `security-review` before commit.
+- file upload/processing
+- auth/access control
+- external script injection
+- redirect/header behavior
 
 ## Phase 5 — Validation gates
 
-Always run build gate with Node 24 wrapper:
+Always run build gate with Node 24:
 
 ```bash
 npx -y -p node@24 -p npm@11 npm run build
 ```
 
-Run check gate when `--all` is used, schema-sensitive files changed, or structural edits are present (unless `--skip-check`):
+Run check gate for schema-sensitive or structural changes:
 
 ```bash
 npx -y -p node@24 -p npm@11 npm run check
 ```
 
-If any gate fails: stop, report failures, do not commit.
+If any gate fails: stop, report, do not commit.
 
 ## Phase 6 — Commit and push
-
-Stage only intended files.
 
 Commit message defaults:
 
 - page: `content(page): update <route>`
 - project: `content(project): upsert <slug>`
-- batch: `content: deploy batch update`
 
-If `--message` is provided, use it.
-
-Push behavior:
-
-- push to `main` unless `--skip-push`
-- do not use force push
+Push to `main` unless `--skip-push`.
 
 ## Non-negotiable safety rules
 
-- Never run `npm install` in this workflow
-- Never run `brew install` in this workflow
-- Never mutate system Node/npm/toolchains in this workflow
-- Never bypass checks/hooks without explicit user request
+- Never run `npm install`
+- Never run `brew install`
+- Never mutate system Node/npm/toolchains
+- Never bypass checks without explicit request

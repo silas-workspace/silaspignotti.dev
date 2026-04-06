@@ -7,7 +7,6 @@ tags:
   - "Python"
   - "OpenCode"
   - "Git"
-cover: "/covers/context-engineering.png"
 coverIcon: "terminal"
 tagline: "Structured context layer for AI-assisted development. Reusable commands, controlled prompts, persistent session memory."
 featured: true

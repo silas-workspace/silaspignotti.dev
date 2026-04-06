@@ -6,7 +6,6 @@ category: "AI/Automation"
 tags:
   - "Notion"
   - "Notion AI"
-cover: "/covers/para-pm-system.png"
 coverIcon: "layout-dashboard"
 tagline: "Project management built on PARA: reusable AI Skills, persistent project memory, human-in-the-loop checkpoints."
 year: 2025

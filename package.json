@@ -22,8 +22,6 @@
   "version": "1.1.0",
   "private": false,
   "scripts": {
-    "generate:cover": "tsx scripts/generate-cover.ts",
-    "generate:cover:force": "tsx scripts/generate-cover.ts --force",
     "process:project-media": "tsx scripts/process-project-media.ts",
     "dev": "astro dev --port 3010",
     "start": "astro preview",
@@ -49,7 +47,6 @@
     "@tailwindcss/vite": "^4.1.11",
     "@types/react": "19.1.10",
     "@types/react-dom": "19.1.7",
-    "@resvg/resvg-js": "^2.6.2",
     "astro": "^5.12.9",
     "astro-expressive-code": "^0.41.3",
     "astro-icon": "^1.1.5",
@@ -69,7 +66,6 @@
     "remark-emoji": "^5.0.1",
     "remark-math": "^6.0.0",
     "remark-sectionize": "^2.1.0",
-    "satori": "^0.12.1",
     "tailwind-merge": "^3.3.1",
     "typescript": "^5.9.2"
   },

@@ -11,7 +11,6 @@ tags:
   - "SQLite"
   - "HTMX"
 github: "https://github.com/spignotti/urbanIQ"
-cover: "/covers/urbaniq.png"
 coverIcon: "building-2"
 tagline: "Analyzing Berlin's districts. One question instead of ten datasets."
 year: 2025
