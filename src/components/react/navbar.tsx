@@ -11,7 +11,6 @@ import { Menu, X } from 'lucide-react'
 import { Separator } from '../ui/separator'
 
 const Navbar = () => {
-  const [scrollLevel, setScrollLevel] = useState(0)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -48,13 +47,10 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = debounce(() => {
-      const scrollY = window.scrollY
-      setScrollLevel(
-        scrollY > 500 ? 4 : scrollY > 300 ? 3 : scrollY > 150 ? 2 : scrollY > 0 ? 1 : 0
-      )
-      setIsScrolled(scrollY > 0)
+      setIsScrolled(window.scrollY > 0)
     }, 50)
 
+    handleScroll()
     window.addEventListener('scroll', handleScroll)
     return () => {
       window.removeEventListener('scroll', handleScroll)
@@ -72,22 +68,11 @@ const Navbar = () => {
     }
   }, [mobileMenuOpen])
 
-  const sizeVariants: Record<number, { width: string }> = {
-    0: { width: '100%' },
-    1: { width: '90%' },
-    2: { width: '80%' },
-    3: { width: '70%' },
-    4: { width: '50%' },
-  }
-
   return (
     <>
-      <motion.header
+      <header
         aria-label="Navigation"
         role="banner"
-        layout={!isMobile}
-        initial={sizeVariants[0]}
-        animate={isMobile ? sizeVariants[0] : sizeVariants[scrollLevel]}
         className={cn(
           'fixed left-1/2 z-30 -translate-x-1/2 transform backdrop-blur-lg',
           'bg-background/80 border-0',
@@ -172,7 +157,7 @@ const Navbar = () => {
             )}
           </div>
         </div>
-      </motion.header>
+      </header>
       
       <AnimatePresence>
         {mobileMenuOpen && (
