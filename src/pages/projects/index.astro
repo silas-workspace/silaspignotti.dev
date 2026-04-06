@@ -2,6 +2,7 @@
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
 import ProjectCard from '@/components/ProjectCard.astro'
+import CategoryFilter from '@/components/react/category-filter'
 import Layout from '@/layouts/Layout.astro'
 import { getCollection } from 'astro:content'
 import { getAllProjects } from '@/lib/data-utils'
@@ -15,6 +16,8 @@ if (!page) {
 const projects = await getAllProjects()
 
 const currentUrl = Astro.url
+
+const categories = ['All', 'Geospatial', 'AI/Automation'] as const
 ---
 
 <Layout canonicalUrl={currentUrl}>
@@ -37,11 +40,22 @@ const currentUrl = Astro.url
       <p class="text-muted-foreground text-md mt-3">{page.data.description}</p>
     </header>
 
-    <ul class="grid grid-cols-1 gap-6 py-sm sm:grid-cols-2 sm:gap-8" role="list">
+    <!-- Category Filter -->
+    <CategoryFilter client:load categories={categories} />
+
+    <!-- Projects Grid -->
+    <ul 
+      id="projects-grid"
+      class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+      role="list"
+    >
       {
         projects.map((project) => (
-          <li>
-            <ProjectCard project={project} headingLevel="h2" tagLimit={6} />
+          <li 
+            class="project-item" 
+            data-category={project.data.category}
+          >
+            <ProjectCard project={project} tagLimit={3} />
           </li>
         ))
       }

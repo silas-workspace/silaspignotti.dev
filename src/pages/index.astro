@@ -125,7 +125,7 @@ const ctaText = ctaSection.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '').trim().replac
       <ul class="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 xl:grid-cols-3" role="list">
         {featuredProjects.map((project) => (
           <li>
-            <ProjectCard project={project} variant="featured" headingLevel="h3" tagLimit={4} />
+            <ProjectCard project={project} tagLimit={3} />
           </li>
         ))}
       </ul>
