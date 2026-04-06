@@ -1,7 +1,7 @@
 ---
 title: "building-detector"
 slug: "building-detector"
-description: "Point-guided building detection from satellite imagery using SAM2. Interactive web app for selecting points on a map and extracting building footprints."
+description: "Building footprint detection in satellite imagery using a fine-tuned segmentation model."
 category: "Geospatial"
 tags:
   - "Python"
@@ -13,7 +13,7 @@ tags:
   - "Rasterio"
 github: "https://github.com/spignotti/building-detector"
 coverIcon: "layers"
-tagline: "Building footprint detection in satellite imagery using a fine-tuned segmentation model."
+tagline: "Point-guided building detection from satellite imagery using SAM2."
 year: 2024
 completed: true
 screenshots:
