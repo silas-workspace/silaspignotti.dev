@@ -22,8 +22,6 @@
   "version": "1.1.0",
   "private": false,
   "scripts": {
-    "prebuild": "node scripts/ensure-node-version.mjs",
-    "precheck": "node scripts/ensure-node-version.mjs",
     "generate:cover": "tsx scripts/generate-cover.ts",
     "generate:cover:force": "tsx scripts/generate-cover.ts --force",
     "process:project-media": "tsx scripts/process-project-media.ts",
