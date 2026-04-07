@@ -7,7 +7,7 @@ ogImage: /ogImage.png
 
 # About
 
-I'm a Geo Data Scientist based in Berlin, currently finishing my M.Sc. in Geoinformation at BHT Berlin (GPA 1.15). I studied Urban Planning at TU Berlin before that. Working with cities and infrastructure is what drew me to geospatial data. Day to day, that means training ML and deep learning models on satellite imagery, building geospatial analysis pipelines, and developing open-source tools. Context Engineering and agentic systems are a second focus: structuring AI-assisted development and integrating LLMs into analysis workflows.
+I'm a Geo Data Scientist based in Berlin, currently finishing my Master of Science in Geoinformation at BHT Berlin (GPA 1.15). I studied Urban Planning at TU Berlin before that. Working with cities and infrastructure is what drew me to geospatial data. Day to day, that means training ML and deep learning models on satellite imagery, building geospatial analysis pipelines, and developing open-source tools. Beyond that, I build automations and agentic systems, and integrate LLMs into my development and analysis workflows.
 
 ## Experience
 
@@ -58,21 +58,15 @@ GPA 1.6
 
 ### Geospatial Data Science
 
-Machine learning and deep learning on satellite imagery and geodata. Remote sensing, spatial analysis, transfer learning, time series analysis. End-to-end pipelines from raw data to trained models.
+Machine learning and deep learning on satellite imagery and geodata. Remote sensing, spatial analysis, time series analysis, geodata processing.
 
 `Python` `SQL` `PyTorch` `scikit-learn` `Google Earth Engine` `PostGIS` `QGIS`
 
 ### AI & Automation
 
-Context Engineering, agentic systems, RAG pipelines, prompt engineering. LLM-based tooling for development, analysis, and workflow automation.
+Agentic systems, context engineering, RAG pipelines, prompt engineering. LLM-based tooling for development, analysis, and workflow automation.
 
-`LangChain` `LangGraph` `LiteLLM` `n8n` `Notion`
-
-### AI-Assisted Development
-
-AI coding tools as core part of the development workflow. Structured handoff documents, prompt pipelines, reproducible project context.
-
-`Claude Code` `OpenCode` `Codex`
+`LangChain` `LangGraph` `LiteLLM` `n8n` `Notion` `Claude Code` `OpenCode` `Codex`
 
 ### Infrastructure & Tooling
 

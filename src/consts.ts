@@ -56,7 +56,7 @@ export interface Category {
 export type Technologies = Record<string, Category[]>
 
 export const technologies: Technologies = {
-  'Geospatial & ML': [
+  'Geospatial Data Science': [
     { text: 'Python', logo: 'si:python' },
     { text: 'SQL', logo: 'lucide:database' },
     { text: 'PyTorch', logo: 'si:pytorch' },
@@ -65,14 +65,14 @@ export const technologies: Technologies = {
     { text: 'PostGIS', logo: 'si:postgresql' },
     { text: 'QGIS', logo: 'si:qgis' },
   ],
-  'AI & Dev Tools': [
+  'AI & Automation': [
     { text: 'LangChain', logo: 'lucide:sparkles' },
     { text: 'LangGraph', logo: 'lucide:waypoints' },
     { text: 'LiteLLM', logo: 'lucide:bot' },
-    { text: 'Claude Code', logo: 'lucide:terminal' },
-    { text: 'OpenCode', logo: 'lucide:wand-sparkles' },
     { text: 'n8n', logo: 'lucide:workflow' },
     { text: 'Notion', logo: 'lucide:file-text' },
+    { text: 'Claude Code', logo: 'lucide:terminal' },
+    { text: 'OpenCode', logo: 'lucide:wand-sparkles' },
     { text: 'Codex', logo: 'lucide:code' },
   ],
   'Infrastructure & Tooling': [

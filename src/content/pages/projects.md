@@ -7,4 +7,4 @@ ogImage: /ogImage.png
 
 ## My Projects
 
-A selection of projects in geospatial data science, machine learning, and AI tooling.
+Selected projects in geospatial analysis, machine learning, and AI tooling.
