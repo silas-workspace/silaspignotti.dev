@@ -27,18 +27,19 @@ Building footprints in OpenStreetMap are incomplete or outdated in many regions.
 
 ## Solution
 
-Web application using the Segment Anything Model 2 (SAM2) to automatically extract building footprints from high-resolution satellite imagery. Users select an area on the map, the system segments buildings, regularizes geometries, and exports OSM-compatible GeoJSON data.
+Web application using the GeoAI package (built on SAM2, pre-optimized for building detection) to extract building footprints from satellite imagery. Users select points on a map, the model segments the corresponding buildings and returns regularized footprints, exported as OSM-compatible GeoJSON.
 
 ## Result
 
-Pixel-accurate building extraction with minimal manual effort. Directly importable into OpenStreetMap. Demonstrates end-to-end integration of a foundation model (SAM2) into a geodata workflow.
+Accurate building extraction with minimal manual effort. Output directly importable into OpenStreetMap.
 
 ## Lessons Learned
 
-- SAM2 out of the box works well for building segmentation with good point prompts. The real challenge was geometry post-processing: regularizing jagged pixel boundaries into clean building footprints with right angles.
+- First project combining a vision model with a web application. Setting up GeoAI (SAM2-based, pre-trained for building detection), connecting it to a Flask backend with a Leaflet map frontend, and building the GeoJSON export pipeline was the main learning curve.
+- The model worked well out of the box with good point prompts. GeoAI delivers regularized rectangular footprints, so no manual geometry post-processing was needed.
 - Flask was pragmatic for a prototype, but the synchronous request model became a bottleneck. Each segmentation call blocks the server for seconds. An async framework with a task queue would be necessary for production use.
-- Serving SAM2 locally requires substantial GPU memory. Inference on CPU works but is too slow for an interactive workflow. GPU availability is the main deployment constraint.
+- GPU memory is the main deployment constraint for SAM2-based models. CPU inference works but is too slow for interactive use.
 
 ## Deep Dive
 
-The geometry pipeline after SAM2 segmentation was the most engineering-intensive part. Raw segmentation masks are pixel-level rasters with jagged edges. Converting these to OSM-compatible building footprints requires raster-to-polygon conversion (rasterio), simplification to reduce vertex count without losing shape (Shapely), and regularization to enforce right angles typical of building footprints. The regularization step uses a minimum rotated bounding rectangle approach, adjusted by the dominant edge orientation of the original polygon. Results are exported as GeoJSON with OSM-compatible tagging.
+The application connects a Leaflet map frontend with a Flask backend serving the GeoAI segmentation model. Users click points on the map to indicate buildings. The backend passes point prompts and the corresponding image tile to GeoAI, which handles segmentation and geometry regularization internally, returning clean rectangular footprints. Results are rendered as polygon overlays on the map and exported as GeoJSON with OSM-compatible tagging.

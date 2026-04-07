@@ -7,6 +7,7 @@ tags:
   - "Python"
   - "Typer"
   - "LiteLLM"
+  - "Ollama"
   - "pypdf"
   - "pymupdf"
   - "Git"
@@ -25,11 +26,11 @@ Downloaded PDFs, scans, and documents come with cryptic filenames. Manually rena
 
 ## Solution
 
-Open-source CLI tool that analyzes file contents via LLM (PDFs, scans, images) and automatically renames them following a `YYMMDD_Sender_Subject.ext` convention. Supports multiple LLM providers, batch operations, and handles iCloud sync edge cases.
+Open-source CLI tool that analyzes file contents via LLM (PDFs, scans, images) and automatically renames them following a YYMMDD_Sender_Subject.ext convention. Supports multiple LLM providers with per-folder model configuration (e.g. local models via Ollama for sensitive folders, cloud models for speed), batch operations, and iCloud sync handling.
 
 ## Result
 
-Consistent file organization with zero manual effort. Published on PyPI, MIT license. Demonstrates a production-grade OSS release process with CI/CD, SemVer, and Trusted Publishing.
+Consistent file organization with zero manual effort. Published on PyPI, MIT license. Full OSS release pipeline with CI/CD, SemVer, and Trusted Publishing on PyPI.
 
 ## Lessons Learned
 
@@ -39,4 +40,4 @@ Consistent file organization with zero manual effort. Published on PyPI, MIT lic
 
 ## Deep Dive
 
-The core challenge was reliable content extraction across file types. PDFs with selectable text go through pypdf, scanned documents and images go through pymupdf's OCR pipeline. The LLM receives extracted text plus filename metadata and returns a structured rename suggestion following the `YYMMDD_Sender_Subject.ext` convention. Batch mode processes entire directories, with dry-run output for verification before committing renames. iCloud sync required special handling: files in evicted state need to be downloaded before content extraction, which added an async wait step to the pipeline.
+The core challenge was reliable content extraction across file types. PDFs with selectable text go through pypdf, scanned documents and images go through pymupdf's OCR pipeline. The LLM receives extracted text plus filename metadata and returns a structured rename suggestion following the YYMMDD_Sender_Subject.ext convention. Batch mode processes entire directories, with dry-run output for verification before committing renames. iCloud sync required special handling: files in "evicted" state need to be downloaded before content extraction, which added an async wait step to the pipeline. Per-folder model configuration allows routing sensitive documents to local models (via Ollama) while using cloud providers for speed-critical directories.

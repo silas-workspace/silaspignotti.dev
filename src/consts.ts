@@ -69,6 +69,7 @@ export const technologies: Technologies = {
     { text: 'LangChain', logo: 'lucide:sparkles' },
     { text: 'LangGraph', logo: 'lucide:waypoints' },
     { text: 'LiteLLM', logo: 'lucide:bot' },
+    { text: 'Ollama', logo: 'lucide:bot' },
     { text: 'n8n', logo: 'lucide:workflow' },
     { text: 'Notion', logo: 'lucide:file-text' },
     { text: 'Claude Code', logo: 'lucide:terminal' },

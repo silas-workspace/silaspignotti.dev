@@ -26,11 +26,11 @@ Geodata on Berlin's districts is scattered across multiple sources (statistics o
 
 ## Solution
 
-NLP-driven geodata aggregation: users ask a natural-language question, the system identifies relevant datasets, retrieves them, performs spatial joins, and delivers a structured district analysis.
+NLP-driven geodata aggregation. Users ask a natural-language question, the system identifies relevant datasets, retrieves them, performs spatial joins, and delivers a structured district analysis.
 
 ## Result
 
-Automated district profiles at the push of a button. Demonstrates the intersection of LLM-based query logic and spatial data processing.
+Automated district profiles from a single question. Connects LLM-based query logic with spatial data processing in one tool.
 
 ## Lessons Learned
 
