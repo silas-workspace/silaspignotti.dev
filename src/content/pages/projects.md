@@ -1,6 +1,6 @@
 ---
 title: My Projects
-description: Geospatial data science, ML/DL, and AI tooling projects. From satellite image classification to open-source CLI tools.
+description: Selected projects in geospatial analysis, machine learning, and AI tooling.
 slug: /projects
 ogImage: /ogImage.png
 ---

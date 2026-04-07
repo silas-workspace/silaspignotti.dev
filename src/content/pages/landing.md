@@ -11,11 +11,11 @@ M.Sc. Geoinformation student at BHT Berlin. Building geospatial ML systems and A
 
 ### Geospatial Data Science
 
-Machine learning and deep learning on satellite imagery and geodata. End-to-end pipelines from raw data to trained models, with a focus on reproducibility and evaluation.
+Machine learning and deep learning on satellite imagery and geodata. Remote sensing, spatial analysis, time series analysis, geodata processing.
 
 ### AI & Automation
 
-Context Engineering, agentic workflows, and LLM-based tooling. I build structured prompt systems, automated pipelines, and integrate AI into development and analysis workflows.
+Agentic systems, context engineering, RAG pipelines, prompt engineering. LLM-based tooling for development, analysis, and workflow automation.
 
 ### Open Source
 

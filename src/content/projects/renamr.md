@@ -14,7 +14,7 @@ tags:
 github: "https://github.com/spignotti/renamr"
 pypi: "https://pypi.org/project/renamr/"
 coverIcon: "wand-2"
-tagline: "Rename downloaded files to a consistent schema without manual sorting."
+tagline: "AI-powered CLI for automatic file renaming. Analyzes PDFs, scans, and images via LLM. Open source, published on PyPI."
 year: 2026
 completed: true
 featured: false
