@@ -70,6 +70,8 @@ export const technologies: Technologies = {
     { text: 'LangGraph', logo: 'lucide:waypoints' },
     { text: 'LiteLLM', logo: 'lucide:bot' },
     { text: 'Ollama', logo: 'lucide:bot' },
+    { text: 'RAG', logo: 'lucide:database' },
+    { text: 'MCP', logo: 'lucide:git-branch' },
     { text: 'n8n', logo: 'lucide:workflow' },
     { text: 'Notion', logo: 'lucide:file-text' },
     { text: 'Claude Code', logo: 'lucide:terminal' },

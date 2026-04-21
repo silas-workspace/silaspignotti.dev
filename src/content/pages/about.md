@@ -7,8 +7,6 @@ ogImage: /ogImage.png
 
 # About
 
-I'm a Geo Data Scientist based in Berlin, currently finishing my Master of Science in Geoinformation at BHT Berlin (GPA 1.15). I studied Urban Planning at TU Berlin before that. Working with cities and infrastructure is what drew me to geospatial data. Day to day, that means training ML and deep learning models on satellite imagery, building geospatial analysis pipelines, and developing open-source tools. Beyond that, I build automations and agentic systems, and integrate LLMs into my development and analysis workflows.
-
 ## Experience
 
 ### Data Analytics · Interzero Plastics Sorting GmbH
@@ -66,7 +64,7 @@ Machine learning and deep learning on satellite imagery and geodata. Remote sens
 
 Agentic systems, context engineering, RAG pipelines, prompt engineering. LLM-based tooling for development, analysis, and workflow automation.
 
-`LangChain` `LangGraph` `LiteLLM` `n8n` `Notion` `Claude Code` `OpenCode` `Codex`
+`LangChain` `LangGraph` `LiteLLM` `Ollama` `RAG` `MCP` `n8n` `Notion` `Claude Code` `OpenCode` `Codex`
 
 ### Infrastructure & Tooling
 

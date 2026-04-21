@@ -19,11 +19,11 @@ Agentic systems, context engineering, RAG pipelines, prompt engineering. LLM-bas
 
 ### Open Source
 
-Python CLI tools and web applications on PyPI and GitHub. Built to solve real problems in my own work, released for others to use.
+Python CLI tools on PyPI and GitHub. Built to solve real problems in my own work, released for others to use.
 
 ## Get in Touch
 
-M.Sc. Geoinformation student at BHT Berlin. Open for freelance projects, collaborations, and roles in Geo Data Science or AI Engineering.
+Open for Freelance Projects, Collaboration and Roles in Geo-Data Science or AI Engineering.
 
 Based in Berlin.
 
