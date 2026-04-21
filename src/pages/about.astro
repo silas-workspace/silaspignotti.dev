@@ -24,9 +24,12 @@ const extractSection = (title: string) => {
   return match ? match[1].trim() : ''
 }
 
-// Parse intro - everything before first ## 
-const introMatch = rawBody.match(/^#\s+About\s*\n+([\s\S]*?)(?=\n##\s+)/)
-const intro = introMatch ? introMatch[1].trim() : rawBody.split('##')[0].replace('# About', '').trim()
+// Parse intro - everything between # About and the first ## section
+const bodyWithoutTitle = rawBody.replace(/^#\s+About\s*\n?/, '')
+const firstSectionIndex = bodyWithoutTitle.search(/(?:^|\n)##\s+/)
+const intro = (firstSectionIndex === -1
+  ? bodyWithoutTitle
+  : bodyWithoutTitle.slice(0, firstSectionIndex)).trim()
 
 // Parse Experience
 const experienceSection = extractSection('Experience')
