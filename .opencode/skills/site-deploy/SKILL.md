@@ -153,16 +153,16 @@ Trigger `security-review` only when changes touch:
 
 ## Phase 5 — Validation gates
 
-Always run build gate with Node 24:
+Always run build gate:
 
 ```bash
-npx -y -p node@24 -p npm@11 npm run build
+npm run build
 ```
 
 Run check gate for schema-sensitive or structural changes:
 
 ```bash
-npx -y -p node@24 -p npm@11 npm run check
+npm run check
 ```
 
 If any gate fails: stop, report, do not commit.

@@ -35,4 +35,4 @@ Safety:
 - Never run `npm install` in this flow.
 - Never run `brew install` in this flow.
 - Never mutate global system toolchains in this flow.
-- Use Node 24 wrapper runtime for validation commands.
+- Run validation directly via `npm run build` (and `npm run check` when needed).

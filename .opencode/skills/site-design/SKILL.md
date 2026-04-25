@@ -83,13 +83,13 @@ If triggered, run `security-review` before final commit.
 Always run build gate:
 
 ```bash
-npx -y -p node@24 -p npm@11 npm run build
+npm run build
 ```
 
 Run check gate for structural or larger frontend/config changes (unless `--skip-check`):
 
 ```bash
-npx -y -p node@24 -p npm@11 npm run check
+npm run check
 ```
 
 If a gate fails: stop, report, do not commit.
