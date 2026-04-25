@@ -6,7 +6,7 @@ import PageHead from '@/components/PageHead.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import { getCollection, render } from 'astro:content'
 import type { CollectionEntry } from 'astro:content'
-import { Calendar, Layers, Terminal, Satellite, MapPin, FileSearch, LayoutDashboard, Wand2, Trees, Building2 } from 'lucide-react'
+import { Calendar, Layers, Terminal, Satellite, MapPin, FileSearch, LayoutDashboard, Wand2, Trees, Building2, BookOpenCheck } from 'lucide-react'
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects')
@@ -32,6 +32,7 @@ const iconMap: Record<string, typeof Building2> = {
   'wand-2': Wand2,
   'trees': Trees,
   'building-2': Building2,
+  'book-open-check': BookOpenCheck,
 }
 
 const IconComponent = iconMap[project.data.coverIcon] || Layers

@@ -2,7 +2,7 @@
 import { withBasePath } from '@/lib/paths'
 import { cn } from '@/lib/utils'
 import type { CollectionEntry } from 'astro:content'
-import { Calendar, Layers, Terminal, Satellite, MapPin, FileSearch, LayoutDashboard, Wand2, Trees, Building2 } from 'lucide-react'
+import { Calendar, Layers, Terminal, Satellite, MapPin, FileSearch, LayoutDashboard, Wand2, Trees, Building2, BookOpenCheck } from 'lucide-react'
 
 interface Props {
   project: CollectionEntry<'projects'>
@@ -30,6 +30,7 @@ const iconMap: Record<string, typeof Building2> = {
   'wand-2': Wand2,
   'trees': Trees,
   'building-2': Building2,
+  'book-open-check': BookOpenCheck,
 }
 
 const IconComponent = iconMap[project.data.coverIcon] || Layers
