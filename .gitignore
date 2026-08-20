@@ -15,17 +15,7 @@ teaser.pptx
 .venv/
 inbox/
 
-# OpenCode
-.opencode/*
-!.opencode/commands/
-.opencode/commands/*
-!.opencode/commands/deploy.md
-!.opencode/commands/design.md
-!.opencode/skills/
-.opencode/skills/*
-!.opencode/skills/site-deploy/
-!.opencode/skills/site-deploy/SKILL.md
-!.opencode/skills/site-design/
-!.opencode/skills/site-design/SKILL.md
-!.opencode/skills/portfolio-writer/
-!.opencode/skills/portfolio-writer/SKILL.md
+# OpenCode (local-only tooling, not published)
+.opencode/
+AGENTS.md
+opencode.json
