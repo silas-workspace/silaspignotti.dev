@@ -1,24 +1,16 @@
 # silaspignotti.dev
 
-Personal portfolio website built with Astro.
-
-## What
-
-Professional portfolio showcasing projects as business cases, CV, and contact information.
-
-## Why
-
-Central professional presence for recruiters, freelance clients, and the developer community. Replaces scattered profiles with a single, curated source of truth.
+Source code for [silaspignotti.dev](https://silaspignotti.dev), the personal portfolio of Silas Pignotti. The site presents selected projects as business cases, a CV, and contact information, focused on geospatial data science, data analytics, and AI & automation.
 
 ## Tech Stack
 
-- Astro 5.x (static site generator)
-- Node.js 24.x (runtime, enforced via `.node-version` and `verify:node`)
+- Astro 5 (static site generator)
+- Node.js 24 (runtime, enforced via `.node-version` and `verify:node`)
 - pnpm (package manager)
-- TailwindCSS (styling)
-- React (interactive islands)
 - TypeScript
-- Content Collections (type-safe markdown content)
+- Tailwind CSS 4 (via `@tailwindcss/vite`)
+- React (interactive islands)
+- Astro Content Collections (type-safe markdown content)
 - GitHub Pages (hosting)
 
 ## Setup
@@ -27,13 +19,13 @@ Central professional presence for recruiters, freelance clients, and the develop
 # Requires Node 24 (see .node-version; your version manager should switch automatically)
 pnpm install
 
-# Start development server (port 3010)
+# Development server (port 3010)
 pnpm run dev
 
-# Build for production
+# Production build
 pnpm run build
 
-# Run type checking
+# Type checking
 pnpm run check
 ```
 
@@ -41,44 +33,27 @@ pnpm run check
 
 ```
 src/
-├── components/       # Reusable UI components
-├── content/           # Content Collections (pages, projects)
-├── layouts/           # Page layouts
-├── pages/             # Route-based pages
-└── styles/            # Global styles
+├── components/       # Reusable Astro components and React islands
+├── content/          # Content Collections (pages, projects)
+├── layouts/          # Page layouts
+├── lib/              # Utility functions
+├── pages/            # Route-based pages
+└── styles/           # Global styles and Tailwind setup
+public/               # Static assets (fonts, images, project media)
 ```
 
 ## Content
 
-- **Pages**: Edit markdown files in `src/content/pages/`
-- **Projects**: Add markdown files to `src/content/projects/`
+All page and project content is stored as markdown with typed frontmatter:
 
-Both collections use type-safe schemas defined in `src/content.config.ts`.
+- Pages: `src/content/pages/`
+- Projects: `src/content/projects/`
 
-## Internal Workflows
-
-Workflows are defined as OpenCode skills and trigger from natural language; no slash commands are needed.
-
-### Content and text
-
-- "Change this text", "add a new project", "update the about page"
-- `portfolio-writer` drafts and revises text (voice, structure, facts)
-- `site-deploy` persists the content, processes media, validates, commits, and pushes to `main`
-- Draft-only requests ("draft a text") stay in chat and are not persisted
-
-### Frontend and design
-
-- "Improve the layout", "make the cards responsive"
-- `site-design` implements UI/frontend/config updates using existing local patterns and template lineage, runs SEO/integrity checks, validates, commits, and pushes to `main`
-
-### Security behavior
-
-No always-on security review runs for normal static changes.
-The workflows stop and request a security review before committing when work touches security-relevant surfaces (forms/input, API/server handlers, file processing, auth/session, external scripts, redirect/header behavior).
+Schemas are defined in `src/content.config.ts`. `pnpm run check` validates content against them.
 
 ## Deployment
 
-Hosted on GitHub Pages. GitHub Actions validates every push and pull request (`pnpm install --frozen-lockfile`, `check`, `build`); deploys only on pushes to `main`.
+Hosted on GitHub Pages. [GitHub Actions](.github/workflows/deploy.yml) validates every push and pull request (`pnpm install --frozen-lockfile`, `check`, `build`) and deploys on pushes to `main`.
 
 ## License
 
