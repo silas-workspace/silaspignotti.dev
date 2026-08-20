@@ -53,7 +53,7 @@ Schemas are defined in `src/content.config.ts`. `pnpm run check` validates conte
 
 ## Deployment
 
-Hosted on GitHub Pages. [GitHub Actions](.github/workflows/deploy.yml) validates every push and pull request (`pnpm install --frozen-lockfile`, `check`, `build`) and deploys on pushes to `main`.
+Hosted on GitHub Pages. [GitHub Actions](.github/workflows/deploy.yml) runs `pnpm install --frozen-lockfile`, `check`, and `build` on every pull request and push to `main`, then deploys the built site on pushes to `main`.
 
 ## License
 
