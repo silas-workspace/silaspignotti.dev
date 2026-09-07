@@ -20,6 +20,9 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   output: 'static',
   site: 'https://silaspignotti.dev',
+  redirects: {
+    '/projects/dispoai': '/projects/routing-engine',
+  },
 
   integrations: [expressiveCode({
     themes: ['catppuccin-latte', 'ayu-dark'],

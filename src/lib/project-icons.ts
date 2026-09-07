@@ -43,6 +43,5 @@ export const PROJECT_COVER_ICON_MAP: Record<ProjectCoverIcon, LucideIcon> = {
   workflow: Workflow,
 }
 
-// decision: workflow added to the valid set on user request (plan stop condition,
-// option 2) — keeps dispoai.md's existing coverIcon valid without content changes.
+// decision: workflow kept in the valid set, because routing-engine.md uses it as its coverIcon. Alternative: remove it and fall back to the default icon.
 export const PROJECT_COVER_ICON_DEFAULT: ProjectCoverIcon = 'layers'
